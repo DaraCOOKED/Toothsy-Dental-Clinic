@@ -1,732 +1,378 @@
 <template>
-  <div id="app">
+  <div class="relative isolate overflow-x-hidden body-font bg-[#FFFAE1] text-[#111827]">
+
+    <!-- Signature ambient watermark: one tooth motif drifting the length of the page -->
+    <div
+      ref="watermarkRef"
+      aria-hidden="true"
+      class="pointer-events-none select-none absolute -right-16 top-24 z-0 w-[280px] md:w-[420px] opacity-[0.07] will-change-transform"
+    >
+      <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M100,20 C70,20 45,45 45,80 C45,110 55,135 50,165 C47,185 60,205 75,195 C85,188 88,170 100,170 C112,170 115,188 125,195 C140,205 153,185 150,165 C145,135 155,110 155,80 C155,45 130,20 100,20 Z"
+          stroke="#111827" stroke-width="3" stroke-linejoin="round"
+        />
+      </svg>
+    </div>
 
     <!-- ═══════════════════ HERO ═══════════════════ -->
-    <section class="hero">
-      <div class="hero__content">
-        <h1 class="hero__heading">Get Ready For Your Best<br>Ever Dental Experience!</h1>
-        <p class="hero__sub">
-          We use only the best quality materials on the market in order to
-          provide the best products to our patients. So don't worry about
-          anything and book yourself.
+    <section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-14 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+
+      <div class="hero-enter order-2 md:order-1">
+        <h1 class="font-display text-[2.1rem] md:text-5xl lg:text-[3.2rem] font-bold leading-[1.1] tracking-tight">
+          Get ready for your best<br class="hidden md:block"> ever dental experience
+        </h1>
+        <p class="mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
+          From routine checkups to full smile makeovers, Toothsy pairs gentle,
+          modern care with a clinic that actually feels calm to sit in.
         </p>
-        <div class="hero__actions">
-          <button class="btn-mint">Book an Appointment</button>
-          <div class="hero__phone">
-            <div class="hero__phone-ring">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="mt-8 flex flex-wrap items-center gap-6">
+          <NuxtLink
+            to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
+          >Book an Appointment</NuxtLink>
+
+          <a href="tel:+855123456789" class="flex items-center gap-2.5 text-sm font-semibold hover:text-[#036533] transition-colors">
+            <span class="flex items-center justify-center w-9 h-9 rounded-full border-[1.5px] border-[#6BCE9F]">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1f9d63" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.11-1.11a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
-            </div>
-            <span>(480) 7901</span>
-          </div>
+            </span>
+            +855 12 345 6789
+          </a>
         </div>
       </div>
-      <div class="hero__img-wrap">
+
+      <div class="relative order-1 md:order-2">
+        <div class="absolute inset-[8%_4%_0_4%] md:inset-[10%_6%_0_6%] bg-[#d4f0ea] rounded-[50%_50%_48%_52%/52%_52%_48%_48%]"></div>
         <img
-          class="hero__img"
+          ref="heroImgRef"
+          class="relative z-10 w-full max-w-[420px] h-[320px] md:h-[460px] object-cover object-top rounded-[50%_50%_48%_52%/52%_52%_48%_48%] mx-auto will-change-transform"
           src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=80&fit=crop&crop=faces,top"
-          alt="Smiling female dentist"
+          alt="Smiling dentist at Toothsy clinic"
         />
       </div>
     </section>
 
-    <!-- ═══════════════════ SERVICE CARDS ═══════════════════ -->
-    <section class="services">
-      <div class="services__grid">
-        <div class="scard" v-for="s in services" :key="s.title">
-          <div class="scard__icon" v-html="s.svg"></div>
-          <h3 class="scard__title">{{ s.title }}</h3>
-          <p class="scard__desc">{{ s.desc }}</p>
+    <!-- ═══════════════════ SERVICES ═══════════════════ -->
+    <section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 pb-20">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div
+          v-for="(s, i) in services"
+          :key="s.title"
+          :ref="(el) => setCardRef(el, i)"
+          class="bg-white rounded-2xl p-8 shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-700 ease-out hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)]"
+          :class="cardVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
+          :style="{ transitionDelay: cardVisible[i] ? `${i * 110}ms` : '0ms' }"
+        >
+          <div class="w-14 h-14 rounded-2xl bg-[#e6faf6] flex items-center justify-center mb-5" v-html="s.svg"></div>
+          <h3 class="font-display text-lg font-bold mb-2">{{ s.title }}</h3>
+          <p class="text-[0.85rem] text-stone-500 leading-relaxed">{{ s.desc }}</p>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════ WELCOMING (text left, img right) ═══════════════════ -->
-    <section class="split">
-      <div class="split__text">
-        <h2>We're Welcoming New<br>Patients And Can't Wait<br>To Meet You.</h2>
-        <p>We use only the best quality materials on the market in order to provide the best products to our patients. So don't worry about anything and book yourself.</p>
+    <!-- ═══════════════════ SPLIT 1 ═══════════════════ -->
+    <section ref="split1Ref" class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 pb-20 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+      <div class="transition-all duration-700 ease-out" :class="split1Visible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'">
+        <h2 class="font-display text-2xl md:text-[2rem] font-bold leading-[1.2] tracking-tight mb-4">
+          We're welcoming new patients<br class="hidden md:block"> and can't wait to meet you
+        </h2>
+        <p class="text-[0.9rem] text-stone-500 leading-relaxed">
+          First visits start with a relaxed consultation, not a drill — we walk
+          through your history, answer every question, and build a plan around
+          what actually works for your schedule.
+        </p>
       </div>
-      <div class="split__media split__media--teal">
-        <img src="https://images.unsplash.com/photo-1588776814546-1ffedbe0b94b?w=600&q=80&fit=crop" alt="Dentist with patient"/>
-      </div>
-    </section>
-
-    <!-- ═══════════════════ WHY CHOOSE US (img left, text right) - green bg ═══════════════════ -->
-    <section class="split split--green">
-      <div class="split__media split__media--green">
-        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80&fit=crop" alt="Male dentist"/>
-      </div>
-      <div class="split__text">
-        <h2>Why Choose Smile For All<br>Your Dental Treatments?</h2>
-        <p>We use only the best quality materials on the market in order to provide the best products to our patients.</p>
-        <ul class="checklist">
-          <li v-for="b in benefits" :key="b">
-            <span class="checklist__dot">
-              <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                <path d="M2 6.5L4.5 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            {{ b }}
-          </li>
-        </ul>
-        <button class="btn-mint" style="margin-top:24px">Book an Appointment</button>
+      <div class="relative transition-all duration-700 ease-out" :class="split1Visible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'">
+        <div class="absolute w-[85%] h-[85%] -right-3.5 -bottom-3.5 bg-[#9fe0d4] rounded-2xl"></div>
+        <img
+          ref="media1Ref"
+          class="relative z-10 w-full h-[280px] md:h-[340px] object-cover rounded-2xl will-change-transform"
+          src="https://images.unsplash.com/photo-1588776814546-1ffedbe0b94b?w=600&q=80&fit=crop"
+          alt="Dentist consulting with a patient"
+        />
       </div>
     </section>
 
-    <!-- ═══════════════════ LEAVE YOUR WORRIES (text left, img right) ═══════════════════ -->
-    <section class="split">
-      <div class="split__text">
-        <h2>Leave Your Worries At The<br>Door And Enjoy A Healthier,<br>More Precise Smile</h2>
-        <p>We use only the best quality materials on the market in order to provide the best products to our patients. So don't worry about anything and book yourself.</p>
-        <button class="btn-mint" style="margin-top:24px">Book an Appointment</button>
-      </div>
-      <div class="split__media split__media--pink">
-        <img src="https://images.unsplash.com/photo-1570612861542-284f4c12e75f?w=600&q=80&fit=crop" alt="Perfect smile"/>
-      </div>
-    </section>
-
-    <!-- ═══════════════════ NEW PATIENTS BANNER ═══════════════════ -->
-    <section class="banner">
-      <h2 class="banner__heading">We're Welcoming New Patients<br>And Can't Wait To Meet You.</h2>
-      <p class="banner__sub">We use only the best quality materials on the market in order to provide the best products to our patients.</p>
-      <div class="banner__img-wrap">
-        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1000&q=80&fit=crop" alt="Modern dental clinic"/>
-      </div>
-      <button class="btn-mint" style="margin-top:32px">Read More</button>
-    </section>
-
-    <!-- ═══════════════════ FOOTER ═══════════════════ -->
-    <footer class="footer">
-      <div class="footer__top">
-        <!-- uifry logo -->
-        <a href="#" class="footer__brand">
-          <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-            <!-- flame icon -->
-            <path d="M13 2C13 2 8 7 8 12C8 12 9.5 10 11 10C11 10 7 14 7 18C7 21.866 9.686 25 13 25C16.314 25 19 21.866 19 18C19 14 15 10 15 10C16.5 10 18 12 18 12C18 7 13 2 13 2Z" fill="#0f172a"/>
-            <circle cx="13" cy="18" r="3" fill="#fff"/>
-          </svg>
-          <span class="footer__brand-name">uifry<sup>™</sup></span>
-        </a>
-
-        <nav class="footer__nav">
-          <a href="#">Home</a>
-          <a href="#">Service</a>
-          <a href="#">Blogs</a>
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-        </nav>
-      </div>
-
-      <hr class="footer__divider"/>
-
-      <div class="footer__bottom">
-        <p class="footer__copy">All rights reserved © uifry.com &nbsp;|&nbsp; Terms and conditions apply!</p>
-        <div class="footer__socials">
-          <!-- Facebook -->
-          <a href="#" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <!-- Instagram -->
-          <a href="#" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          </a>
-          <!-- YouTube -->
-          <a href="#" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
-          </a>
-          <!-- LinkedIn -->
-          <a href="#" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-          <!-- Twitter -->
-          <a href="#" aria-label="Twitter">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
-          </a>
+    <!-- ═══════════════════ SPLIT 2 (green bg) ═══════════════════ -->
+    <section ref="split2Ref" class="relative z-10 bg-[#dff0e0] py-16 md:py-20">
+      <div class="max-w-6xl mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div class="relative order-1 transition-all duration-700 ease-out" :class="split2Visible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'">
+          <div class="absolute w-[85%] h-[85%] -left-3.5 -bottom-3.5 bg-[#9fd4a4] rounded-2xl"></div>
+          <img
+            ref="media2Ref"
+            class="relative z-10 w-full h-[280px] md:h-[340px] object-cover rounded-2xl will-change-transform"
+            src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80&fit=crop"
+            alt="Dentist smiling in clinic"
+          />
+        </div>
+        <div class="order-2 transition-all duration-700 ease-out" :class="split2Visible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'">
+          <h2 class="font-display text-2xl md:text-[2rem] font-bold leading-[1.2] tracking-tight mb-4">
+            Why choose Toothsy for your dental care?
+          </h2>
+          <p class="text-[0.9rem] text-stone-500 leading-relaxed mb-5">
+            No two smiles get the same generic plan here — every treatment is
+            built around your actual teeth, your actual budget, and how much
+            time you've got.
+          </p>
+          <ul class="flex flex-col gap-3">
+            <li v-for="b in benefits" :key="b" class="flex items-center gap-2.5 text-sm text-stone-600">
+              <span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#6BCE9F] flex items-center justify-center">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 6.5L4.5 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              {{ b }}
+            </li>
+          </ul>
+          <NuxtLink
+            to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block mt-6 bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
+          >Book an Appointment</NuxtLink>
         </div>
       </div>
-    </footer>
+    </section>
+
+    <!-- ═══════════════════ SPLIT 3 ═══════════════════ -->
+    <section ref="split3Ref" class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-20 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+      <div class="transition-all duration-700 ease-out" :class="split3Visible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'">
+        <h2 class="font-display text-2xl md:text-[2rem] font-bold leading-[1.2] tracking-tight mb-4">
+          Leave your worries at the door, leave with a healthier smile
+        </h2>
+        <p class="text-[0.9rem] text-stone-500 leading-relaxed mb-6">
+          Nervous about the chair? You're not the only one. We talk you through
+          every step before it happens, and stop the moment you need us to.
+        </p>
+        <NuxtLink
+          to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
+        >Book an Appointment</NuxtLink>
+      </div>
+      <div class="relative transition-all duration-700 ease-out" :class="split3Visible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'">
+        <div class="absolute w-[85%] h-[85%] -right-3.5 -bottom-3.5 bg-[#f4b8b8] rounded-2xl"></div>
+        <img
+          ref="media3Ref"
+          class="relative z-10 w-full h-[280px] md:h-[340px] object-cover rounded-2xl will-change-transform"
+          src="https://images.unsplash.com/photo-1570612861542-284f4c12e75f?w=600&q=80&fit=crop"
+          alt="Patient with a confident smile"
+        />
+      </div>
+    </section>
+
+    <!-- ═══════════════════ BANNER ═══════════════════ -->
+    <section
+      ref="bannerRef"
+      class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 pb-24 text-center transition-all duration-700 ease-out"
+      :class="bannerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
+    >
+      <h2 class="font-display text-2xl md:text-[2.1rem] font-bold leading-[1.2] tracking-tight mb-3">
+        Your next appointment could be the one that changes how you feel about the dentist
+      </h2>
+      <p class="text-[0.9rem] text-stone-500 leading-relaxed max-w-lg mx-auto mb-10">
+        Book a consultation and see the clinic before you commit to anything.
+      </p>
+      <div class="relative max-w-3xl mx-auto rounded-2xl overflow-hidden h-[260px] md:h-[320px]">
+        <img
+          ref="bannerImgRef"
+          class="absolute inset-0 w-full h-[130%] -top-[15%] object-cover will-change-transform"
+          src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1000&q=80&fit=crop"
+          alt="Modern Toothsy clinic interior"
+        />
+      </div>
+      <NuxtLink
+        to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block mt-8 bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
+      >Book an Appointment</NuxtLink>
+    </section>
 
   </div>
 </template>
 
-<script>
-export default {
-  name: 'DentalClinic',
-  data() {
-    return {
-      menuOpen: false,
-      services: [
-        {
-          title: 'Root Canal Treatment',
-          desc: 'Root canal treatment is needed when dental pulp is inflamed or infected. We ensure a completely painless experience inside and outside.',
-          svg: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 2 6 4 6 7c0 1 .4 2 .9 3L8 20c.2 1 1 2 2 2h4c1 0 1.8-1 2-2l1.1-10c.5-1 .9-2 .9-3 0-3-3-5-6-5z"/></svg>`
-        },
-        {
-          title: 'Cosmetic Dentist',
-          desc: 'Cosmetic dentistry is a branch of dentistry that focuses on improving or enhancing the appearance of your smile beautifully.',
-          svg: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-width="3"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-width="3"/></svg>`
-        },
-        {
-          title: 'Dental Implants',
-          desc: 'A dental implant is an artificial tooth root placed into your jaw to hold a replacement tooth or bridge that can last a lifetime.',
-          svg: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2DD4BF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="9" rx="2"/><path d="M12 11v11"/><path d="M9 16h6"/><path d="M9 19.5h6"/></svg>`
-        }
-      ],
-      benefits: [
-        'Top quality dentist team',
-        'State of the art dental services',
-        'Discount on all dental treatment',
-        'Enrollment is quick and easy'
-      ]
-    }
+<script setup>
+/* ---------- content ---------- */
+const services = [
+  {
+    title: 'Root Canal Treatment',
+    desc: 'For inflamed or infected pulp — handled calmly, with numbing that actually works before we start.',
+    svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1f9d63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C9 2 6 4 6 7c0 1 .4 2 .9 3L8 20c.2 1 1 2 2 2h4c1 0 1.8-1 2-2l1.1-10c.5-1 .9-2 .9-3 0-3-3-5-6-5z"/></svg>`
+  },
+  {
+    title: 'Cosmetic Dentistry',
+    desc: 'Whitening, veneers, and small fixes that add up to a smile you stop covering with your hand.',
+    svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1f9d63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-width="3"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-width="3"/></svg>`
+  },
+  {
+    title: 'Dental Implants',
+    desc: 'A real root replacement for a missing tooth — built to last, not just to look right on day one.',
+    svg: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1f9d63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="9" rx="2"/><path d="M12 11v11"/><path d="M9 16h6"/><path d="M9 19.5h6"/></svg>`
   }
+]
+
+const benefits = [
+  'Dentists who explain before they treat',
+  'Modern equipment, sterilised every single time',
+  'Transparent pricing, no surprise add-ons',
+  'Same-week booking for most appointments'
+]
+
+let prefersReducedMotion = false
+
+/* ---------- scroll reveal (cards / splits / banner) ---------- */
+const cardEls = ref([])
+const cardVisible = reactive(services.map(() => false))
+
+const split1Ref = ref(null); const split1Visible = ref(false)
+const split2Ref = ref(null); const split2Visible = ref(false)
+const split3Ref = ref(null); const split3Visible = ref(false)
+const bannerRef = ref(null); const bannerVisible = ref(false)
+
+let observer = null
+
+function setCardRef(el, i) {
+  cardEls.value[i] = el
 }
+
+function setupReveal() {
+  const targets = [
+    ...cardEls.value.map((el, i) => ({ el, set: (val) => (cardVisible[i] = val) })),
+    { el: split1Ref.value, set: (val) => (split1Visible.value = val) },
+    { el: split2Ref.value, set: (val) => (split2Visible.value = val) },
+    { el: split3Ref.value, set: (val) => (split3Visible.value = val) },
+    { el: bannerRef.value, set: (val) => (bannerVisible.value = val) }
+  ].filter((t) => t.el)
+
+  if (prefersReducedMotion) {
+    targets.forEach((t) => t.set(true))
+    return
+  }
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        const match = targets.find((t) => t.el === entry.target)
+        if (match) {
+          match.set(true)
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
+  )
+
+  targets.forEach((t) => observer.observe(t.el))
+}
+
+/* ---------- parallax (one shared rAF loop) ---------- */
+const watermarkRef = ref(null)
+const heroImgRef = ref(null)
+const media1Ref = ref(null)
+const media2Ref = ref(null)
+const media3Ref = ref(null)
+const bannerImgRef = ref(null)
+
+const w = { y: 0, ty: 0, rot: 0, trot: 0 }
+let parallaxItems = []
+let rafId = null
+
+function clamp(n, min, max) { return Math.min(max, Math.max(min, n)) }
+function lerp(a, b, t) { return a + (b - a) * t }
+
+function setupParallax() {
+  parallaxItems = [
+    { el: heroImgRef.value, strength: 20, y: 0, ty: 0 },
+    { el: media1Ref.value, strength: 18, y: 0, ty: 0 },
+    { el: media2Ref.value, strength: 18, y: 0, ty: 0 },
+    { el: media3Ref.value, strength: 18, y: 0, ty: 0 },
+    { el: bannerImgRef.value, strength: 34, y: 0, ty: 0 }
+  ].filter((item) => item.el)
+}
+
+function tick() {
+  const vh = window.innerHeight || 1
+
+  // page-level watermark drift, driven by overall scroll progress
+  const doc = document.documentElement
+  const maxScroll = doc.scrollHeight - vh
+  const pageProgress = maxScroll > 0 ? clamp(window.scrollY / maxScroll, 0, 1) : 0
+  w.ty = pageProgress * 1200
+  w.trot = pageProgress * 30
+  w.y = lerp(w.y, w.ty, 0.08)
+  w.rot = lerp(w.rot, w.trot, 0.08)
+  if (watermarkRef.value) {
+    watermarkRef.value.style.transform = `translate3d(0, ${w.y}px, 0) rotate(${w.rot}deg)`
+  }
+
+  // per-image depth drift, driven by each element's own viewport position
+  parallaxItems.forEach((item) => {
+    const rect = item.el.getBoundingClientRect()
+    const centerY = rect.top + rect.height / 2
+    const progress = clamp(1 - centerY / vh, 0, 1)
+    item.ty = (progress - 0.5) * item.strength * 2
+    item.y = lerp(item.y, item.ty, 0.1)
+    item.el.style.transform = `translate3d(0, ${item.y}px, 0)`
+  })
+
+  rafId = requestAnimationFrame(tick)
+}
+
+onMounted(() => {
+  prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  nextTick(() => {
+    setupReveal()
+    setupParallax()
+    if (!prefersReducedMotion) {
+      rafId = requestAnimationFrame(tick)
+    }
+  })
+})
+
+onBeforeUnmount(() => {
+  if (rafId) cancelAnimationFrame(rafId)
+  if (observer) observer.disconnect()
+})
 </script>
 
 <style scoped>
-/* ── Reset ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-img { display: block; width: 100%; }
-ul { list-style: none; }
-a { text-decoration: none; }
-button { cursor: pointer; border: none; font-family: inherit; }
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-/* ── Tokens ── */
-:root {
-  --cream: #f5f0d8;
-  --mint: #6BCE9F;
-  --mint2: #2bb89d;
-  --dark:  #111827;
-  --grey:  #6b7280;
-  --pill-mint: #4dcfb8;
+.body-font {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
 }
 
-#app {
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  background: var(--cream);
-  color: var(--dark);
+/* hero entrance, staggered */
+.hero-enter > * {
+  opacity: 0;
+  animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero-enter > *:nth-child(1) { animation-delay: 0.05s; }
+.hero-enter > *:nth-child(2) { animation-delay: 0.2s; }
+.hero-enter > *:nth-child(3) { animation-delay: 0.35s; }
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Shared button ── */
-.btn-mint {
-  background: #6BCE9F;
-  color: #fff;
-  padding: 13px 28px;
-  border-radius: 50px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  transition: background 0.2s, transform 0.15s;
-  display: inline-block;
-}
-.btn-mint:hover { background: var(--mint2); transform: translateY(-1px); }
-
-/* ══════════════════════════════════
-   NAVBAR
-══════════════════════════════════ */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: var(--cream);
-}
-.navbar__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 14px 40px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-/* ── Logo ── */
-.navbar__logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-  text-decoration: none;
-}
-.navbar__logo-icon {
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
-}
-.navbar__logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-}
-.navbar__logo-name {
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--dark);
-}
-.navbar__logo-sub {
-  font-size: 0.6rem;
-  color: var(--grey);
-  letter-spacing: 0.04em;
-  margin-top: 2px;
-}
-
-/* ── Mint pill nav container ── */
-.navbar__nav-pill {
-  display: flex;
-  align-items: center;
-  background: var(--mint);
-  border-radius: 50px;
-  padding: 5px;
-  gap: 2px;
-  margin-left: auto;
-  margin-right: 16px;
-}
-.navbar__nav-link {
-  display: inline-flex;
-  align-items: center;
-  padding: 9px 22px;
-  border-radius: 50px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #fff;
-  text-decoration: none;
-  transition: background 0.15s, color 0.15s;
-  white-space: nowrap;
-}
-.navbar__nav-link:hover {
-  background: rgba(255,255,255,0.15);
-}
-/* Active = black pill */
-.navbar__nav-link--active {
-  background: #111827;
-  color: #fff;
-  font-weight: 600;
-}
-
-/* ── Book Now button ── */
-.navbar__book {
-  flex-shrink: 0;
-  background: var(--mint);
-  color: #fff;
-  padding: 12px 28px;
-  border-radius: 50px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  transition: background 0.2s;
-  white-space: nowrap;
-}
-.navbar__book:hover { background: var(--mint2); }
-
-/* ── Hamburger ── */
-.navbar__hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  padding: 4px;
-  margin-left: auto;
-  cursor: pointer;
-}
-.navbar__hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: var(--dark);
-  border-radius: 2px;
-}
-
-/* ── Mobile menu ── */
-.navbar__mobile {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 12px 24px 18px;
-  background: var(--cream);
-  border-top: 1px solid rgba(0,0,0,0.07);
-}
-.navbar__mobile-link {
-  display: block;
-  padding: 10px 16px;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--grey);
-  text-decoration: none;
-}
-.navbar__mobile-link--active {
-  background: var(--mint);
-  color: #fff;
-}
-.navbar__mobile-book {
-  margin-top: 8px;
-  background: var(--mint);
-  color: #fff;
-  padding: 12px;
-  border-radius: 50px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-/* ══════════════════════════════════
-   HERO
-══════════════════════════════════ */
-.hero {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 60px 40px 48px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: center;
-}
-.hero__heading {
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 900;
-  line-height: 1.12;
-  letter-spacing: -0.5px;
-  margin-bottom: 20px;
-  color: var(--dark);
-}
-.hero__sub {
-  font-size: 0.9rem;
-  color: var(--grey);
-  line-height: 1.75;
-  max-width: 420px;
-  margin-bottom: 36px;
-}
-.hero__actions {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-.hero__phone {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--dark);
-}
-.hero__phone-ring {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1.5px solid var(--mint);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.hero__img-wrap {
-  position: relative;
-}
-.hero__img-wrap::before {
-  content: '';
-  position: absolute;
-  inset: 12% 8% 0;
-  background: #d4f0ea;
-  border-radius: 50% 50% 48% 52% / 52% 52% 48% 48%;
-  z-index: 0;
-}
-.hero__img {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 460px;
-  height: 480px;
-  object-fit: cover;
-  object-position: center top;
-  border-radius: 50% 50% 48% 52% / 52% 52% 48% 48%;
-  margin: 0 auto;
-}
-
-/* ══════════════════════════════════
-   SERVICE CARDS
-══════════════════════════════════ */
-.services {
-  max-width: 1200px;
-  margin: 0 auto 80px;
-  padding: 0 40px;
-}
-.services__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.scard {
-  background: #fff;
-  border-radius: 16px;
-  padding: 36px 28px 32px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  transition: transform 0.2s;
-}
-.scard:hover { transform: translateY(-4px); }
-.scard__icon {
-  width: 56px;
-  height: 56px;
-  background: #e6faf6;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 18px;
-}
-.scard__title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--dark);
-  margin-bottom: 10px;
-}
-.scard__desc {
-  font-size: 0.845rem;
-  color: var(--grey);
-  line-height: 1.7;
-}
-
-/* ══════════════════════════════════
-   SPLIT SECTIONS
-══════════════════════════════════ */
-.split {
-  max-width: 1200px;
-  margin: 0 auto 80px;
-  padding: 0 40px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 72px;
-  align-items: center;
-}
-.split--green {
-  max-width: 100%;
-  background: #dff0e0;
-  padding: 72px max(40px, calc((100% - 1200px)/2 + 40px));
-  margin-bottom: 0;
-}
-
-.split__text h2 {
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
-  font-weight: 800;
-  line-height: 1.22;
-  letter-spacing: -0.3px;
-  color: var(--dark);
-  margin-bottom: 16px;
-}
-.split__text p {
-  font-size: 0.88rem;
-  color: var(--grey);
-  line-height: 1.75;
-}
-
-.split__media {
-  position: relative;
-  border-radius: 16px;
-  overflow: visible;
-}
-.split__media::after {
-  content: '';
-  position: absolute;
-  width: 85%;
-  height: 85%;
-  border-radius: 16px;
-  z-index: 0;
-}
-.split__media--teal::after { background: #9fe0d4; bottom: -14px; right: -14px; }
-.split__media--green::after { background: #9fd4a4; bottom: -14px; left: -14px; }
-.split__media--pink::after { background: #f4b8b8; bottom: -14px; right: -14px; }
-
-.split__media img {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 340px;
-  object-fit: cover;
-  border-radius: 16px;
-}
-
-/* Checklist */
-.checklist {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.checklist li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.875rem;
-  color: var(--grey);
-}
-.checklist__dot {
-  width: 20px;
-  height: 20px;
-  background: var(--mint);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-/* ══════════════════════════════════
-   BANNER
-══════════════════════════════════ */
-.banner {
-  text-align: center;
-  padding: 80px 40px;
-}
-.banner__heading {
-  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  line-height: 1.22;
-  margin-bottom: 14px;
-}
-.banner__sub {
-  font-size: 0.875rem;
-  color: var(--grey);
-  line-height: 1.75;
-  max-width: 480px;
-  margin: 0 auto 40px;
-}
-.banner__img-wrap {
-  max-width: 820px;
-  margin: 0 auto;
-  border-radius: 16px;
-  overflow: hidden;
-}
-.banner__img-wrap img {
-  height: 300px;
-  object-fit: cover;
-}
-
-/* ══════════════════════════════════
-   FOOTER
-══════════════════════════════════ */
-.footer {
-  background: var(--cream);
-  padding: 40px 40px 28px;
-  margin-top: 40px;
-}
-.footer__top {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  padding-bottom: 28px;
-}
-.footer__brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  flex-shrink: 0;
-}
-.footer__brand-name {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--dark);
-  letter-spacing: -0.3px;
-}
-.footer__brand-name sup {
-  font-size: 0.55rem;
-  vertical-align: super;
-}
-.footer__nav {
-  display: flex;
-  gap: 36px;
-  margin-left: auto;
-}
-.footer__nav a {
-  font-size: 0.875rem;
-  color: var(--grey);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.footer__nav a:hover { color: var(--dark); }
-
-.footer__divider {
-  max-width: 1200px;
-  margin: 0 auto;
-  border: none;
-  border-top: 1px solid rgba(0,0,0,0.15);
-}
-.footer__bottom {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 20px;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-.footer__copy {
-  font-size: 0.8rem;
-  color: var(--grey);
-}
-.footer__socials {
-  display: flex;
-  gap: 10px;
-}
-.footer__socials a {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--dark);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.15s;
-}
-.footer__socials a svg {
-  width: 15px;
-  height: 15px;
-}
-.footer__socials a:hover { opacity: 0.75; }
-
-/* ══════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════ */
-@media (max-width: 900px) {
-  .navbar__nav-pill { display: none; }
-  .navbar__book { display: none; }
-  .navbar__hamburger { display: flex; }
-  .navbar__inner { padding: 14px 24px; }
-
-  .hero {
-    grid-template-columns: 1fr;
-    padding: 32px 24px 40px;
-    gap: 32px;
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter > * {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
-  .hero__img-wrap { order: -1; }
-  .hero__img { height: 300px; max-width: 280px; }
-
-  .services { padding: 0 24px; margin-bottom: 48px; }
-  .services__grid { grid-template-columns: 1fr; }
-
-  .split {
-    grid-template-columns: 1fr;
-    gap: 32px;
-    padding: 0 24px;
-    margin-bottom: 48px;
-  }
-  .split--green { padding: 48px 24px; }
-
-  .banner { padding: 48px 24px; }
-
-  .footer { padding: 32px 24px 20px; }
-  .footer__top { flex-direction: column; align-items: flex-start; }
-  .footer__nav { margin-left: 0; flex-wrap: wrap; gap: 16px; }
-  .footer__bottom { flex-direction: column; align-items: flex-start; }
-}
-
-@media (max-width: 480px) {
-  .hero__heading { font-size: 1.8rem; }
-  .split__text h2 { font-size: 1.4rem; }
-  .banner__heading { font-size: 1.4rem; }
 }
 </style>

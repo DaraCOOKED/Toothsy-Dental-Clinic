@@ -26,41 +26,37 @@
         >Home</NuxtLink>
 
         <NuxtLink
-          to="/brewerise"
+          to="/service"
           active-class="text-amber-700 underline underline-offset-4"
           class="hover:text-amber-300 transition-colors"
-        >Breweries</NuxtLink>
+        >Services</NuxtLink>
 
         <NuxtLink
-          to="/schedule"
+          to="/blog"
           active-class="text-amber-700 underline underline-offset-4"
           class="hover:text-amber-300 transition-colors"
-        >Schedule</NuxtLink>
+        >Blog</NuxtLink>
 
         <NuxtLink
-          to="/beer-style"
+          to="/about"
           active-class="text-amber-700 underline underline-offset-4"
           class="hover:text-amber-300 transition-colors"
-        >Beer styles</NuxtLink>
+        >About</NuxtLink>
 
         <NuxtLink
-          to="/award"
+          to="/contact"
           active-class="text-amber-700 underline underline-offset-4"
           class="hover:text-amber-300 transition-colors"
-        >Awards</NuxtLink>
+        >Contact Us</NuxtLink>
 
-        <NuxtLink
-          to="/sponsor"
-          active-class="text-amber-700 underline underline-offset-4"
-          class="hover:text-amber-300 transition-colors"
-        >Sponsors</NuxtLink>
+  
 
         <NuxtLink
   to="https://docs.google.com/forms/d/e/1FAIpQLScEjueBWitDWygOZkaHDnkADWIHhYdgZ-lH_u3EvKM2RzL1AA/viewform"
   target="_blank"
   rel="noopener noreferrer"
   class="ml-2 px-4 py-1.5 rounded-full bg-[#036533] border border-[#036533] text-white hover:text-amber-300 hover:border-amber-300 transition-colors"
->Vote here</NuxtLink>
+>Book</NuxtLink>
       </nav>
     </div>
   </header>
@@ -105,36 +101,31 @@
         class="hover:text-amber-600"
       >Home</NuxtLink>
       <NuxtLink
-        to="/brewerise"
+        to="/serice"
         active-class="text-amber-600 underline underline-offset-4"
         @click="menuOpen = false"
         class="hover:text-amber-600"
-      >Breweries</NuxtLink>
+      >Services</NuxtLink>
       <NuxtLink
-        to="/schedule"
+        to="/blog"
         active-class="text-amber-600 underline underline-offset-4"
         @click="menuOpen = false"
         class="hover:text-amber-600"
-      >Schedule</NuxtLink>
+      >Blog</NuxtLink>
       <NuxtLink
-        to="/beer-style"
+        to="/about"
         active-class="text-amber-600 underline underline-offset-4"
         @click="menuOpen = false"
         class="hover:text-amber-600"
-      >Beer Style</NuxtLink>
+      >About</NuxtLink>
       <NuxtLink
-        to="/award"
+        to="/contact"
         active-class="text-amber-600 underline underline-offset-4"
         @click="menuOpen = false"
         class="hover:text-amber-600"
-      >Award</NuxtLink>
+      >Contact Us</NuxtLink>
       
-      <NuxtLink
-        to="/sponsor"
-        active-class="text-amber-600 underline underline-offset-4"
-        @click="menuOpen = false"
-        class="hover:text-amber-600"
-      >Sponsors</NuxtLink>
+   
       
       
     </nav>

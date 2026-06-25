@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   },
 
   app: {
-    baseURL: "/beer-crown/",
+    baseURL: "/toothsy-detal-clinic/",
     head: {
       link: [
         {

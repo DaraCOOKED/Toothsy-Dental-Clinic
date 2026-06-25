@@ -2,12 +2,9 @@
   <div class="min-h-screen flex flex-col bg-[#FFFAE1] text-stone-900">
     <header class="sticky top-0 z-50 bg-[#FFFAE1] text-amber-50">
     <div class="flex items-center justify-between  px-4 py-1">
-      <div class="flex justify-center item-center align-center" >
+      <div class="flex justify-center bg-white rounded-2xl item-center align-center" >
         <NuxtLink to="/" class="text-lg justify-center font-bold ">
         <img src="/company-logo.png" class="h-10 mt-1.5 w-12" alt="Beer Crown 2026 logo">
-      </NuxtLink>
-      <NuxtLink to="/" class="text-lg justify-center font-bold flex justify-center tracking-wide">
-        <img src="/beer-asso.png" class="h-13.5 w-14 flex" alt="Beer Crown 2026 logo">
       </NuxtLink>
       </div>
       
@@ -18,7 +15,7 @@
         <span class="block w-6 h-1 bg-[#000]"></span>
       </button>
 
-      <nav class="hidden md:flex items-center gap-6 text-[#036533] text-sm font-medium">
+      <nav class="hidden md:flex bg-gray-500 items-center gap-6 text-[#036533] text-sm font-medium">
         <NuxtLink
           to="/"
           exact-active-class="text-amber-700 underline underline-offset-4"

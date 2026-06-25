@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-[#F7EBD5] text-stone-900">
-    <header class="sticky top-0 z-50 bg-[#F7EBD5] text-amber-50">
+  <div class="min-h-screen flex flex-col bg-[#FFFAE1] text-stone-900">
+    <header class="sticky top-0 z-50 bg-[#FFFAE1] text-amber-50">
     <div class="flex items-center justify-between  px-4 py-1">
       <div class="flex justify-center item-center align-center" >
         <NuxtLink to="/" class="text-lg justify-center font-bold ">

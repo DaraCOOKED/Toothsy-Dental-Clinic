@@ -1,8 +1,11 @@
 <template>
   <div class="min-h-screen flex flex-col bg-[#FFFAE1] text-stone-900">
 
-    <header class="sticky top-0 z-50 bg-[#FFFAE1]">
-      <div class="flex items-center justify-between px-4 py-1 md:px-8">
+    <header
+      class="sticky top-0 z-50 transition-colors duration-300"
+      :class="scrolled ? 'bg-[#FFFAE1]' : 'bg-transparent'"
+    >
+  <div class="flex items-center justify-between px-4 py-1 md:px-8">
 
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center gap-2 rounded-xl px-3 py-1.5">

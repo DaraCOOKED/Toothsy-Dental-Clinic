@@ -1,28 +1,25 @@
 <template>
   <div class="min-h-screen flex flex-col bg-[#FFFAE1] text-stone-900">
 
-    <header
-      class="sticky top-0 z-50 transition-colors duration-300"
-      :class="scrolled ? 'bg-[#FFFAE1]' : 'bg-transparent'"
-    >
-  <div class="flex items-center justify-between px-4 py-1 md:px-8">
+    <header ref="headerRef" class="fixed top-0 inset-x-0 z-50">
+      <div ref="scrimRef" class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-transparent pointer-events-none"></div>
+
+      <div class="relative z-10 flex items-center justify-between px-4 py-1 md:px-8">
 
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center gap-2 rounded-xl px-3 py-1.5">
-          <img src="/companylogo.png" class="h-16 w-17" alt="Toothsy Dental Clinic logo">
+          <img ref="logoRef" src="/companylogo.png" class="h-16 w-17" alt="Toothsy Dental Clinic logo">
         </NuxtLink>
 
         <!-- Mobile menu button -->
         <button @click="menuOpen = true" class="md:hidden flex flex-col gap-1" aria-label="Open menu">
-          <span class="block w-6 h-0.5 bg-[#1a1a1a]"></span>
-          <span class="block w-6 h-0.5 bg-[#1a1a1a]"></span>
-          <span class="block w-6 h-0.5 bg-[#1a1a1a]"></span>
+          <span class="block w-6 h-0.5 bg-white"></span>
+          <span class="block w-6 h-0.5 bg-white"></span>
+          <span class="block w-6 h-0.5 bg-white"></span>
         </button>
 
         <!-- Desktop nav pill -->
         <nav ref="navRef" class="hidden md:flex relative items-center gap-1 bg-[#8FE3B8] rounded-full p-1.5 text-sm font-medium">
-
-          <!-- sliding highlight, sits behind whichever link is active -->
           <span class="nav-pill absolute top-1.5 bottom-1.5 left-0 rounded-full bg-[#111827]" :style="pillStyle"></span>
 
           <NuxtLink
@@ -33,10 +30,10 @@
             class="relative z-10 px-5 py-2 rounded-full transition-colors duration-300"
             :class="isActive(link) ? 'text-white' : 'text-[#0d3b24] hover:text-[#036533]'"
           >{{ link.label }}</NuxtLink>
-
-          
         </nav>
-        <div>
+
+        <!-- Book Now (desktop only) -->
+        <div class="hidden md:block">
           <NuxtLink
             to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
             target="_blank"
@@ -62,7 +59,6 @@
         v-if="menuOpen"
         class="md:hidden fixed inset-y-0 left-0 z-[70] w-80 max-w-[85%] bg-white shadow-xl overflow-y-auto flex flex-col"
       >
-        <!-- Drawer header -->
         <div class="flex items-center justify-between px-2 border-b border-stone-100">
           <div class="flex justify-center items-center">
             <NuxtLink to="/" class="text-lg font-bold" @click="menuOpen = false">
@@ -76,58 +72,26 @@
           </button>
         </div>
 
-        <!-- Nav links -->
         <nav class="flex flex-col gap-5 px-5 py-6 text-xl text-[#036533] font-medium">
-          <NuxtLink
-            to="/"
-            exact-active-class="text-amber-600 underline underline-offset-4"
-            @click="menuOpen = false"
-            class="hover:text-amber-600"
-          >Home</NuxtLink>
-          <NuxtLink
-            to="/service"
-            active-class="text-amber-600 underline underline-offset-4"
-            @click="menuOpen = false"
-            class="hover:text-amber-600"
-          >Services</NuxtLink>
-          <NuxtLink
-            to="/blog"
-            active-class="text-amber-600 underline underline-offset-4"
-            @click="menuOpen = false"
-            class="hover:text-amber-600"
-          >Blog</NuxtLink>
-          <NuxtLink
-            to="/about"
-            active-class="text-amber-600 underline underline-offset-4"
-            @click="menuOpen = false"
-            class="hover:text-amber-600"
-          >About</NuxtLink>
-          <NuxtLink
-            to="/contact"
-            active-class="text-amber-600 underline underline-offset-4"
-            @click="menuOpen = false"
-            class="hover:text-amber-600"
-          >Contact Us</NuxtLink>
+          <NuxtLink to="/" exact-active-class="text-amber-600 underline underline-offset-4" @click="menuOpen = false" class="hover:text-amber-600">Home</NuxtLink>
+          <NuxtLink to="/service" active-class="text-amber-600 underline underline-offset-4" @click="menuOpen = false" class="hover:text-amber-600">Services</NuxtLink>
+          <NuxtLink to="/blog" active-class="text-amber-600 underline underline-offset-4" @click="menuOpen = false" class="hover:text-amber-600">Blog</NuxtLink>
+          <NuxtLink to="/about" active-class="text-amber-600 underline underline-offset-4" @click="menuOpen = false" class="hover:text-amber-600">About</NuxtLink>
+          <NuxtLink to="/contact" active-class="text-amber-600 underline underline-offset-4" @click="menuOpen = false" class="hover:text-amber-600">Contact Us</NuxtLink>
         </nav>
 
-        <!-- Book button -->
         <div class="flex justify-center pb-6">
           <NuxtLink
             class="px-8 py-2 rounded-full bg-[#036533] text-white text-sm font-medium hover:bg-amber-300"
-            to="https://docs.google.com/forms/d/e/1FAIpQLScEjueBWitDWygOZkaHDnkADWIHhYdgZ-lH_u3EvKM2RzL1AA/viewform"
+            to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
             target="_blank"
             rel="noopener noreferrer"
             @click="menuOpen = false"
-          >
-            Book Now
-          </NuxtLink>
+          >Book Now</NuxtLink>
         </div>
 
-        <!-- Footer signature, pushed to the bottom of the drawer -->
         <div class="mt-auto px-5 py-5 border-t border-stone-100">
-          <p class="text-center text-[10px] text-stone-400 tracking-wide">
-            Toothsy Dental Clinic
-          </p>
+          <p class="text-center text-[10px] text-stone-400 tracking-wide">Toothsy Dental Clinic</p>
         </div>
       </aside>
     </Transition>
@@ -163,7 +127,6 @@ const linkEls = ref([])
 const pillStyle = ref({ width: '0px', transform: 'translateX(0px)', opacity: 0 })
 
 function setLinkRef(el, i) {
-  // NuxtLink is a component -> ref gives instance with $el. Plain elements don't have it.
   linkEls.value[i] = el?.$el ?? el ?? null
 }
 
@@ -193,28 +156,67 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => resizeObserver?.disconnect())
-
 watch(() => route.path, () => nextTick(updatePill))
+
+/* ---------- Header scroll behavior ---------- */
+const headerRef = ref(null)
+const scrimRef = ref(null)
+const logoRef = ref(null)
+
+const SCROLL_THRESHOLD = 140
+let progress = 0
+let headerRafId = null
+let prefersReducedMotion = false
+
+function clamp(n, min, max) { return Math.min(max, Math.max(min, n)) }
+function lerp(a, b, t) { return a + (b - a) * t }
+
+function applyHeaderStyles(p) {
+  if (headerRef.value) {
+    headerRef.value.style.backgroundColor = `rgba(255, 250, 225, ${p})`
+    headerRef.value.style.backdropFilter = `blur(${p * 10}px)`
+    headerRef.value.style.WebkitBackdropFilter = `blur(${p * 10}px)`
+    headerRef.value.style.boxShadow = `0 4px 24px rgba(0,0,0,${p * 0.08})`
+  }
+  if (scrimRef.value) {
+    scrimRef.value.style.opacity = `${clamp(1 - p * 1.4, 0, 1)}`
+  }
+  if (logoRef.value) {
+    const scale = lerp(1, 0.82, p)
+    const lift = lerp(0, -3, p)
+    logoRef.value.style.transform = `translateY(${lift}px) scale(${scale})`
+  }
+}
+
+function headerTick() {
+  const target = clamp(window.scrollY / SCROLL_THRESHOLD, 0, 1)
+  progress = lerp(progress, target, 0.12)
+  applyHeaderStyles(progress)
+  headerRafId = requestAnimationFrame(headerTick)
+}
+
+onMounted(() => {
+  prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (prefersReducedMotion) {
+    applyHeaderStyles(window.scrollY > SCROLL_THRESHOLD / 2 ? 1 : 0)
+    return
+  }
+
+  headerRafId = requestAnimationFrame(headerTick)
+})
+
+onBeforeUnmount(() => {
+  if (headerRafId) cancelAnimationFrame(headerRafId)
+})
 </script>
 
 <style scoped>
-.slide-enter-active,
-.slide-leave-active {
-  transition: transform 0.3s ease;
-}
-.slide-enter-from,
-.slide-leave-to {
-  transform: translateX(-100%);
-}
+.slide-enter-active, .slide-leave-active { transition: transform 0.3s ease; }
+.slide-enter-from, .slide-leave-to { transform: translateX(-100%); }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+.fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
 
 .nav-pill {
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),

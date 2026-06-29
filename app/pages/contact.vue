@@ -56,6 +56,8 @@
         </div>
       </div>
     </section>
+      <AppointmentForm />
+
   </div>
 </template>
 

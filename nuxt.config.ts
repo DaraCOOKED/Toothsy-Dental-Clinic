@@ -13,6 +13,14 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
+  runtimeConfig: {
+    public: {
+    emailjsServiceId: "service_09csxvs",
+    emailjsTemplateId: "template_kh59r91",
+    emailjsPublicKey: "T8FLPsFfvUtRLmlaa",
+    },
+  },
+
   app: {
     baseURL: "/toothsy-detal-clinic/",
     head: {

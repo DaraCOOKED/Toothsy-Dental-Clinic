@@ -1,5 +1,5 @@
 <template>
-  <div class="relative isolate overflow-x-hidden bg-[#FFFAE1]">
+  <div class="relative isolate overflow-x-hidden bg-[#FFFA]">
 
     <!-- ════════════════════════════════════════════════════
       AMBIENT LAYER — blobs, watermark, accent shapes

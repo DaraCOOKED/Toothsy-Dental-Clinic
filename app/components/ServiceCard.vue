@@ -1,21 +1,30 @@
 <template>
   <div
     ref="cardRef"
-    class="group bg-white rounded-2xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(0,0,0,0.09)] card-reveal"
+    class="group bg-white rounded-2xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(0,0,0,0.09)] card-reveal cursor-pointer"
     :class="visible ? 'is-visible' : ''"
     :style="{ transitionDelay: visible ? `${index * 90}ms` : '0ms' }"
+    @click="$emit('open-detail')"
   >
     <div
-      class="w-12 h-12 rounded-full bg-[#1f9d63] flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-105"
-      v-html="svg"
-    ></div>
+      class="rounded-full bg-[#1f9d63] flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-105 overflow-hidden"
+      :style="{ width: iconSize, height: iconSize }"
+    >
+      <img
+        :src="icon"
+        :alt="title"
+        class="object-contain"
+        :style="{ width: `${iconInnerRatio}%`, height: `${iconInnerRatio}%` }"
+      />
+    </div>
 
     <h3 class="font-display text-base font-bold text-[#111827] mb-2">{{ title }}</h3>
     <p class="text-[0.83rem] text-stone-500 leading-relaxed mb-5">{{ desc }}</p>
 
-    <NuxtLink
-      :to="link"
+    <button
+      type="button"
       class="group/link inline-flex items-center gap-2 text-sm font-semibold text-[#111827] hover:text-[#1f9d63] transition-colors"
+      @click.stop="$emit('open-detail')"
     >
       Learn More
       <span class="flex items-center justify-center w-6 h-6 rounded-full border border-[#1f9d63] group-hover/link:bg-[#1f9d63] transition-colors duration-200">
@@ -31,7 +40,7 @@
           <path d="M5 12h14M13 6l6 6-6 6"/>
         </svg>
       </span>
-    </NuxtLink>
+    </button>
   </div>
 </template>
 
@@ -40,10 +49,14 @@
 const props = defineProps({
   title: { type: String, required: true },
   desc:  { type: String, required: true },
-  link:  { type: String, required: true },
-  svg:   { type: String, required: true },
+  link:  { type: String, default: '' },           // optional now, modal handles the click
+  icon:  { type: String, required: true },         // image src instead of raw svg string
+  iconSize: { type: String, default: '48px' },     // outer circle size, e.g. '48px', '3rem'
+  iconInnerRatio: { type: Number, default: 50 },   // icon image size as % of circle
   index: { type: Number, default: 0 },
 })
+
+defineEmits(['open-detail'])
 
 const cardRef = ref(null)
 const visible = ref(false)
@@ -53,13 +66,11 @@ onMounted(() => {
   const prefersReducedMotion =
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  // Skip animation for reduced-motion users — show immediately
   if (prefersReducedMotion) {
     visible.value = true
     return
   }
 
-  // Trigger reveal when card enters the viewport
   observer = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting) {
@@ -78,12 +89,6 @@ onBeforeUnmount(() => observer?.disconnect())
 
 
 <style scoped>
-/*
-  CARD REVEAL
-  Initial: invisible + shifted down + scaled down + blurred
-  Final:   visible + natural position + sharp
-  Uses transitions (not keyframes) so per-card stagger delay works.
-*/
 .card-reveal {
   opacity: 0;
   transform: translateY(40px) scale(0.97);

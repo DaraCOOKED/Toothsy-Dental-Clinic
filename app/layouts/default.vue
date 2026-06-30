@@ -38,7 +38,7 @@
             to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
             target="_blank"
             rel="noopener noreferrer"
-            class="relative z-10 ml-1 px-5 py-2 rounded-full bg-[#1f9d63] text-white hover:bg-[#036533] transition-colors duration-300"
+            class="relative z-10 ml-1 px-5 py-2 rounded-full bg-[#6BCE9F] text-white hover:bg-[#036533] transition-colors duration-300"
           >Book Now</NuxtLink>
         </div>
       </div>
@@ -117,7 +117,7 @@ const year = new Date().getFullYear()
 const navLinks = [
   { to: '/', label: 'Home', exact: true },
   { to: '/service', label: 'Services' },
-  { to: '/blog', label: 'Blogs' },
+  { to: '/blog', label: 'Dental Care' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' }
 ]
@@ -173,7 +173,7 @@ function lerp(a, b, t) { return a + (b - a) * t }
 
 function applyHeaderStyles(p) {
   if (headerRef.value) {
-    headerRef.value.style.backgroundColor = `rgba(255, 250, 225, ${p})`
+    headerRef.value.style.backgroundColor = `rgba(252, 251, 236, ${p})`
     headerRef.value.style.backdropFilter = `blur(${p * 10}px)`
     headerRef.value.style.WebkitBackdropFilter = `blur(${p * 10}px)`
     headerRef.value.style.boxShadow = `0 4px 24px rgba(0,0,0,${p * 0.08})`

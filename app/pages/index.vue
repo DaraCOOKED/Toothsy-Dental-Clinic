@@ -1,5 +1,5 @@
 <template>
-  <div class="relative isolate overflow-x-hidden body-font bg-[#FFFAE1] text-[#111827]">
+  <div class="relative isolate overflow-x-hidden body-font bg-[#FFFA] text-[#111827]">
 
     <!-- Signature ambient watermark (same motif as Home, mirrored to the left this time) -->
     <div
@@ -71,8 +71,8 @@
 
         <img
           ref="heroImgRef"
-          class="absolute inset-0 z-10 w-[86%] h-[86%] mx-auto mt-[5%] object-cover object-top rounded-[2rem] will-change-transform"
-          src="https://scontent.fpnh5-4.fna.fbcdn.net/v/t39.30808-6/649296538_122131075887034806_1677847096457612159_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx2048x1536&ctp=s2048x1536&_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=GZk4JTBOnrgQ7kNvwEcSiir&_nc_oc=AdpbixUzlWd9hCJE8CqTL7Jp4HpZb2MmKRB6F0SA4jD6uoiFWiTKNFzTutHdqN41ttM&_nc_zt=23&_nc_ht=scontent.fpnh5-4.fna&_nc_gid=8-roTCLBHn0obPDB8fc8kg&_nc_ss=7b289&oh=00_Af9fArrk0wMDSCx1gzcuJF102odmqSYPLVRONU6d003aIQ&oe=6A47838E"
+          class="absolute inset-0 z-10 w-[85%] h-[86%] mt-[3%] mx-auto mt-[6%] object-cover object-top rounded-[2rem] will-change-transform"
+          src="/owndoctor.png"
           alt="Toothsy dental team in the clinic"
         />
 
@@ -109,7 +109,7 @@
   <div class="text-center mb-10">
     <span class="inline-block text-[0.68rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">Our services</span>
     <h2 class="font-display text-2xl md:text-[1.9rem] font-bold tracking-tight max-w-md mx-auto leading-[1.2]">
-      Every service your smile could need
+      Your Smile Is Our M atter 
     </h2>
   </div>
 
@@ -197,28 +197,7 @@
       </div>
     </section>
 
-    <!-- ═══════════════════ APPROACH (bento) ═══════════════════ -->
-    <section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 pb-20">
-      <div class="text-center mb-12">
-        <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">How we work</span>
-        <h2 class="font-display text-2xl md:text-[2rem] font-bold tracking-tight">A few things every patient notices</h2>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-6">
-        <div
-          v-for="(v, i) in values"
-          :key="v.title"
-          :ref="(el) => setBentoRef(el, i)"
-          class="rounded-3xl p-7 md:p-8 transition-all duration-700 ease-out"
-          :class="[v.bg, v.span, bentoVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8']"
-          :style="{ transitionDelay: bentoVisible[i] ? `${i * 100}ms` : '0ms' }"
-        >
-          <div class="w-12 h-12 rounded-2xl bg-white/70 flex items-center justify-center mb-5" v-html="v.svg"></div>
-          <h3 class="font-display text-lg font-bold mb-2">{{ v.title }}</h3>
-          <p class="text-[0.85rem] text-stone-600 leading-relaxed">{{ v.desc }}</p>
-        </div>
-      </div>
-    </section>
 
     <!-- ═══════════════════ TEAM ═══════════════════ -->
     <section class="relative z-10 bg-[#d4f0ea] py-16 md:py-20">

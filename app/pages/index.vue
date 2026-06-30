@@ -72,7 +72,7 @@
         <img
           ref="heroImgRef"
           class="absolute inset-0 z-10 w-[86%] h-[86%] mx-auto mt-[5%] object-cover object-top rounded-[2rem] will-change-transform"
-          src="https://images.unsplash.com/photo-1581595219315-a187dd40c322?w=600&q=80&fit=crop&crop=faces,top"
+          src="https://scontent.fpnh5-4.fna.fbcdn.net/v/t39.30808-6/649296538_122131075887034806_1677847096457612159_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx2048x1536&ctp=s2048x1536&_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=GZk4JTBOnrgQ7kNvwEcSiir&_nc_oc=AdpbixUzlWd9hCJE8CqTL7Jp4HpZb2MmKRB6F0SA4jD6uoiFWiTKNFzTutHdqN41ttM&_nc_zt=23&_nc_ht=scontent.fpnh5-4.fna&_nc_gid=8-roTCLBHn0obPDB8fc8kg&_nc_ss=7b289&oh=00_Af9fArrk0wMDSCx1gzcuJF102odmqSYPLVRONU6d003aIQ&oe=6A47838E"
           alt="Toothsy dental team in the clinic"
         />
 
@@ -87,16 +87,15 @@
           </div>
         </div>
       </div>
+      
     </section>
-
-    <!-- wave: cream → green -->
+        <!-- wave: cream → green -->
     <div aria-hidden="true" class="relative z-10">
       <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="block w-full h-[36px] md:h-[52px]">
         <path d="M0,60 C220,0 480,60 720,20 C960,-10 1200,50 1440,10 L1440,60 L0,60 Z" fill="#dff0e0" />
       </svg>
     </div>
-
-    <!-- ═══════════════════ STATS ═══════════════════ -->
+        <!-- ═══════════════════ STATS ═══════════════════ -->
     <section ref="statsSectionRef" class="relative z-10 bg-[#dff0e0] py-12 md:py-14">
       <div class="max-w-6xl mx-auto px-6 md:px-10 grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 text-center">
         <div v-for="(s, i) in stats" :key="s.label">
@@ -105,6 +104,52 @@
         </div>
       </div>
     </section>
+<!-- ═══════════════════ SERVICES ═══════════════════ -->
+<section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-14 ">
+  <div class="text-center mb-10">
+    <span class="inline-block text-[0.68rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">Our services</span>
+    <h2 class="font-display text-2xl md:text-[1.9rem] font-bold tracking-tight max-w-md mx-auto leading-[1.2]">
+      Every service your smile could need
+    </h2>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[860px] mx-auto">
+    <div
+      v-for="svc in servicesPreview"
+      :key="svc.title"
+      class="rounded-[24px] overflow-hidden transition-transform duration-200 hover:-translate-y-1"
+      :class="svc.bg"
+    >
+      <div class="w-full h-[168px] flex items-center justify-center" :class="svc.thumbBg" v-html="svc.svg"></div>
+      <div class="px-[18px] pt-[18px] pb-[22px]">
+        <div class="flex items-center justify-between mb-3">
+          <span class="bg-[#111827] text-white text-[0.67rem] font-bold px-[13px] py-[5px] rounded-full">{{ svc.badge }}</span>
+          <span class="font-display text-[0.78rem] font-bold text-[#036533]">{{ svc.price }}</span>
+        </div>
+        <h3 class="font-display text-base font-bold text-[#064e35] uppercase tracking-[0.03em] leading-tight mb-1.5">{{ svc.title }}</h3>
+        <p class="text-[0.77rem] text-[#2d6b52] leading-relaxed">{{ svc.desc }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-center gap-4 mt-8">
+    <NuxtLink
+      to="/service"
+      class="inline-flex items-center gap-1.5 border-2 border-[#6BCE9F] text-[#036533] font-semibold text-sm px-6 py-3 rounded-full transition-colors hover:bg-[#dff0e0] hover:border-[#036533]"
+    >
+      See all services
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </NuxtLink>
+    <NuxtLink
+      to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
+      target="_blank" rel="noopener noreferrer"
+      class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
+    >Book an appointment</NuxtLink>
+  </div>
+</section>
+
+
+
 
     <!-- wave: green → cream -->
     <div aria-hidden="true" class="relative z-10">
@@ -223,7 +268,7 @@
         <img
           ref="ctaImgRef"
           class="absolute inset-0 w-full h-[140%] -top-[20%] object-cover will-change-transform"
-          src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1000&q=80&fit=crop"
+          src="https://scontent.fpnh5-4.fna.fbcdn.net/v/t39.30808-6/570473008_122109913719034806_7986897680499847805_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1377&ctp=s2048x1377&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=VZBa-w_tN8IQ7kNvwEQS6DU&_nc_oc=AdpUmnr9uTiYVWzc3H8Bh_u0w1oPG5ABkoPHrLp7DIJmhKCPg3OUJKOUI4JC67cIFT4&_nc_zt=23&_nc_ht=scontent.fpnh5-4.fna&_nc_gid=l8favXh0ud6odV-aEwXvhA&_nc_ss=7b289&oh=00_Af9Aeka-_tNX5ZA1SXfA2M5p9SmaQ8fuc_jS4fTAwe2_Sw&oe=6A478F09"
           alt="Inside the Toothsy clinic"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
@@ -302,7 +347,7 @@ const values = [
 ]
 
 const team = [
-  { name: 'Dr. Sothea Lim', role: 'Lead Dentist · Cosmetic & Implants', img: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&q=80&fit=crop&crop=faces' },
+  { name: 'Dr. Sothea Lim', role: 'Lead Dentist · Cosmetic & Implants', img: 'https://scontent.fpnh5-1.fna.fbcdn.net/v/t39.30808-6/590007906_122115551079034806_2958149669644650810_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Iybm9OUsydAQ7kNvwHX3ApB&_nc_oc=Adp2s-wTpUjFBhQv_z3hgvBEuemPZbkU3xJbzGR5gKK0CpMAGZW2DgvS4iLGCZgP_RE&_nc_zt=23&_nc_ht=scontent.fpnh5-1.fna&_nc_gid=f0WjikLsSrvOWu00HEDHxw&_nc_ss=7b289&oh=00_Af9a2Rs6rzK2Ns1T_Y2mFmKofYMZ4PuMl19ZIWGJ4ldELQ&oe=6A479058' },
   { name: 'Dr. Channary Pich', role: 'Endodontics · Root Canal', img: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&q=80&fit=crop&crop=faces' },
   { name: 'Dr. Vibol Heng', role: 'Family & Pediatric Dentistry', img: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&q=80&fit=crop&crop=faces' },
   { name: 'Dr. Sreymom Keo', role: 'Orthodontics', img: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80&fit=crop&crop=faces' }
@@ -496,6 +541,29 @@ onBeforeUnmount(() => {
   if (statsRafId) cancelAnimationFrame(statsRafId)
   if (observer) observer.disconnect()
 })
+const servicesPreview = [
+  {
+    badge: 'General', price: 'From $25',
+    bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
+    title: 'Checkup & clean',
+    desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
+    svg: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#036533" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 5 5 5 8c0 3 1.5 5 1 8-.4 2.5 1.5 4.5 3 3.5 1-.6 1.3-2.5 3-2.5s2 1.9 3 2.5c1.5 1 3.4-1 3-3.5-.5-3 1-5 1-8 0-3-3-6-7-6z"/></svg>`
+  },
+  {
+    badge: 'Cosmetic', price: 'From $80',
+    bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
+    title: 'Teeth whitening',
+    desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
+    svg: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#036533" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12s1 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`
+  },
+  {
+    badge: 'Restorative', price: 'From $60',
+    bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
+    title: 'Fillings',
+    desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
+    svg: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#036533" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>`
+  },
+]
 </script>
 
 <style scoped>

@@ -9,9 +9,15 @@ export default defineNuxtConfig({
     "@fortawesome/fontawesome-free/css/all.min.css",
   ],
 
-  vite: {
-    plugins: [tailwindcss()],
+ vite: {
+  plugins: [tailwindcss()],
+  server: {
+    watch: {
+      usePolling: true,
+      interval: 100,
+    },
   },
+},
 
   runtimeConfig: {
     public: {

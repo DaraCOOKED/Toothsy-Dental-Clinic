@@ -120,7 +120,13 @@
       class="rounded-[24px] overflow-hidden transition-transform duration-200 hover:-translate-y-1"
       :class="svc.bg"
     >
-      <div class="w-full h-[168px] flex items-center justify-center" :class="svc.thumbBg" v-html="svc.svg"></div>
+      <div class="w-full h-[168px] overflow-hidden" :class="svc.thumbBg">
+        <img
+          :src="svc.image"
+          :alt="svc.title"
+          class="block w-full h-full object-cover object-center"
+        />
+      </div>
       <div class="px-[18px] pt-[18px] pb-[22px]">
         <div class="flex items-center justify-between mb-3">
           <span class="bg-[#111827] text-white text-[0.67rem] font-bold px-[13px] py-[5px] rounded-full">{{ svc.badge }}</span>
@@ -326,7 +332,7 @@ const values = [
 ]
 
 const team = [
-  { name: 'Dr. Sothea Lim', role: 'Lead Dentist · Cosmetic & Implants', img: 'https://scontent.fpnh5-1.fna.fbcdn.net/v/t39.30808-6/590007906_122115551079034806_2958149669644650810_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Iybm9OUsydAQ7kNvwHX3ApB&_nc_oc=Adp2s-wTpUjFBhQv_z3hgvBEuemPZbkU3xJbzGR5gKK0CpMAGZW2DgvS4iLGCZgP_RE&_nc_zt=23&_nc_ht=scontent.fpnh5-1.fna&_nc_gid=f0WjikLsSrvOWu00HEDHxw&_nc_ss=7b289&oh=00_Af9a2Rs6rzK2Ns1T_Y2mFmKofYMZ4PuMl19ZIWGJ4ldELQ&oe=6A479058' },
+  { name: 'Dr. SOKThea Liyo', role: 'Orthodontics', img: '/team-member.png' },
   { name: 'Dr. Channary Pich', role: 'Endodontics · Root Canal', img: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&q=80&fit=crop&crop=faces' },
   { name: 'Dr. Vibol Heng', role: 'Family & Pediatric Dentistry', img: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&q=80&fit=crop&crop=faces' },
   { name: 'Dr. Sreymom Keo', role: 'Orthodontics', img: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80&fit=crop&crop=faces' }
@@ -526,21 +532,21 @@ const servicesPreview = [
     bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
     title: 'Checkup & clean',
     desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
-    svg: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#036533" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 5 5 5 8c0 3 1.5 5 1 8-.4 2.5 1.5 4.5 3 3.5 1-.6 1.3-2.5 3-2.5s2 1.9 3 2.5c1.5 1 3.4-1 3-3.5-.5-3 1-5 1-8 0-3-3-6-7-6z"/></svg>`
+    image: '/service1.png'
   },
   {
     badge: 'Cosmetic', price: 'From $80',
     bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
     title: 'Teeth whitening',
     desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
-    svg: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#036533" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12s1 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`
+    image: '/service1.png'
   },
   {
     badge: 'Restorative', price: 'From $60',
     bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
     title: 'Fillings',
     desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
-    svg: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#036533" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>`
+    image: '/service1.png'
   },
 ]
 </script>

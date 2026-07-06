@@ -117,7 +117,7 @@ const closePopup = () => {
 
       <button
         type="submit"
-        class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+        class="w-full bg-[#8FE3B8] text-white py-3 rounded-lg hover:bg-[#1f9d63] transition-colors font-semibold"
       >
         Book Appointment
       </button>
@@ -241,3 +241,6 @@ const closePopup = () => {
   transition: transform 0.3s ease;
 }
 </style>
+
+
+

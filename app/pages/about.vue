@@ -150,8 +150,7 @@
           </div>
         </div>
 
-        <!-- Meet Our Specialists -->
-        <div ref="specialistsRef" class="bg-[#EFF8FC] -mx-4 px-4 md:px-10 py-16">
+        <div ref="specialistsRef" class="bg-[#EFF8FC] -mx-2 px-2 md:px-5 py-10">
           <h2 ref="specialistsTitleRef"
             class="text-center text-2xl md:text-3xl font-bold mb-2 will-change-transform fade-up-reveal"
             :class="specialistsVisible ? 'is-visible' : ''"
@@ -200,21 +199,7 @@
         </div>
 
         <!-- Services -->
-        <div ref="servicesRef" class="bg-[#6fbfaa] -mx-4 px-4 md:px-10 py-12">
-          <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-            <div
-              v-for="(service, i) in services" :key="service.title"
-              :ref="(el) => setServiceCardRef(el, i)"
-              class="bg-white rounded-xl p-7 text-center will-change-transform service-card-reveal"
-              :class="serviceVisible[i] ? 'is-visible' : ''"
-              :style="{ transitionDelay: serviceVisible[i] ? `${i * 110}ms` : '0ms' }"
-            >
-              <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4"/>
-              <h3 class="font-bold text-gray-900 font-sans mb-2">{{ service.title }}</h3>
-              <p class="text-sm text-gray-500 font-sans leading-relaxed">{{ service.description }}</p>
-            </div>
-          </div>
-        </div>
+        
 
         <!-- CTA + Video -->
         <div ref="ctaRef"

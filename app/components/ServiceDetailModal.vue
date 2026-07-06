@@ -37,29 +37,14 @@
             <!-- Scrollable content -->
             <div class="overflow-y-auto p-7 sm:p-8">
               <div class="flex items-start justify-between gap-4 mb-5">
-                <div
-                  class="rounded-full bg-[#1f9d63] flex items-center justify-center flex-shrink-0 overflow-hidden"
-                  :style="{ width: iconSize, height: iconSize }"
-                >
-                  <img
-                    v-if="service?.icon"
-                    :src="service.icon"
-                    :alt="service?.title"
-                    class="object-contain"
-                    :style="{ width: `${iconInnerRatio}%`, height: `${iconInnerRatio}%` }"
-                  />
-                </div>
-                <span
-                  v-if="service?.price"
-                  class="text-xs font-semibold text-[#1f9d63] bg-[#e6faf6] px-3 py-1 rounded-full whitespace-nowrap"
-                >
-                  From {{ service.price }}
-                </span>
+              
+            
               </div>
 
-              <h2 :id="titleId" class="font-display text-2xl font-bold text-[#111827] mb-3">
+              <h2 :id="titleId" class="font-sans font-semibold text-xl text-[#111827] mb-2">
                 {{ service?.title }}
               </h2>
+              
 
               <p class="text-[0.95rem] text-stone-500 leading-relaxed mb-6">
                 {{ service?.desc }}

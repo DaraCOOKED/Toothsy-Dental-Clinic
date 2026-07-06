@@ -17,7 +17,7 @@
     </div>
 
     <div class="p-7">
-      <h3 class="font-display text-base font-bold text-[#111827] mb-2">{{ title }}</h3>
+      <h3 class="font-sans font-semibold text-xl text-[#111827] mb-2">{{ title }}</h3>
       <p class="text-[0.83rem] text-stone-500 leading-relaxed mb-5">{{ desc }}</p>
 
       <button
@@ -25,7 +25,7 @@
         class="group/link inline-flex items-center gap-2 text-sm font-semibold text-[#111827] hover:text-[#1f9d63] transition-colors"
         @click.stop="$emit('open-detail')"
       >
-        Learn More
+        See More
         <span class="flex items-center justify-center w-6 h-6 rounded-full border border-[#1f9d63] group-hover/link:bg-[#1f9d63] transition-colors duration-200">
           <svg
             class="w-3 h-3 text-[#1f9d63] group-hover/link:text-white transition-colors duration-200"

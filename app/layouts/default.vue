@@ -2,7 +2,7 @@
   <div class="min-h-screen flex flex-col bg-[#EFF8FC] text-stone-900">
 
     <header ref="headerRef" class="fixed top-0 inset-x-0 z-50">
-      <div ref="scrimRef" class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-transparent pointer-events-none"></div>
+      <div ref="scrimRef" class="absolute inset-0 bg-gradient-to-b  from-black/30 via-black/10 to-transparent pointer-events-none"></div>
 
       <div class="relative z-10 flex items-center justify-between px-4 py-1 md:px-8">
 
@@ -13,10 +13,10 @@
 
         <!-- Mobile menu button -->
         <button @click="menuOpen = true" class="md:hidden flex flex-col gap-1" aria-label="Open menu">
-          <span class="block w-6 h-0.5 bg-white"></span>
-          <span class="block w-6 h-0.5 bg-white"></span>
-          <span class="block w-6 h-0.5 bg-white"></span>
-        </button>
+  <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
+  <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
+  <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
+</button>
 
         <!-- Desktop nav pill -->
         <nav ref="navRef" class="hidden md:flex relative items-center gap-1 bg-[#8FE3B8] rounded-full p-1.5 text-sm font-medium">
@@ -113,7 +113,25 @@
 const route = useRoute()
 const menuOpen = ref(false)
 const year = new Date().getFullYear()
+const scrolled = ref(false)
 
+const barColor = computed(() => {
+  if (menuOpen.value) return 'bg-white'
+  return scrolled.value ? 'bg-black' : 'bg-white'
+})
+
+function handleScroll() {
+  scrolled.value = window.scrollY > 50 // adjust threshold as needed
+}
+
+onMounted(() => {
+  handleScroll()
+  window.addEventListener('scroll', handleScroll, { passive: true })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 const navLinks = [
   { to: '/', label: 'Home', exact: true },
   { to: '/service', label: 'Services' },

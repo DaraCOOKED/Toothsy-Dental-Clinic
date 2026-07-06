@@ -15,7 +15,7 @@
       >
         <source :src="videoSrc" type="video/mp4">
       </video>
-      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#FFFAE1]"></div>
+      <div class="absolute inset-0 from-black/60 via-black/40 to-[#FFFAE1]"></div>
     </div>
 
     <div class="relative z-10 w-full px-6 md:px-9 pt-20 text-center">

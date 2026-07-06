@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#FFFA]">
+  <div class="bg-[#EFF8FC]">
     <HeroSection
       eyebrow="Contact"
       title="Get in touch"

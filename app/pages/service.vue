@@ -1,6 +1,6 @@
 <!-- pages/service.vue -->
 <template>
-  <div class="bg-[#FFFA]">
+  <div class="bg-[#EFF8FC]">
     <HeroSection
       eyebrow="Services"
       title="Dental services"

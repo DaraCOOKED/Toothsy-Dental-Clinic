@@ -1,5 +1,5 @@
 <template>
-  <div class="relative isolate overflow-x-hidden bg-[#FFFA]">
+  <div class="relative isolate overflow-x-hidden bg-[#EFF8FC]">
 
     <!-- ════════════════════════════════════════════════════
       AMBIENT LAYER — blobs, watermark, accent shapes
@@ -151,7 +151,7 @@
         </div>
 
         <!-- Meet Our Specialists -->
-        <div ref="specialistsRef" class="bg-[#f5f0d8] -mx-4 px-4 md:px-10 py-16">
+        <div ref="specialistsRef" class="bg-[#EFF8FC] -mx-4 px-4 md:px-10 py-16">
           <h2 ref="specialistsTitleRef"
             class="text-center text-2xl md:text-3xl font-bold mb-2 will-change-transform fade-up-reveal"
             :class="specialistsVisible ? 'is-visible' : ''"

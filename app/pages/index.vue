@@ -1,5 +1,5 @@
 <template>
-  <div class="relative isolate overflow-x-hidden body-font bg-[#FFFA] text-[#111827]">
+  <div class="relative isolate overflow-x-hidden body-font bg-[#EFF8FC] text-[#111827]">
 
     <!-- Signature ambient watermark (same motif as Home, mirrored to the left this time) -->
     <div
@@ -160,7 +160,7 @@
     <!-- wave: green → cream -->
     <div aria-hidden="true" class="relative z-10">
       <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="block w-full h-[36px] md:h-[52px] rotate-180">
-        <path d="M0,60 C220,0 480,60 720,20 C960,-10 1200,50 1440,10 L1440,60 L0,60 Z" fill="#FFFAE1" />
+        <path d="M0,60 C220,0 480,60 720,20 C960,-10 1200,50 1440,10 L1440,60 L0,60 Z" fill="#dff0e0" />
       </svg>
     </div>
 
@@ -184,7 +184,7 @@
           class="relative pl-12 md:pl-0 mb-12 md:mb-16 last:mb-0 transition-all duration-700 ease-out"
           :class="timelineVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'"
         >
-          <span class="absolute left-0 md:left-1/2 top-0 md:-translate-x-1/2 w-9 h-9 rounded-full bg-[#6BCE9F] border-4 border-[#FFFAE1] text-white text-[0.65rem] font-bold flex items-center justify-center z-10">
+          <span class="absolute left-0 md:left-1/2 top-0 md:-translate-x-1/2 w-9 h-9 rounded-full bg-[#6BCE9F] border-4 border-[#EFF8FC] text-white text-[0.65rem] font-bold flex items-center justify-center z-10">
             {{ i + 1 }}
           </span>
 

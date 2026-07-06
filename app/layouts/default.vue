@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-[#FFFAE1] text-stone-900">
+  <div class="min-h-screen flex flex-col bg-[#EFF8FC] text-stone-900">
 
     <header ref="headerRef" class="fixed top-0 inset-x-0 z-50">
       <div ref="scrimRef" class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-transparent pointer-events-none"></div>
@@ -35,7 +35,7 @@
         <!-- Book Now (desktop only) -->
         <div class="hidden md:block">
           <NuxtLink
-            to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
+            to="book-appointment"
             target="_blank"
             rel="noopener noreferrer"
             class="relative z-10 ml-1 px-5 py-2 rounded-full bg-[#6BCE9F] text-white hover:bg-[#036533] transition-colors duration-300"

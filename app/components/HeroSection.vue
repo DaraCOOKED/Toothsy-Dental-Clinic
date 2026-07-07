@@ -3,18 +3,22 @@
     ref="heroRef"
     class="relative w-full min-h-[78vh] md:min-h-screen overflow-hidden flex items-center justify-center"
   >
-    <div ref="videoLayerRef" class="absolute inset-0 will-change-transform">
-      <video
-        ref="videoRef"
-        class="w-full h-full object-cover"
-        autoplay
-        muted
-        loop
-        playsinline
-        :poster="poster"
+    <div ref="bgLayerRef" class="absolute inset-0 will-change-transform">
+      <div
+        v-for="(img, index) in images"
+        :key="img"
+        class="absolute inset-0 transition-opacity ease-in-out"
+        :style="{
+          opacity: index === currentIndex ? 1 : 0,
+          transitionDuration: `${fadeDuration}ms`
+        }"
       >
-        <source :src="videoSrc" type="video/mp4">
-      </video>
+        <img
+          :src="img"
+          class="w-full h-full object-cover"
+          :alt="`Toothsy Dental Clinic ${index + 1}`"
+        >
+      </div>
       <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#FFFAE1]"></div>
     </div>
 
@@ -52,7 +56,7 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   eyebrow: { type: String, default: '' },
   title: { type: String, default: 'Your Smile,' },
   highlight: { type: String, default: 'Our Priority' },
@@ -60,22 +64,34 @@ defineProps({
     type: String,
     default: 'Gentle, modern dental care for the whole family. Book your visit with Toothsy today.'
   },
-  videoSrc: { type: String, default: '/video/hero-bg.mp4' },
-  poster: { type: String, default: '/hero-poster.png' }
+  images: {
+    type: Array,
+    default: () => [
+      '/images/hero/hero-1.jpg',
+      '/images/hero/hero-2.jpg',
+      '/images/hero/hero-3.jpg',
+      '/images/hero/hero-4.jpg'
+    ]
+  },
+  // how long each slide stays fully visible before the next one crossfades in (ms)
+  slideDuration: { type: Number, default: 5500 },
+  // how long the crossfade itself takes (ms)
+  fadeDuration: { type: Number, default: 1200 }
 })
 
 const heroRef = ref(null)
-const videoLayerRef = ref(null)
-const videoRef = ref(null)
+const bgLayerRef = ref(null)
 const headingRef = ref(null)
 const subRef = ref(null)
 const scrollHintRef = ref(null)
 
+const currentIndex = ref(0)
+let slideTimer = null
 let rafId = null
 
 const v = {
-  videoY: 0, tVideoY: 0,
-  videoScale: 1.12, tVideoScale: 1.12,
+  bgY: 0, tBgY: 0,
+  bgScale: 1.12, tBgScale: 1.12,
   headY: 0, tHeadY: 0,
   headOp: 1, tHeadOp: 1,
   subY: 0, tSubY: 0,
@@ -92,8 +108,8 @@ function calcTargets() {
   const vh = window.innerHeight || 1
   const progress = clamp(-rect.top / vh, 0, 1.5)
 
-  v.tVideoY = progress * 110
-  v.tVideoScale = 1.12 + progress * 0.18
+  v.tBgY = progress * 110
+  v.tBgScale = 1.12 + progress * 0.18
   v.tHeadY = progress * -90
   v.tHeadOp = clamp(1 - progress * 1.7, 0, 1)
   v.tSubY = progress * -50
@@ -105,15 +121,15 @@ function tick() {
   calcTargets()
   const ease = 0.08
 
-  v.videoY = lerp(v.videoY, v.tVideoY, ease)
-  v.videoScale = lerp(v.videoScale, v.tVideoScale, ease)
+  v.bgY = lerp(v.bgY, v.tBgY, ease)
+  v.bgScale = lerp(v.bgScale, v.tBgScale, ease)
   v.headY = lerp(v.headY, v.tHeadY, ease)
   v.headOp = lerp(v.headOp, v.tHeadOp, ease)
   v.subY = lerp(v.subY, v.tSubY, ease)
   v.subOp = lerp(v.subOp, v.tSubOp, ease)
   v.hintOp = lerp(v.hintOp, v.tHintOp, ease)
 
-  if (videoLayerRef.value) videoLayerRef.value.style.transform = `translate3d(0, ${v.videoY}px, 0) scale(${v.videoScale})`
+  if (bgLayerRef.value) bgLayerRef.value.style.transform = `translate3d(0, ${v.bgY}px, 0) scale(${v.bgScale})`
   if (headingRef.value) {
     headingRef.value.style.transform = `translate3d(0, ${v.headY}px, 0)`
     headingRef.value.style.opacity = v.headOp
@@ -127,17 +143,25 @@ function tick() {
   rafId = requestAnimationFrame(tick)
 }
 
+function startSlideshow() {
+  if (props.images.length <= 1) return
+  slideTimer = setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % props.images.length
+  }, props.slideDuration)
+}
+
 onMounted(() => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (prefersReducedMotion) {
-    videoRef.value?.pause?.()
-    return
+
+  if (!prefersReducedMotion) {
+    startSlideshow()
+    rafId = requestAnimationFrame(tick)
   }
-  rafId = requestAnimationFrame(tick)
 })
 
 onBeforeUnmount(() => {
   if (rafId) cancelAnimationFrame(rafId)
+  if (slideTimer) clearInterval(slideTimer)
 })
 </script>
 

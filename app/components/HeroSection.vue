@@ -19,25 +19,25 @@
           :alt="`Toothsy Dental Clinic ${index + 1}`"
         >
       </div>
-      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#FFFAE1]"></div>
+      <div class="absolute inset-0 hero-vignette"></div>
     </div>
 
     <div class="relative z-10 w-full px-6 md:px-9 pt-20 text-center">
       <p
         v-if="eyebrow"
-        class="mb-4 text-xs md:text-sm font-semibold uppercase tracking-[0.3em] text-[#8FE3B8]"
+        class="mb-4 text-xs md:text-sm font-semibold uppercase tracking-[0.3em] text-[#8FE3B8] hero-text-shadow"
       >
         {{ eyebrow }}
       </p>
       <h1
         ref="headingRef"
-        class="text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight will-change-transform"
+        class="text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight will-change-transform hero-text-shadow"
       >
         {{ title }}<span v-if="highlight" class="text-[#8FE3B8]"> {{ highlight }}</span>
       </h1>
       <p
         ref="subRef"
-        class="text-white/85 text-base md:text-xl mt-5 max-w-2xl mx-auto will-change-transform"
+        class="text-white/85 text-base md:text-xl mt-5 max-w-2xl mx-auto will-change-transform hero-text-shadow"
       >
         {{ description }}
       </p>
@@ -166,6 +166,25 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+/* Soft, localized darkening behind the text only — keeps the photos
+   bright everywhere else instead of washing the whole hero out. */
+.hero-vignette {
+  background: radial-gradient(
+    ellipse 65% 55% at 50% 40%,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.32) 40%,
+    rgba(0, 0, 0, 0) 72%
+  );
+}
+
+/* Crisp edge on the text itself so it stays legible even over the
+   brighter parts of a photo, without needing a heavier overlay. */
+.hero-text-shadow {
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.65),
+    0 1px 3px rgba(0, 0, 0, 0.75);
+}
+
 .scroll-bounce {
   animation: bounce 1.8s ease-in-out infinite;
 }

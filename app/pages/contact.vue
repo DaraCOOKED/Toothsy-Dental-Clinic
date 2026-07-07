@@ -21,6 +21,7 @@
         <ContactInfoPanel />
       </div>
     </section>
+
   </div>
 </template>
 

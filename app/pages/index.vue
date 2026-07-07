@@ -1,5 +1,5 @@
 <template>
-  <div class="relative isolate overflow-x-hidden body-font bg-[#FFFAE1] text-[#111827]">
+  <div class="relative isolate body-font bg-[#EFF8FC] text-[#111827]">
 
     <!-- Signature ambient watermark (same motif as Home, mirrored to the left this time) -->
     <div
@@ -32,14 +32,8 @@
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-4">
-          <div class="flex items-center gap-3 bg-white rounded-2xl px-5 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
-            <span class="font-display text-xl font-bold text-[#036533]">15+</span>
-            <span class="text-xs text-stone-500 leading-tight">Years caring<br>for smiles</span>
-          </div>
-          <div class="flex items-center gap-3 bg-white rounded-2xl px-5 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
-            <span class="font-display text-xl font-bold text-[#036533]">12k+</span>
-            <span class="text-xs text-stone-500 leading-tight">Patients<br>treated</span>
-          </div>
+         
+         
           <NuxtLink
             to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
             target="_blank"
@@ -71,8 +65,8 @@
 
         <img
           ref="heroImgRef"
-          class="absolute inset-0 z-10 w-[86%] h-[86%] mx-auto mt-[5%] object-cover object-top rounded-[2rem] will-change-transform"
-          src="https://scontent.fpnh5-4.fna.fbcdn.net/v/t39.30808-6/649296538_122131075887034806_1677847096457612159_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx2048x1536&ctp=s2048x1536&_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=GZk4JTBOnrgQ7kNvwEcSiir&_nc_oc=AdpbixUzlWd9hCJE8CqTL7Jp4HpZb2MmKRB6F0SA4jD6uoiFWiTKNFzTutHdqN41ttM&_nc_zt=23&_nc_ht=scontent.fpnh5-4.fna&_nc_gid=8-roTCLBHn0obPDB8fc8kg&_nc_ss=7b289&oh=00_Af9fArrk0wMDSCx1gzcuJF102odmqSYPLVRONU6d003aIQ&oe=6A47838E"
+          class="absolute inset-0 z-10 w-[85%] h-[86%] mx-auto mt-[6%] object-cover object-top rounded-[2rem] will-change-transform"
+          src="/owndoctor.png"
           alt="Toothsy dental team in the clinic"
         />
 
@@ -89,27 +83,13 @@
       </div>
       
     </section>
-        <!-- wave: cream → green -->
-    <div aria-hidden="true" class="relative z-10">
-      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="block w-full h-[36px] md:h-[52px]">
-        <path d="M0,60 C220,0 480,60 720,20 C960,-10 1200,50 1440,10 L1440,60 L0,60 Z" fill="#dff0e0" />
-      </svg>
-    </div>
-        <!-- ═══════════════════ STATS ═══════════════════ -->
-    <section ref="statsSectionRef" class="relative z-10 bg-[#dff0e0] py-12 md:py-14">
-      <div class="max-w-6xl mx-auto px-6 md:px-10 grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 text-center">
-        <div v-for="(s, i) in stats" :key="s.label">
-          <div class="font-display text-3xl md:text-4xl font-bold text-[#036533]">{{ statValues[i] }}{{ s.suffix }}</div>
-          <div class="mt-1 text-xs md:text-sm text-stone-600">{{ s.label }}</div>
-        </div>
-      </div>
-    </section>
-<!-- ═══════════════════ SERVICES ═══════════════════ -->
+   
+
 <section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-14 ">
   <div class="text-center mb-10">
     <span class="inline-block text-[0.68rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">Our services</span>
     <h2 class="font-display text-2xl md:text-[1.9rem] font-bold tracking-tight max-w-md mx-auto leading-[1.2]">
-      Every service your smile could need
+      Your Smile Is Our Matter
     </h2>
   </div>
 
@@ -120,7 +100,13 @@
       class="rounded-[24px] overflow-hidden transition-transform duration-200 hover:-translate-y-1"
       :class="svc.bg"
     >
-      <div class="w-full h-[168px] flex items-center justify-center" :class="svc.thumbBg" v-html="svc.svg"></div>
+      <div class="w-full h-[168px] overflow-hidden" :class="svc.thumbBg">
+        <img
+          :src="svc.image"
+          :alt="svc.title"
+          class="block w-full h-full object-cover object-center"
+        />
+      </div>
       <div class="px-[18px] pt-[18px] pb-[22px]">
         <div class="flex items-center justify-between mb-3">
           <span class="bg-[#111827] text-white text-[0.67rem] font-bold px-[13px] py-[5px] rounded-full">{{ svc.badge }}</span>
@@ -151,74 +137,86 @@
 
 
 
-    <!-- wave: green → cream -->
-    <div aria-hidden="true" class="relative z-10">
-      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" class="block w-full h-[36px] md:h-[52px] rotate-180">
-        <path d="M0,60 C220,0 480,60 720,20 C960,-10 1200,50 1440,10 L1440,60 L0,60 Z" fill="#FFFAE1" />
-      </svg>
+  
+<!-- time story -->
+<section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-20">
+  <div class="text-center mb-12">
+    <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">
+      Our Story
+    </span>
+
+    <h2 class="font-display text-2xl md:text-[2rem] font-bold tracking-tight max-w-lg mx-auto">
+      A new clinic dedicated to healthier, happier smiles
+    </h2>
+
+    <p class="mt-4 text-stone-500 max-w-2xl mx-auto leading-relaxed">
+      Since opening in September 2025, Toothsy Clinic has focused on providing
+      gentle, modern, and patient-first dental care in a welcoming environment.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+
+    <!-- Text column -->
+    <div class="space-y-7 order-2 md:order-1">
+      <div
+        v-for="(item, i) in storyItems"
+        :key="item.year"
+        :ref="(el) => setTimelineRef(el, i)"
+        class="flex items-start gap-3 transition-all duration-700 ease-out"
+        :class="timelineVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'"
+      >
+        <span class="mt-2.5 w-2 h-2 rounded-full bg-[#1f9d63] flex-shrink-0"></span>
+
+        <div>
+          <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] mb-1.5">
+            {{ item.year }} — {{ item.title }}
+          </h3>
+
+          <p class="text-[0.85rem] text-stone-500 leading-relaxed">
+            {{ item.desc }}
+          </p>
+        </div>
+      </div>
     </div>
 
-    <!-- ═══════════════════ STORY TIMELINE ═══════════════════ -->
-    <section ref="timelineSectionRef" class="relative z-10 max-w-5xl mx-auto px-6 md:px-10 py-16 md:py-20">
-      <div class="text-center mb-14">
-        <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">Our story</span>
-        <h2 class="font-display text-2xl md:text-[2rem] font-bold tracking-tight">
-          From one small room to a clinic families keep coming back to
-        </h2>
-      </div>
+    <!-- Image column -->
+    <div class="relative order-1 md:order-2 h-[280px] md:h-[420px]">
+      <div class="absolute inset-[4%_0%_0%_8%] bg-[#d4f0ea] rounded-[2rem]"></div>
 
-      <div class="relative">
-        <div class="absolute left-[18px] md:left-1/2 top-0 bottom-0 w-[3px] bg-stone-200 md:-translate-x-1/2"></div>
-        <div ref="timelineLineRef" class="absolute left-[18px] md:left-1/2 top-0 w-[3px] bg-[#6BCE9F] md:-translate-x-1/2" style="height: 0%"></div>
+      <img
+        src="/frontmain.jpg"
+        alt="Inside Toothsy Clinic"
+        class="absolute inset-0 w-[92%] h-[92%] ml-auto object-cover rounded-[2rem]"
+      />
 
-        <div
-          v-for="(item, i) in storyItems"
-          :key="item.year"
-          :ref="(el) => setTimelineRef(el, i)"
-          class="relative pl-12 md:pl-0 mb-12 md:mb-16 last:mb-0 transition-all duration-700 ease-out"
-          :class="timelineVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'"
-        >
-          <span class="absolute left-0 md:left-1/2 top-0 md:-translate-x-1/2 w-9 h-9 rounded-full bg-[#6BCE9F] border-4 border-[#FFFAE1] text-white text-[0.65rem] font-bold flex items-center justify-center z-10">
-            {{ i + 1 }}
+      <!-- Floating Badge -->
+      <div class="absolute -left-3 bottom-6 md:bottom-10 z-20">
+        <div class="badge-float bg-[#6BCE9F] text-white rounded-2xl px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.18)] flex items-center gap-2.5">
+
+          <span class="flex-shrink-0 w-6 h-6 rounded-full bg-white/25 flex items-center justify-center">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path
+                d="M6 1v10M1 6h10"
+                stroke="#fff"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
           </span>
 
-          <div class="md:grid md:grid-cols-2 md:gap-14">
-            <div v-if="i % 2 !== 0" aria-hidden="true"></div>
-            <div :class="i % 2 === 0 ? 'md:text-right md:pr-10' : 'md:pl-10'">
-              <span class="font-display text-sm font-bold text-[#036533]">{{ item.year }}</span>
-              <h3 class="font-display text-lg md:text-xl font-bold mt-1 mb-2">{{ item.title }}</h3>
-              <p class="text-[0.85rem] text-stone-500 leading-relaxed" :class="i % 2 === 0 ? 'md:ml-auto md:max-w-sm' : 'md:max-w-sm'">
-                {{ item.desc }}
-              </p>
-            </div>
-            <div v-if="i % 2 === 0" aria-hidden="true"></div>
-          </div>
+          <span class="text-[0.7rem] font-semibold leading-tight">
+            Since<br>Sep 2025
+          </span>
+
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- ═══════════════════ APPROACH (bento) ═══════════════════ -->
-    <section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 pb-20">
-      <div class="text-center mb-12">
-        <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">How we work</span>
-        <h2 class="font-display text-2xl md:text-[2rem] font-bold tracking-tight">A few things every patient notices</h2>
-      </div>
+  </div>
+</section>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-6">
-        <div
-          v-for="(v, i) in values"
-          :key="v.title"
-          :ref="(el) => setBentoRef(el, i)"
-          class="rounded-3xl p-7 md:p-8 transition-all duration-700 ease-out"
-          :class="[v.bg, v.span, bentoVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8']"
-          :style="{ transitionDelay: bentoVisible[i] ? `${i * 100}ms` : '0ms' }"
-        >
-          <div class="w-12 h-12 rounded-2xl bg-white/70 flex items-center justify-center mb-5" v-html="v.svg"></div>
-          <h3 class="font-display text-lg font-bold mb-2">{{ v.title }}</h3>
-          <p class="text-[0.85rem] text-stone-600 leading-relaxed">{{ v.desc }}</p>
-        </div>
-      </div>
-    </section>
+
 
     <!-- ═══════════════════ TEAM ═══════════════════ -->
     <section class="relative z-10 bg-[#d4f0ea] py-16 md:py-20">
@@ -268,16 +266,12 @@
         <img
           ref="ctaImgRef"
           class="absolute inset-0 w-full h-[140%] -top-[20%] object-cover will-change-transform"
-          src="https://scontent.fpnh5-4.fna.fbcdn.net/v/t39.30808-6/570473008_122109913719034806_7986897680499847805_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1377&ctp=s2048x1377&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=VZBa-w_tN8IQ7kNvwEQS6DU&_nc_oc=AdpUmnr9uTiYVWzc3H8Bh_u0w1oPG5ABkoPHrLp7DIJmhKCPg3OUJKOUI4JC67cIFT4&_nc_zt=23&_nc_ht=scontent.fpnh5-4.fna&_nc_gid=l8favXh0ud6odV-aEwXvhA&_nc_ss=7b289&oh=00_Af9Aeka-_tNX5ZA1SXfA2M5p9SmaQ8fuc_jS4fTAwe2_Sw&oe=6A478F09"
+          src="/frontmain.jpg"
           alt="Inside the Toothsy clinic"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
         <div ref="ctaIconRef" class="absolute top-6 right-6 md:top-8 md:right-10 will-change-transform">
-          <div class="cta-icon-float w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1f9d63" stroke-width="2" stroke-linecap="round">
-              <path d="M12 2v6M12 16v6M2 12h6M16 12h6" />
-            </svg>
-          </div>
+          
         </div>
       </div>
 
@@ -302,10 +296,26 @@ const stats = [
 ]
 
 const storyItems = [
-  { year: '2010', title: 'One room, one dentist', desc: 'Toothsy opened as a single consulting room, focused on getting basic care to families who kept putting off the dentist.' },
-  { year: '2015', title: 'Building a real team', desc: 'We brought in specialists for root canals, implants, and cosmetic work, so patients stop getting passed between clinics.' },
-  { year: '2021', title: 'A clinic designed to feel calm', desc: "We rebuilt every room around comfort first — softer lighting, quieter equipment, and appointments that don't rush." },
-  { year: 'Today', title: 'Still taking new patients', desc: "Same approach, more hands — we're still booking consultations for anyone ready to start fresh with their smile." }
+  {
+    year: '15 Sep 2025',
+    title: 'Our doors officially opened',
+    desc: 'Toothsy Clinic welcomed its very first patients with a commitment to gentle, modern, and personalized dental care.'
+  },
+  {
+    year: 'Oct 2025',
+    title: 'Building trust in our community',
+    desc: 'As more patients visited, we focused on creating a friendly environment where everyone feels comfortable and cared for.'
+  },
+  {
+    year: 'Early 2026',
+    title: 'Growing one smile at a time',
+    desc: 'We expanded our services and continued improving every patient experience through quality treatment and modern equipment.'
+  },
+  {
+    year: 'Today',
+    title: 'The journey has just begun',
+    desc: "We're proud to continue welcoming new patients every day and look forward to growing together with our community."
+  }
 ]
 
 const values = [
@@ -347,7 +357,7 @@ const values = [
 ]
 
 const team = [
-  { name: 'Dr. Sothea Lim', role: 'Lead Dentist · Cosmetic & Implants', img: 'https://scontent.fpnh5-1.fna.fbcdn.net/v/t39.30808-6/590007906_122115551079034806_2958149669644650810_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=Iybm9OUsydAQ7kNvwHX3ApB&_nc_oc=Adp2s-wTpUjFBhQv_z3hgvBEuemPZbkU3xJbzGR5gKK0CpMAGZW2DgvS4iLGCZgP_RE&_nc_zt=23&_nc_ht=scontent.fpnh5-1.fna&_nc_gid=f0WjikLsSrvOWu00HEDHxw&_nc_ss=7b289&oh=00_Af9a2Rs6rzK2Ns1T_Y2mFmKofYMZ4PuMl19ZIWGJ4ldELQ&oe=6A479058' },
+  { name: 'Dr. SOKThea Liyo', role: 'Orthodontics', img: '/team-member.png' },
   { name: 'Dr. Channary Pich', role: 'Endodontics · Root Canal', img: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&q=80&fit=crop&crop=faces' },
   { name: 'Dr. Vibol Heng', role: 'Family & Pediatric Dentistry', img: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&q=80&fit=crop&crop=faces' },
   { name: 'Dr. Sreymom Keo', role: 'Orthodontics', img: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80&fit=crop&crop=faces' }
@@ -376,9 +386,6 @@ const statsSectionRef = ref(null)
 const statValues = reactive(stats.map(() => 0))
 const statsAnimated = ref(false)
 let statsRafId = null
-
-const timelineSectionRef = ref(null)
-const timelineLineRef = ref(null)
 
 const ctaSectionRef = ref(null)
 const ctaVisible = ref(false)
@@ -411,7 +418,6 @@ function setupReveal() {
   if (prefersReducedMotion) {
     targets.forEach((t) => t.set(true))
     stats.forEach((s, i) => { statValues[i] = s.value })
-    if (timelineLineRef.value) timelineLineRef.value.style.height = '100%'
     return
   }
 
@@ -512,15 +518,6 @@ function tick() {
     item.el.style.transform = `translate3d(0, ${item.y}px, 0) rotate(${item.baseRotate || 0}deg)`
   })
 
-  // story timeline: connecting line fills as you scroll through the section
-  if (timelineSectionRef.value && timelineLineRef.value) {
-    const rect = timelineSectionRef.value.getBoundingClientRect()
-    const total = rect.height + vh
-    const passed = clamp(vh - rect.top, 0, total)
-    const fillProgress = total > 0 ? clamp(passed / total, 0, 1) : 0
-    timelineLineRef.value.style.height = `${fillProgress * 100}%`
-  }
-
   rafId = requestAnimationFrame(tick)
 }
 
@@ -547,21 +544,21 @@ const servicesPreview = [
     bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
     title: 'Checkup & clean',
     desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
-    svg: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#036533" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 5 5 5 8c0 3 1.5 5 1 8-.4 2.5 1.5 4.5 3 3.5 1-.6 1.3-2.5 3-2.5s2 1.9 3 2.5c1.5 1 3.4-1 3-3.5-.5-3 1-5 1-8 0-3-3-6-7-6z"/></svg>`
+    image: '/service1.png'
   },
   {
     badge: 'Cosmetic', price: 'From $80',
     bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
     title: 'Teeth whitening',
     desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
-    svg: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#036533" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12s1 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>`
+    image: '/service1.png'
   },
   {
     badge: 'Restorative', price: 'From $60',
     bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
     title: 'Fillings',
     desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
-    svg: `<svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#036533" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>`
+    image: '/service1.png'
   },
 ]
 </script>

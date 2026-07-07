@@ -1,6 +1,7 @@
 <template>
   <div
     ref="panelRef"
+      <NuxtLink
     class="relative overflow-hidden border border-[#bfe6da] rounded-2xl h-[650px]"
   >
 
@@ -17,7 +18,6 @@
         Crafting memorable experiences with passion and creativity.
       </p>
 
-      <NuxtLink
         to="/about"
         class="mt-5 inline-block bg-[#1f9d63] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#036533]"
       >

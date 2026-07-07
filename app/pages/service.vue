@@ -1,5 +1,6 @@
+<!-- pages/service.vue -->
 <template>
-  <div class="bg-[#FFFAE1]">
+  <div class="bg-[#EFF8FC]">
     <HeroSection
       eyebrow="Services"
       title="Dental services"
@@ -7,7 +8,7 @@
       description="Explore gentle, modern treatments from routine checkups to whitening and orthodontics."
     />
 
-    <section class="py-20 px-6">
+    <section ref="sectionRef" class="py-20 px-6">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold text-[#111827]">
@@ -20,17 +21,30 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <ServiceCard
-            v-for="(service, i) in services"
+            v-for="(service, i) in paginatedServices"
             :key="service.link"
             :title="service.title"
             :desc="service.desc"
             :link="service.link"
-            :svg="service.svg"
+            :image="service.image"
             :index="i"
+            @open-detail="openModal(service)"
           />
         </div>
+
+        <Pagination
+          v-if="totalPages > 1"
+          v-model="currentPage"
+          :total-pages="totalPages"
+        />
       </div>
     </section>
+
+    <!-- Modal -->
+    <ServiceDetailModal
+      v-model:open="modalOpen"
+      :service="activeService"
+    />
   </div>
 </template>
 
@@ -42,22 +56,100 @@ useHead({
 
 const services = [
   {
-    title: 'General Dentistry',
-    desc: 'Routine check-ups, cleanings, and fillings to keep your smile healthy year-round.',
-    link: '/service/general',
-    svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12h8M12 8v8"/></svg>'
+    title: 'Tooth Cleaning',
+    desc: 'A thorough professional cleaning that removes plaque and tartar, keeping your teeth and gums healthy.',
+    link: '/service/tooth-cleaning',
+    image: '/service1.png',
+    category: 'Preventive Care',
+    includes: ['Plaque & tartar removal', 'Polishing', 'Gum health check'],
   },
   {
-    title: 'Teeth Whitening',
-    desc: 'Professional-grade whitening that lifts stains and brightens your smile safely.',
-    link: '/service/whitening',
-    svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+    title: 'Dental Filling',
+    desc: 'Restore decayed or damaged teeth with a filling that blends naturally with your smile.',
+    link: '/service/dental-filling',
+    image: '/service1.png',
+    category: 'Restorative',
+    includes: ['Cavity assessment', 'Decay removal', 'Tooth-colored filling'],
+  },
+  {
+    title: 'Tooth Extraction',
+    desc: 'Gentle removal of damaged, infected, or crowded teeth for both kids and adults.',
+    link: '/service/extraction',
+    image: '/service1.png',
+    category: 'Surgical',
+    includes: ['Examination & X-ray', 'Local anesthesia', 'Safe tooth removal'],
+  },
+  {
+    title: 'Wisdom Teeth Surgery',
+    desc: 'Comfortable surgical removal of impacted or problematic wisdom teeth.',
+    link: '/service/wisdom-teeth',
+    image: '/service1.png',
+    category: 'Surgical',
+    includes: ['X-ray assessment', 'Surgical extraction', 'Aftercare guidance'],
+  },
+  {
+    title: 'Root Canal Treatment',
+    desc: 'Relieve pain and save an infected tooth with careful root canal therapy.',
+    link: '/service/root-canal',
+    image: '/service1.png',
+    category: 'Restorative',
+    includes: ['Infection diagnosis', 'Root canal procedure', 'Protective crown fitting'],
+  },
+  {
+    title: 'Dental Crown',
+    desc: 'Durable ceramic or zirconium crowns that restore the strength and look of damaged teeth.',
+    link: '/service/dental-crown',
+    image: '/service1.png',
+    category: 'Restorative',
+    includes: ['Tooth preparation', 'Custom crown fitting', 'Final polish'],
+  },
+  {
+    title: 'Dental Veneer',
+    desc: 'Thin custom shells that instantly improve the shape and color of your smile.',
+    link: '/service/veneer',
+    image: '/service1.png',
+    category: 'Cosmetic',
+    includes: ['Smile consultation', 'Custom veneer fitting', 'Final bonding'],
+  },
+  {
+    title: 'Dental Implant',
+    desc: 'A permanent, natural-looking replacement for missing teeth, topped with a durable crown.',
+    link: '/service/implant',
+    image: '/service1.png',
+    category: 'Restorative',
+    includes: ['Consultation & imaging', 'Implant placement', 'Crown attachment'],
   },
   {
     title: 'Orthodontics',
-    desc: 'Braces and clear aligners to straighten teeth at any age, comfortably.',
+    desc: 'Straighten teeth at any age with braces designed for comfortable, lasting results.',
     link: '/service/orthodontics',
-    svg: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="8" rx="3"/><path d="M7 8V6a2 2 0 0 1 4 0v2M13 8V6a2 2 0 0 1 4 0v2"/></svg>'
-  }
+    image: '/service1.png',
+    category: 'Alignment',
+    includes: ['Initial consultation', 'Custom treatment plan', 'Regular adjustment visits'],
+  },
 ]
+
+const modalOpen = ref(false)
+const activeService = ref(null)
+
+function openModal(service) {
+  activeService.value = service
+  modalOpen.value = true
+}
+
+// Pagination
+const pageSize = 6
+const currentPage = ref(1)
+const sectionRef = ref(null)
+
+const totalPages = computed(() => Math.ceil(services.length / pageSize))
+
+const paginatedServices = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  return services.slice(start, start + pageSize)
+})
+
+watch(currentPage, () => {
+  sectionRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+})
 </script>

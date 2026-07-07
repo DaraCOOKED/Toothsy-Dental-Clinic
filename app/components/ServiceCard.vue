@@ -1,49 +1,60 @@
+<!-- components/ServiceCard.vue -->
 <template>
   <div
     ref="cardRef"
-    class="group bg-white rounded-2xl p-7 shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(0,0,0,0.09)] card-reveal"
+    class="group bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(0,0,0,0.09)] card-reveal cursor-pointer"
     :class="visible ? 'is-visible' : ''"
     :style="{ transitionDelay: visible ? `${index * 90}ms` : '0ms' }"
+    @click="$emit('open-detail')"
   >
-    <div
-      class="w-12 h-12 rounded-full bg-[#1f9d63] flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-105"
-      v-html="svg"
-    ></div>
+    <!-- Full-width photo -->
+    <div class="w-full overflow-hidden" :style="{ height: imageHeight }">
+      <img
+        :src="image"
+        :alt="title"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+    </div>
 
-    <h3 class="font-display text-base font-bold text-[#111827] mb-2">{{ title }}</h3>
-    <p class="text-[0.83rem] text-stone-500 leading-relaxed mb-5">{{ desc }}</p>
+    <div class="p-7">
+      <h3 class="font-sans font-semibold text-xl text-[#111827] mb-2">{{ title }}</h3>
+      <p class="text-[0.83rem] text-stone-500 leading-relaxed mb-5">{{ desc }}</p>
 
-    <NuxtLink
-      :to="link"
-      class="group/link inline-flex items-center gap-2 text-sm font-semibold text-[#111827] hover:text-[#1f9d63] transition-colors"
-    >
-      Learn More
-      <span class="flex items-center justify-center w-6 h-6 rounded-full border border-[#1f9d63] group-hover/link:bg-[#1f9d63] transition-colors duration-200">
-        <svg
-          class="w-3 h-3 text-[#1f9d63] group-hover/link:text-white transition-colors duration-200"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
-      </span>
-    </NuxtLink>
+      <button
+        type="button"
+        class="group/link inline-flex items-center gap-2 text-sm font-semibold text-[#111827] hover:text-[#1f9d63] transition-colors"
+        @click.stop="$emit('open-detail')"
+      >
+        See More
+        <span class="flex items-center justify-center w-6 h-6 rounded-full border border-[#1f9d63] group-hover/link:bg-[#1f9d63] transition-colors duration-200">
+          <svg
+            class="w-3 h-3 text-[#1f9d63] group-hover/link:text-white transition-colors duration-200"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </span>
+      </button>
+    </div>
   </div>
 </template>
 
-
 <script setup>
-const props = defineProps({
+defineProps({
   title: { type: String, required: true },
   desc:  { type: String, required: true },
-  link:  { type: String, required: true },
-  svg:   { type: String, required: true },
+  link:  { type: String, default: '' },
+  image: { type: String, required: true },        // photo path/URL — replaces the old `svg` icon
+  imageHeight: { type: String, default: '11rem' }, // ~176px, bump up/down as needed
   index: { type: Number, default: 0 },
 })
+
+defineEmits(['open-detail'])
 
 const cardRef = ref(null)
 const visible = ref(false)
@@ -53,13 +64,11 @@ onMounted(() => {
   const prefersReducedMotion =
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  // Skip animation for reduced-motion users — show immediately
   if (prefersReducedMotion) {
     visible.value = true
     return
   }
 
-  // Trigger reveal when card enters the viewport
   observer = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting) {
@@ -76,14 +85,7 @@ onMounted(() => {
 onBeforeUnmount(() => observer?.disconnect())
 </script>
 
-
 <style scoped>
-/*
-  CARD REVEAL
-  Initial: invisible + shifted down + scaled down + blurred
-  Final:   visible + natural position + sharp
-  Uses transitions (not keyframes) so per-card stagger delay works.
-*/
 .card-reveal {
   opacity: 0;
   transform: translateY(40px) scale(0.97);

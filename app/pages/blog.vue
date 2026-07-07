@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#FFFAE1]">
+  <div class="bg-[#EFF8FC]">
     <HeroSection
       eyebrow="Blog"
       title="Dental advice"
@@ -77,7 +77,7 @@ const posts = [
     excerpt: 'A few daily habits that matter more than an expensive toothbrush.'
   },
   {
-    image: 'https://images.unsplash.com/photo-1588776814546-1ffedbe0b94b?w=500&q=80&fit=crop',
+    image: '/service1.png',
     category: 'Self Care',
     author: 'Anita Jackson',
     title: 'When to See a Dentist',
@@ -91,7 +91,7 @@ const posts = [
     excerpt: 'What actually works, what is mostly marketing, and what to skip entirely.'
   },
   {
-    image: 'https://images.unsplash.com/photo-1570612861542-284f4c12e75f?w=500&q=80&fit=crop',
+    image: '/service1.png',
     category: 'Self Care',
     author: 'Anita Jackson',
     title: 'Kids and First Visits',

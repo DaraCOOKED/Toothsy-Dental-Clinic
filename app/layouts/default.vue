@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-[#FFFAE1] text-stone-900">
+  <div class="min-h-screen flex flex-col bg-[#EFF8FC] text-stone-900">
 
     <header ref="headerRef" class="fixed top-0 inset-x-0 z-50">
-      <div ref="scrimRef" class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-transparent pointer-events-none"></div>
+      <div ref="scrimRef" class="absolute inset-0 bg-gradient-to-b  from-black/30 via-black/10 to-transparent pointer-events-none"></div>
 
       <div class="relative z-10 flex items-center justify-between px-4 py-1 md:px-8">
 
@@ -13,10 +13,10 @@
 
         <!-- Mobile menu button -->
         <button @click="menuOpen = true" class="md:hidden flex flex-col gap-1" aria-label="Open menu">
-          <span class="block w-6 h-0.5 bg-white"></span>
-          <span class="block w-6 h-0.5 bg-white"></span>
-          <span class="block w-6 h-0.5 bg-white"></span>
-        </button>
+  <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
+  <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
+  <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
+</button>
 
         <!-- Desktop nav pill -->
         <nav ref="navRef" class="hidden md:flex relative items-center gap-1 bg-[#8FE3B8] rounded-full p-1.5 text-sm font-medium">
@@ -35,10 +35,10 @@
         <!-- Book Now (desktop only) -->
         <div class="hidden md:block">
           <NuxtLink
-            to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
+            to="book-appointment"
             target="_blank"
             rel="noopener noreferrer"
-            class="relative z-10 ml-1 px-5 py-2 rounded-full bg-[#1f9d63] text-white hover:bg-[#036533] transition-colors duration-300"
+            class="relative z-10 ml-1 px-5 py-2 rounded-full bg-[#6BCE9F] text-white hover:bg-[#036533] transition-colors duration-300"
           >Book Now</NuxtLink>
         </div>
       </div>
@@ -113,11 +113,29 @@
 const route = useRoute()
 const menuOpen = ref(false)
 const year = new Date().getFullYear()
+const scrolled = ref(false)
 
+const barColor = computed(() => {
+  if (menuOpen.value) return 'bg-white'
+  return scrolled.value ? 'bg-black' : 'bg-white'
+})
+
+function handleScroll() {
+  scrolled.value = window.scrollY > 50 // adjust threshold as needed
+}
+
+onMounted(() => {
+  handleScroll()
+  window.addEventListener('scroll', handleScroll, { passive: true })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 const navLinks = [
   { to: '/', label: 'Home', exact: true },
   { to: '/service', label: 'Services' },
-  { to: '/blog', label: 'Blogs' },
+  { to: '/blog', label: 'Dental Care' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' }
 ]
@@ -173,7 +191,7 @@ function lerp(a, b, t) { return a + (b - a) * t }
 
 function applyHeaderStyles(p) {
   if (headerRef.value) {
-    headerRef.value.style.backgroundColor = `rgba(255, 250, 225, ${p})`
+    headerRef.value.style.backgroundColor = `rgba(252, 251, 236, ${p})`
     headerRef.value.style.backdropFilter = `blur(${p * 10}px)`
     headerRef.value.style.WebkitBackdropFilter = `blur(${p * 10}px)`
     headerRef.value.style.boxShadow = `0 4px 24px rgba(0,0,0,${p * 0.08})`

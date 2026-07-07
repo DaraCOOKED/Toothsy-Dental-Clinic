@@ -218,7 +218,7 @@
               class="absolute inset-0 w-full h-[130%] -top-[15%] object-cover will-change-transform"
               autoplay loop muted playsinline
             >
-              <source src="~/assets/vedios/clinic.mp4" type="video/mp4"/>
+              <source src="" type="video/mp4"/>
             </video>
           </div>
         </div>

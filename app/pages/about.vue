@@ -107,7 +107,7 @@
 
         <!-- Page Title -->
         <h1 ref="titleRef"
-          class="text-center mb-12 font-display text-3xl md:text-4xl font-bold text-[#111827] will-change-transform"
+          class="text-center text-3xl md:text-4xl font-bold mb-12 underline will-change-transform"
         >About Us</h1>
 
         <!-- Mission Section -->

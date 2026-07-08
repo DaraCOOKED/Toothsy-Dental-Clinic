@@ -24,7 +24,6 @@ export default defineNuxtConfig({
       emailjsServiceId: "service_09csxvs",
       emailjsTemplateId: "template_kh59r91",
       emailjsPublicKey: "T8FLPsFfvUtRLmlaa",
-      strapiUrl: "http://localhost:1337",
     },
   },
 

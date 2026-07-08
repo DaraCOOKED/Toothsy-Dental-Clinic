@@ -11,7 +11,7 @@
     <section ref="sectionRef" class="py-20 px-6">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12">
-          <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827] ">
+          <h2 class="text-3xl md:text-4xl font-bold text-[#111827]">
             Our Services
           </h2>
           <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed">

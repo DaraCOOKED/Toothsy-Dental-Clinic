@@ -3,37 +3,42 @@
     ref="heroRef"
     class="relative w-full min-h-[78vh] md:min-h-screen overflow-hidden flex items-center justify-center"
   >
-    <div ref="videoLayerRef" class="absolute inset-0 will-change-transform">
-      <video
-        ref="videoRef"
-        class="w-full h-full object-cover"
-        autoplay
-        muted
-        loop
-        playsinline
-        :poster="poster"
+    <div ref="bgLayerRef" class="absolute inset-0 will-change-transform">
+      <div
+        v-for="(img, index) in images"
+        :key="img"
+        class="absolute inset-0 transition-opacity ease-in-out"
+        :style="{
+          opacity: index === currentIndex ? 1 : 0,
+          transitionDuration: `${fadeDuration}ms`
+        }"
       >
-        <source :src="videoSrc" type="video/mp4">
-      </video>
-      <div class="absolute inset-0 from-black/60 via-black/40 to-[#FFFAE1]"></div>
+        <img
+          :src="img"
+          class="w-full h-full object-cover"
+          :alt="`Toothsy Dental Clinic ${index + 1}`"
+        >
+      </div>
+      <div class="absolute inset-0 hero-vignette"></div>
     </div>
 
     <div class="relative z-10 w-full px-6 md:px-9 pt-20 text-center">
       <p
         v-if="eyebrow"
-        class="mb-4 text-xs md:text-sm font-semibold uppercase tracking-[0.3em] text-[#8FE3B8]"
+        class="mb-4 text-xs md:text-sm font-semibold uppercase tracking-[0.3em] text-[#8FE3B8] hero-text-shadow"
       >
         {{ eyebrow }}
       </p>
+      
       <h1
         ref="headingRef"
-        class="text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight will-change-transform"
+        class="text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight will-change-transform hero-text-shadow"
       >
         {{ title }}<span v-if="highlight" class="text-[#8FE3B8]"> {{ highlight }}</span>
       </h1>
       <p
         ref="subRef"
-        class="text-white/85 text-base md:text-xl mt-5 max-w-2xl mx-auto will-change-transform"
+        class="text-white/85 text-base md:text-xl mt-5 max-w-2xl mx-auto will-change-transform hero-text-shadow"
       >
         {{ description }}
       </p>
@@ -52,7 +57,7 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   eyebrow: { type: String, default: '' },
   title: { type: String, default: 'Your Smile,' },
   highlight: { type: String, default: 'Our Priority' },
@@ -60,22 +65,34 @@ defineProps({
     type: String,
     default: 'Gentle, modern dental care for the whole family. Book your visit with Toothsy today.'
   },
-  videoSrc: { type: String, default: '/video/hero-bg.mp4' },
-  poster: { type: String, default: '/hero-poster.png' }
+  images: {
+    type: Array,
+    default: () => [
+      '/images/hero/hero-1.jpg',
+      '/images/hero/hero-2.jpg',
+      '/images/hero/hero-3.jpg',
+      '/images/hero/hero-4.jpg'
+    ]
+  },
+  // how long each slide stays fully visible before the next one crossfades in (ms)
+  slideDuration: { type: Number, default: 5500 },
+  // how long the crossfade itself takes (ms)
+  fadeDuration: { type: Number, default: 1200 }
 })
 
 const heroRef = ref(null)
-const videoLayerRef = ref(null)
-const videoRef = ref(null)
+const bgLayerRef = ref(null)
 const headingRef = ref(null)
 const subRef = ref(null)
 const scrollHintRef = ref(null)
 
+const currentIndex = ref(0)
+let slideTimer = null
 let rafId = null
 
 const v = {
-  videoY: 0, tVideoY: 0,
-  videoScale: 1.12, tVideoScale: 1.12,
+  bgY: 0, tBgY: 0,
+  bgScale: 1.12, tBgScale: 1.12,
   headY: 0, tHeadY: 0,
   headOp: 1, tHeadOp: 1,
   subY: 0, tSubY: 0,
@@ -92,8 +109,8 @@ function calcTargets() {
   const vh = window.innerHeight || 1
   const progress = clamp(-rect.top / vh, 0, 1.5)
 
-  v.tVideoY = progress * 110
-  v.tVideoScale = 1.12 + progress * 0.18
+  v.tBgY = progress * 110
+  v.tBgScale = 1.12 + progress * 0.18
   v.tHeadY = progress * -90
   v.tHeadOp = clamp(1 - progress * 1.7, 0, 1)
   v.tSubY = progress * -50
@@ -105,15 +122,15 @@ function tick() {
   calcTargets()
   const ease = 0.08
 
-  v.videoY = lerp(v.videoY, v.tVideoY, ease)
-  v.videoScale = lerp(v.videoScale, v.tVideoScale, ease)
+  v.bgY = lerp(v.bgY, v.tBgY, ease)
+  v.bgScale = lerp(v.bgScale, v.tBgScale, ease)
   v.headY = lerp(v.headY, v.tHeadY, ease)
   v.headOp = lerp(v.headOp, v.tHeadOp, ease)
   v.subY = lerp(v.subY, v.tSubY, ease)
   v.subOp = lerp(v.subOp, v.tSubOp, ease)
   v.hintOp = lerp(v.hintOp, v.tHintOp, ease)
 
-  if (videoLayerRef.value) videoLayerRef.value.style.transform = `translate3d(0, ${v.videoY}px, 0) scale(${v.videoScale})`
+  if (bgLayerRef.value) bgLayerRef.value.style.transform = `translate3d(0, ${v.bgY}px, 0) scale(${v.bgScale})`
   if (headingRef.value) {
     headingRef.value.style.transform = `translate3d(0, ${v.headY}px, 0)`
     headingRef.value.style.opacity = v.headOp
@@ -127,21 +144,48 @@ function tick() {
   rafId = requestAnimationFrame(tick)
 }
 
+function startSlideshow() {
+  if (props.images.length <= 1) return
+  slideTimer = setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % props.images.length
+  }, props.slideDuration)
+}
+
 onMounted(() => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (prefersReducedMotion) {
-    videoRef.value?.pause?.()
-    return
+
+  if (!prefersReducedMotion) {
+    startSlideshow()
+    rafId = requestAnimationFrame(tick)
   }
-  rafId = requestAnimationFrame(tick)
 })
 
 onBeforeUnmount(() => {
   if (rafId) cancelAnimationFrame(rafId)
+  if (slideTimer) clearInterval(slideTimer)
 })
 </script>
 
 <style scoped>
+/* Soft, localized darkening behind the text only — keeps the photos
+   bright everywhere else instead of washing the whole hero out. */
+.hero-vignette {
+  background: radial-gradient(
+    ellipse 65% 55% at 50% 40%,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.32) 40%,
+    rgba(0, 0, 0, 0) 72%
+  );
+}
+
+/* Crisp edge on the text itself so it stays legible even over the
+   brighter parts of a photo, without needing a heavier overlay. */
+.hero-text-shadow {
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.65),
+    0 1px 3px rgba(0, 0, 0, 0.75);
+}
+
 .scroll-bounce {
   animation: bounce 1.8s ease-in-out infinite;
 }

@@ -21,7 +21,7 @@ export default defineNuxtConfig({
 },
 
   runtimeConfig: {
-    public: {
+  public: {
     emailjsServiceId: "service_09csxvs",
     emailjsTemplateId: "template_kh59r91",
     emailjsPublicKey: "T8FLPsFfvUtRLmlaa",
@@ -30,7 +30,9 @@ export default defineNuxtConfig({
     
     
   },
-
+  },
+},
+  
   app: {
     baseURL: "/toothsy-detal-clinic/",
     head: {

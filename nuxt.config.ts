@@ -20,13 +20,15 @@ export default defineNuxtConfig({
 },
 
   runtimeConfig: {
-    public: {
+  public: {
     emailjsServiceId: "service_09csxvs",
     emailjsTemplateId: "template_kh59r91",
     emailjsPublicKey: "T8FLPsFfvUtRLmlaa",
-    },
-  },
 
+    strapiUrl: "http://localhost:1337",
+  },
+},
+  
   app: {
     baseURL: "/toothsy-detal-clinic/",
     head: {

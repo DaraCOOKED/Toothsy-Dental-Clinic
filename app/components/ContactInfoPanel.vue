@@ -6,12 +6,7 @@
   >
     <!-- Map -->
     <div class="relative rounded-2xl overflow-hidden border border-[#bfe6da] h-[220px] mb-5">
-      <iframe
-        class="w-full h-full"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps?q=Street%20271%2C%20Phnom%20Penh%2C%20Cambodia&output=embed"
-      ></iframe>
+    <iframe class="w-[100%]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3907.6264222235827!2d104.9139173!3d11.6499473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109534d095a86f5%3A0x76f62d7f485de94!2sToothsy%20Dental%20clinic!5e0!3m2!1sen!2skh!4v1783390807731!5m2!1sen!2skh" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
 
       <div class="absolute bottom-3 left-3 right-3 bg-white rounded-xl shadow-md px-4 py-3 flex items-center gap-3">
         <span class="flex-shrink-0 w-9 h-9 rounded-full bg-[#1f9d63] flex items-center justify-center">

@@ -11,10 +11,10 @@
     <section ref="sectionRef" class="py-20 px-6">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold text-[#111827]">
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827] inline-block relative">
             Our Services
           </h2>
-          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
             Choose the care you need, then book a visit so we can recommend the right next step.
           </p>
         </div>
@@ -153,3 +153,17 @@ watch(currentPage, () => {
   sectionRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 })
 </script>
+<style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.body-font {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+}
+
+
+</style>

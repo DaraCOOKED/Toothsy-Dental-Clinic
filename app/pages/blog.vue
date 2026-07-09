@@ -30,7 +30,7 @@
         >
           <BlogCarouselCard
             v-for="post in posts"
-            :key="post.title + post.author"
+            :key="post.slug"
             v-bind="post"
           />
         </div>
@@ -68,36 +68,25 @@ useHead({
   meta: [{ name: 'description', content: 'Dental care tips and explainers from Toothsy Dental Clinic.' }]
 })
 
-const posts = [
-  {
-    image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=500&q=80&fit=crop',
-    category: 'Self Care',
-    author: 'Anita Jackson',
-    title: 'Care of your Teeth',
-    excerpt: 'A few daily habits that matter more than an expensive toothbrush.'
-  },
-  {
-    image: '/service1.png',
-    category: 'Self Care',
-    author: 'Anita Jackson',
-    title: 'When to See a Dentist',
-    excerpt: 'Pain, sensitivity, or bleeding gums. Here is what each one is telling you.'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&q=80&fit=crop',
-    category: 'Self Care',
-    author: 'Anita Jackson',
-    title: 'Whitening, Honestly',
-    excerpt: 'What actually works, what is mostly marketing, and what to skip entirely.'
-  },
-  {
-    image: '/service1.png',
-    category: 'Self Care',
-    author: 'Anita Jackson',
-    title: 'Kids and First Visits',
-    excerpt: 'How to make a child\'s first dental visit feel like nothing to worry about.'
-  }
-]
+const { find } = useStrapi()
+
+const { data } = await useAsyncData('blog-carousel-posts', () =>
+  find('dental-cares', {
+    populate: '*',
+    sort: ['publishedAt:desc'],
+  })
+)
+
+const posts = computed(() =>
+  (data.value?.data ?? []).map((post) => ({
+    slug: post.slug,
+    image: post.coverImage ? useStrapiMedia(post.coverImage.url) : '/service1.png',
+    category: post.Category,
+    author: post.author,
+    title: post.Title,
+    excerpt: post.excerpt,
+  }))
+)
 
 const sectionRef = ref(null)
 const trackRef = ref(null)

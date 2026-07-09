@@ -29,7 +29,6 @@
       >
         {{ eyebrow }}
       </p>
-      
       <h1
         ref="headingRef"
         class="text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight will-change-transform hero-text-shadow"

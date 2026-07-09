@@ -107,8 +107,9 @@
 
         <!-- Page Title -->
         <h1 ref="titleRef"
-          class="text-center mb-12 font-display text-3xl md:text-4xl font-bold text-[#111827] will-change-transform"
-        >About Us</h1>
+          class="text-center mb-12 text-3xl md:text-5xl font-bold text-[#111827] will-change-transform [font-family:'Poppins',sans-serif]">
+          About Us
+        </h1>
 
         <!-- Mission Section -->
         <div ref="missionRef" class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16 items-start">

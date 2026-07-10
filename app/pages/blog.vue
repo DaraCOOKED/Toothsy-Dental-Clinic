@@ -15,7 +15,7 @@
     >
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-10">
-          <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827]">
+          <h2 class="text-3xl md:text-4xl font-bold text-[#111827]">
             From the Blog
           </h2>
           <p class="mt-4 text-stone-500 text-sm md:text-base max-w-md mx-auto leading-relaxed">

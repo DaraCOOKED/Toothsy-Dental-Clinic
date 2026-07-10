@@ -243,39 +243,61 @@
 
 <script setup>
 // ═══════════════════════════════════════════════════════════════
-//  ASSETS & CONTENT (unchanged from original)
+//  ASSETS & CONTENT
 // ═══════════════════════════════════════════════════════════════
-import clinicImg    from '~/assets/images/clinic.png'
-import drBrentImg   from '~/assets/images/dr-brent.png'
-import drVashiImg   from '~/assets/images/dr-vashi.png'
-import drConnorsImg from '~/assets/images/dr-connors.png'
-import drFourthImg  from '~/assets/images/dr-fourth.png'
+import clinicImg from '~/assets/images/clinic.png'
 
 useHead({
   title: 'About - Toothsy Dental Clinic',
   meta: [{ name: 'description', content: 'Learn about Toothsy Dental Clinic, our mission, specialists, and services.' }]
 })
 
-const doctors = [
-  {
-    name: 'DR. Brent',
-    specialty: 'Specialty in General & Cosmetic Service',
-    photo: drBrentImg,
-    bio: 'Dr. Brent provides general and cosmetic dentistry services at Northern Heights Dental in Flagstaff, Arizona. He has extensive experience in general and cosmetic dentistry, including full mouth restoration, dental veneers, crowns, bridges, dental implants, wisdom teeth extractions, Invisalign, and dentures. Dr. Brent and his younger sister grew up in Massachusetts with a mother who worked as a hygienist and a grandfather who was a general dentist.'
-  },
-  {
-    name: 'DR. Ashish J. Vashi',
-    specialty: 'Specialty in Implant Dentistry',
-    photo: drVashiImg,
-    bio: 'Dr. Ashish J. Vashi has been practicing general, cosmetic and implant dentistry in California for over 18 years.'
-  },
-  {
-    name: 'Dr. James Connors',
-    specialty: 'Specialty in Oral Surgeon',
-    photo: drConnorsImg,
-    bio: 'When it comes to oral surgeons, few can compare to Dr. James Connors.'
-  },
-]
+// ─────────────────────────────────────────────────────────
+// OLD STATIC DATA — kept as an example / reference only.
+// Not used anymore now that doctors come from Strapi below.
+// ─────────────────────────────────────────────────────────
+// import drBrentImg   from '~/assets/images/dr-brent.png'
+// import drVashiImg   from '~/assets/images/dr-vashi.png'
+// import drConnorsImg from '~/assets/images/dr-connors.png'
+//
+// const doctorsExample = [
+//   {
+//     name: 'DR. Brent',
+//     specialty: 'Specialty in General & Cosmetic Service',
+//     photo: drBrentImg,
+//     bio: 'Dr. Brent provides general and cosmetic dentistry services at Northern Heights Dental in Flagstaff, Arizona. He has extensive experience in general and cosmetic dentistry, including full mouth restoration, dental veneers, crowns, bridges, dental implants, wisdom teeth extractions, Invisalign, and dentures. Dr. Brent and his younger sister grew up in Massachusetts with a mother who worked as a hygienist and a grandfather who was a general dentist.'
+//   },
+//   {
+//     name: 'DR. Ashish J. Vashi',
+//     specialty: 'Specialty in Implant Dentistry',
+//     photo: drVashiImg,
+//     bio: 'Dr. Ashish J. Vashi has been practicing general, cosmetic and implant dentistry in California for over 18 years.'
+//   },
+//   {
+//     name: 'Dr. James Connors',
+//     specialty: 'Specialty in Oral Surgeon',
+//     photo: drConnorsImg,
+//     bio: 'When it comes to oral surgeons, few can compare to Dr. James Connors.'
+//   },
+// ]
+
+// ─────────────────────────────────────────────────────────
+// LIVE DATA — pulled from Strapi
+// ─────────────────────────────────────────────────────────
+const { find } = useStrapi()
+
+const { data: doctorsData } = await useAsyncData('doctors', () =>
+  find('doctors', { populate: '*' })
+)
+
+const doctors = computed(() =>
+  (doctorsData.value?.data ?? []).map((doc) => ({
+    name: doc.name,
+    specialty: doc.specialty,
+    photo: doc.photo ? useStrapiMedia(doc.photo.url) : '',
+    bio: doc.bio,
+  }))
+)
 
 const services = [
   { title: 'Root Canal Treatment', description: 'Root canal treatment (endodontics) is a dental procedure used to treat infection at the centre of a tooth.' },
@@ -335,7 +357,7 @@ function setServiceCardRef(el, i) { serviceCardEls.value[i] = el }
 const missionVisible     = ref(false)
 const specialistsVisible = ref(false)
 const ctaVisible         = ref(false)
-const doctorVisible      = reactive(doctors.map(() => false))
+const doctorVisible      = reactive(doctors.value.map(() => false))
 const serviceVisible     = reactive(services.map(() => false))
 
 
@@ -740,8 +762,8 @@ onMounted(() => {
     missionVisible.value     = true
     specialistsVisible.value = true
     ctaVisible.value         = true
-    doctors.forEach((_, i)  => { doctorVisible[i]  = true })
-    services.forEach((_, i) => { serviceVisible[i] = true })
+    doctors.value.forEach((_, i) => { doctorVisible[i]  = true })
+    services.forEach((_, i)      => { serviceVisible[i] = true })
     return
   }
 

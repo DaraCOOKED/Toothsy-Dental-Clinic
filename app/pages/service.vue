@@ -54,80 +54,24 @@ useHead({
   meta: [{ name: 'description', content: 'Explore our full range of gentle, modern dental services.' }]
 })
 
-const services = [
-  {
-    title: 'Tooth Cleaning',
-    desc: 'A thorough professional cleaning that removes plaque and tartar, keeping your teeth and gums healthy.',
-    link: '/service/tooth-cleaning',
-    image: '/service1.png',
-    category: 'Preventive Care',
-    includes: ['Plaque & tartar removal', 'Polishing', 'Gum health check'],
-  },
-  {
-    title: 'Dental Filling',
-    desc: 'Restore decayed or damaged teeth with a filling that blends naturally with your smile.',
-    link: '/service/dental-filling',
-    image: '/service1.png',
-    category: 'Restorative',
-    includes: ['Cavity assessment', 'Decay removal', 'Tooth-colored filling'],
-  },
-  {
-    title: 'Tooth Extraction',
-    desc: 'Gentle removal of damaged, infected, or crowded teeth for both kids and adults.',
-    link: '/service/extraction',
-    image: '/service1.png',
-    category: 'Surgical',
-    includes: ['Examination & X-ray', 'Local anesthesia', 'Safe tooth removal'],
-  },
-  {
-    title: 'Wisdom Teeth Surgery',
-    desc: 'Comfortable surgical removal of impacted or problematic wisdom teeth.',
-    link: '/service/wisdom-teeth',
-    image: '/service1.png',
-    category: 'Surgical',
-    includes: ['X-ray assessment', 'Surgical extraction', 'Aftercare guidance'],
-  },
-  {
-    title: 'Root Canal Treatment',
-    desc: 'Relieve pain and save an infected tooth with careful root canal therapy.',
-    link: '/service/root-canal',
-    image: '/service1.png',
-    category: 'Restorative',
-    includes: ['Infection diagnosis', 'Root canal procedure', 'Protective crown fitting'],
-  },
-  {
-    title: 'Dental Crown',
-    desc: 'Durable ceramic or zirconium crowns that restore the strength and look of damaged teeth.',
-    link: '/service/dental-crown',
-    image: '/service1.png',
-    category: 'Restorative',
-    includes: ['Tooth preparation', 'Custom crown fitting', 'Final polish'],
-  },
-  {
-    title: 'Dental Veneer',
-    desc: 'Thin custom shells that instantly improve the shape and color of your smile.',
-    link: '/service/veneer',
-    image: '/service1.png',
-    category: 'Cosmetic',
-    includes: ['Smile consultation', 'Custom veneer fitting', 'Final bonding'],
-  },
-  {
-    title: 'Dental Implant',
-    desc: 'A permanent, natural-looking replacement for missing teeth, topped with a durable crown.',
-    link: '/service/implant',
-    image: '/service1.png',
-    category: 'Restorative',
-    includes: ['Consultation & imaging', 'Implant placement', 'Crown attachment'],
-  },
-  {
-    title: 'Orthodontics',
-    desc: 'Straighten teeth at any age with braces designed for comfortable, lasting results.',
-    link: '/service/orthodontics',
-    image: '/service1.png',
-    category: 'Alignment',
-    includes: ['Initial consultation', 'Custom treatment plan', 'Regular adjustment visits'],
-  },
-]
+const { find } = useStrapi()
+
+const { data } = await useAsyncData('services', () =>
+  find('services', {
+    populate: '*',
+  })
+)
+
+const services = computed(() =>
+  (data.value?.data ?? []).map((item) => ({
+    title: item.title,
+    desc: item.desc,
+    link: `/service/${item.slug}`,
+    image: item.image ? useStrapiMedia(item.image.url) : '/service1.png',
+    category: item.category,
+    includes: item.includes ? item.includes.split('\n').filter(Boolean) : [],
+  }))
+)
 
 const modalOpen = ref(false)
 const activeService = ref(null)
@@ -142,11 +86,11 @@ const pageSize = 6
 const currentPage = ref(1)
 const sectionRef = ref(null)
 
-const totalPages = computed(() => Math.ceil(services.length / pageSize))
+const totalPages = computed(() => Math.ceil(services.value.length / pageSize))
 
 const paginatedServices = computed(() => {
   const start = (currentPage.value - 1) * pageSize
-  return services.slice(start, start + pageSize)
+  return services.value.slice(start, start + pageSize)
 })
 
 watch(currentPage, () => {

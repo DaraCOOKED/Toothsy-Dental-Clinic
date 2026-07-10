@@ -544,21 +544,21 @@ const servicesPreview = [
     bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
     title: 'Checkup & clean',
     desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
-    image: '/service1.png'
+    image: '/clean-teeth.jpeg'
   },
   {
     badge: 'Cosmetic', price: 'From $80',
     bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
     title: 'Teeth whitening',
     desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
-    image: '/service1.png'
+    image: '/teeth-whitening.webp'
   },
   {
     badge: 'Restorative', price: 'From $60',
     bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
     title: 'Fillings',
     desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
-    image: '/service1.png'
+    image: '/dental-filling.jpg'
   },
 ]
 </script>

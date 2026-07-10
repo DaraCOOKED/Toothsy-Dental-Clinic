@@ -10,7 +10,7 @@
     <section class="pt-24 pb-20 px-6 md:px-10">
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-12">
-          <h1 class="font-display text-3xl md:text-4xl font-bold text-[#111827] inline-block relative">
+          <h1 class=" text-3xl md:text-4xl font-bold text-[#111827] inline-block relative">
             Get In Touch
           </h1>
           <p class="mt-6 text-stone-500 text-sm md:text-base">

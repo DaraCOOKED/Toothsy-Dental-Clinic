@@ -847,3 +847,5 @@ onBeforeUnmount(() => {
 /* ── GPU layer hint ───────────────────────────────────────── */
 .will-change-transform { will-change: transform; }
 </style>
+
+

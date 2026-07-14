@@ -15,11 +15,11 @@
     >
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-10">
-          <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827]">
+          <h2 class="text-3xl md:text-4xl font-bold text-[#111827]">
             From the Blog
           </h2>
           <p class="mt-4 text-stone-500 text-sm md:text-base max-w-md mx-auto leading-relaxed">
-            Tips, explainers, and the occasional myth-busting straight from our dentists.
+            Expert dental tips, oral health guides, and practical advice to help you keep your smile healthy and confident.
           </p>
         </div>
 
@@ -70,32 +70,46 @@ useHead({
 
 const posts = [
   {
-    image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=500&q=80&fit=crop',
-    category: 'Self Care',
-    author: 'Anita Jackson',
-    title: 'Care of your Teeth',
-    excerpt: 'A few daily habits that matter more than an expensive toothbrush.'
+    image: '/blog1.jpg',
+    category: 'Oral Care',
+    author: '',
+    title: 'How to Brush Your Teeth the Right Way',
+    excerpt: 'Brushing for just two minutes with the proper technique can prevent cavities, reduce plaque, and keep your gums healthy.'
   },
   {
     image: '/service1.png',
-    category: 'Self Care',
-    author: 'Anita Jackson',
-    title: 'When to See a Dentist',
-    excerpt: 'Pain, sensitivity, or bleeding gums. Here is what each one is telling you.'
+    category: 'Dental Health',
+    author: '',
+    title: '7 Signs You Should Visit a Dentist',
+    excerpt: 'Persistent tooth pain, bleeding gums, bad breath, or sensitivity may be signs that it is time for a professional dental checkup.'
   },
   {
-    image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&q=80&fit=crop',
-    category: 'Self Care',
-    author: 'Anita Jackson',
-    title: 'Whitening, Honestly',
-    excerpt: 'What actually works, what is mostly marketing, and what to skip entirely.'
+    image: '/blog3.jpg',
+    category: 'Cosmetic Dentistry',
+    author: '',
+    title: 'Teeth Whitening: What Really Works?',
+    excerpt: 'Learn the difference between professional whitening treatments, over-the-counter products, and common myths about whitening your teeth.'
   },
   {
-    image: '/service1.png',
-    category: 'Self Care',
-    author: 'Anita Jackson',
-    title: 'Kids and First Visits',
-    excerpt: 'How to make a child\'s first dental visit feel like nothing to worry about.'
+    image: '/blog4.jpg',
+    category: 'Preventive Care',
+    author: '',
+    title: 'Why Regular Dental Checkups Matter',
+    excerpt: 'Routine dental exams help detect problems early, prevent costly treatments, and keep your teeth and gums in excellent condition.'
+  },
+  {
+    image: '/blog5.jpg',
+    category: 'Oral Hygiene',
+    author: '',
+    title: 'How to Prevent Cavities',
+    excerpt: 'Simple daily habits like brushing, flossing, eating a balanced diet, and limiting sugary drinks can greatly reduce your risk of cavities.'
+  },
+  {
+    image: '/blog6.jpg',
+    category: 'Pediatric Dentistry',
+    author: '',
+    title: 'Caring for Your Child is Teeth',
+    excerpt: 'Discover when your child should first visit the dentist and how to build healthy oral hygiene habits from an early age.'
   }
 ]
 

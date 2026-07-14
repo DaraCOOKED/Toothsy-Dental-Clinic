@@ -28,7 +28,7 @@ export default defineNuxtConfig({
   },
 
   app: {
-    baseURL: "/toothsy-detal-clinic/",
+    baseURL: "/toothsy-dental-clinic/",
     head: {
       link: [
         {

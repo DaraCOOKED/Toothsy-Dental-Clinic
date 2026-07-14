@@ -58,7 +58,7 @@ const services = [
   {
     title: 'Tooth Cleaning',
     desc: 'A thorough professional cleaning that removes plaque and tartar, keeping your teeth and gums healthy.',
-    link: '/service/tooth-cleaning',
+    link: '/book-appointment',
     image: '/clean-teeth.jpeg',
     category: 'Preventive Care',
     includes: ['Plaque & tartar removal', 'Polishing', 'Gum health check'],
@@ -66,7 +66,7 @@ const services = [
   {
     title: 'Dental Filling',
     desc: 'Restore decayed or damaged teeth with a filling that blends naturally with your smile.',
-    link: '/service/dental-filling',
+    link: '/book-appointment',
     image: '/dental-filling.jpg',
     category: 'Restorative',
     includes: ['Cavity assessment', 'Decay removal', 'Tooth-colored filling'],
@@ -74,7 +74,7 @@ const services = [
   {
     title: 'Tooth Extraction',
     desc: 'Gentle removal of damaged, infected, or crowded teeth for both kids and adults.',
-    link: '/service/extraction',
+    link: '/book-appointment',
     image: '/dental-extraction.png',
     category: 'Surgical',
     includes: ['Examination & X-ray', 'Local anesthesia', 'Safe tooth removal'],
@@ -82,7 +82,7 @@ const services = [
   {
     title: 'Wisdom Teeth Surgery',
     desc: 'Comfortable surgical removal of impacted or problematic wisdom teeth.',
-    link: '/service/wisdom-teeth',
+    link: '/book-appointment',
     image: '/wisdom-teeth-surgy.jpg',
     category: 'Surgical',
     includes: ['X-ray assessment', 'Surgical extraction', 'Aftercare guidance'],
@@ -90,7 +90,7 @@ const services = [
   {
     title: 'Root Canal Treatment',
     desc: 'Relieve pain and save an infected tooth with careful root canal therapy.',
-    link: '/service/root-canal',
+    link: '/book-appointment',
     image: '/Root-Canal-Treatment.jpg',
     category: 'Restorative',
     includes: ['Infection diagnosis', 'Root canal procedure', 'Protective crown fitting'],
@@ -98,7 +98,7 @@ const services = [
   {
     title: 'Dental Crown',
     desc: 'Durable ceramic or zirconium crowns that restore the strength and look of damaged teeth.',
-    link: '/service/dental-crown',
+    link: '/book-appointment',
     image: '/dental-crown.png',
     category: 'Restorative',
     includes: ['Tooth preparation', 'Custom crown fitting', 'Final polish'],
@@ -106,7 +106,7 @@ const services = [
   {
     title: 'Dental Veneer',
     desc: 'Thin custom shells that instantly improve the shape and color of your smile.',
-    link: '/service/veneer',
+    link: '/book-appointment',
     image: '/dental-filling.jpg',
     category: 'Cosmetic',
     includes: ['Smile consultation', 'Custom veneer fitting', 'Final bonding'],
@@ -114,7 +114,7 @@ const services = [
   {
     title: 'Dental Implant',
     desc: 'A permanent, natural-looking replacement for missing teeth, topped with a durable crown.',
-    link: '/service/implant',
+    link: '/book-appointment',
     image: '/temporary-tooth-dental-implant-crown.jpg',
     category: 'Restorative',
     includes: ['Consultation & imaging', 'Implant placement', 'Crown attachment'],
@@ -122,7 +122,7 @@ const services = [
   {
     title: 'Orthodontics',
     desc: 'Straighten teeth at any age with braces designed for comfortable, lasting results.',
-    link: '/service/orthodontics',
+    link: '/book-appointment',
     image: '/Orthodontic.jpg',
     category: 'Alignment',
     includes: ['Initial consultation', 'Custom treatment plan', 'Regular adjustment visits'],

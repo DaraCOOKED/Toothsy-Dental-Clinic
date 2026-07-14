@@ -77,14 +77,14 @@ const posts = [
     excerpt: 'Brushing for just two minutes with the proper technique can prevent cavities, reduce plaque, and keep your gums healthy.'
   },
   {
-    image: '/service1.png',
+    image: '/blog2.jpg',
     category: 'Dental Health',
     author: '',
     title: '7 Signs You Should Visit a Dentist',
     excerpt: 'Persistent tooth pain, bleeding gums, bad breath, or sensitivity may be signs that it is time for a professional dental checkup.'
   },
   {
-    image: '/blog3.jpg',
+    image: 'teeth-whitening.webp',
     category: 'Cosmetic Dentistry',
     author: '',
     title: 'Teeth Whitening: What Really Works?',

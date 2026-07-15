@@ -60,13 +60,13 @@
 
         <div
           ref="heroBlobRef"
-          class="absolute inset-[6%_2%_4%_8%] md:inset-[8%_4%_4%_10%] bg-[#d4f0ea] rounded-[2.5rem] will-change-transform z-0"
+          class="absolute inset-[6%_2%_4%_8%] md:inset-[5%_-3%_4%_10%] bg-[#d4f0ea] rounded-[2.5rem] will-change-transform z-0"
         ></div>
 
         <img
           ref="heroImgRef"
-          class="absolute inset-0 z-10 w-[85%] h-[86%] mx-auto mt-[6%] object-cover object-top rounded-[2rem] will-change-transform"
-          src="/owndoctor.png"
+          class="absolute inset-0 z-10 w-[100%] h-[86%] mx-auto mt-[6%] object-cover object-top rounded-[2rem] will-change-transform"
+          src="/homepage-viproom.png"
           alt="Toothsy dental team in the clinic"
         />
 
@@ -150,12 +150,12 @@
     </h2>
 
     <p class="mt-4 text-stone-500 max-w-2xl mx-auto leading-relaxed">
-      Since opening in September 2025, Toothsy Clinic has focused on providing
+      Since opening in November 2025, Toothsy Clinic has focused on providing
       gentle, modern, and patient-first dental care in a welcoming environment.
     </p>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+  <div class="grid grid-cols-1 gap-10 md:gap-16 items-center">
 
     <!-- Text column -->
     <div class="space-y-7 order-2 md:order-1">
@@ -180,38 +180,7 @@
       </div>
     </div>
 
-    <!-- Image column -->
-    <div class="relative order-1 md:order-2 h-[280px] md:h-[420px]">
-      <div class="absolute inset-[4%_0%_0%_8%] bg-[#d4f0ea] rounded-[2rem]"></div>
 
-      <img
-        src="/frontmain.jpg"
-        alt="Inside Toothsy Clinic"
-        class="absolute inset-0 w-[92%] h-[92%] ml-auto object-cover rounded-[2rem]"
-      />
-
-      <!-- Floating Badge -->
-      <div class="absolute -left-3 bottom-6 md:bottom-10 z-20">
-        <div class="badge-float bg-[#6BCE9F] text-white rounded-2xl px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.18)] flex items-center gap-2.5">
-
-          <span class="flex-shrink-0 w-6 h-6 rounded-full bg-white/25 flex items-center justify-center">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path
-                d="M6 1v10M1 6h10"
-                stroke="#fff"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
-          </span>
-
-          <span class="text-[0.7rem] font-semibold leading-tight">
-            Since<br>Sep 2025
-          </span>
-
-        </div>
-      </div>
-    </div>
 
   </div>
 </section>
@@ -219,14 +188,14 @@
 
 
     <!-- ═══════════════════ TEAM ═══════════════════ -->
-    <section class="relative z-10 bg-[#d4f0ea] py-16 md:py-20">
+    <section class="relative z-10 bg-[#d4f0ea] py-16 md:py-20 flex justify-center">
       <div class="max-w-6xl mx-auto px-6 md:px-10">
         <div class="text-center mb-12">
           <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#036533] mb-3">Meet the team</span>
           <h2 class="font-display text-2xl md:text-[2rem] font-bold tracking-tight">The dentists you'll actually see</h2>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
           <div
             v-for="(m, i) in team"
             :key="m.name"
@@ -238,7 +207,7 @@
             <div class="overflow-hidden rounded-2xl mb-3">
               <img
                 :src="m.img"
-                :alt="m.name"
+                :alt="m.alt"
                 class="w-full h-[170px] md:h-[210px] object-cover object-top transition-transform duration-500 group-hover:scale-105"
               />
             </div>
@@ -297,14 +266,9 @@ const stats = [
 
 const storyItems = [
   {
-    year: '15 Sep 2025',
+    year: '27 Nov 2025',
     title: 'Our doors officially opened',
     desc: 'Toothsy Clinic welcomed its very first patients with a commitment to gentle, modern, and personalized dental care.'
-  },
-  {
-    year: 'Oct 2025',
-    title: 'Building trust in our community',
-    desc: 'As more patients visited, we focused on creating a friendly environment where everyone feels comfortable and cared for.'
   },
   {
     year: 'Early 2026',
@@ -357,10 +321,9 @@ const values = [
 ]
 
 const team = [
-  { name: 'Dr. SOKThea Liyo', role: 'Orthodontics', img: '/team-member.png' },
-  { name: 'Dr. Channary Pich', role: 'Endodontics · Root Canal', img: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&q=80&fit=crop&crop=faces' },
-  { name: 'Dr. Vibol Heng', role: 'Family & Pediatric Dentistry', img: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&q=80&fit=crop&crop=faces' },
-  { name: 'Dr. Sreymom Keo', role: 'Orthodontics', img: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80&fit=crop&crop=faces' }
+  { name: 'Dr. Sornn Rithean', role: 'General Dentist', img: '/team/dr-1.png', alt: 'Dr. SOKThea Liyo, Orthodontics specialist' },
+  { name: 'Dr. Chheng Mesa', role: 'Specialist Orthodontic', img: '/team/dr-2.png', alt: 'Dr. Channary Pich, Endodontics and Root Canal specialist' },
+  { name: 'Dr. Sornn Rithornu', role: 'Prosthodontics', img: '/team/dr-3.png', alt: 'Dr. Vibol Heng, Family and Pediatric Dentistry specialist' },
 ]
 
 let prefersReducedMotion = false

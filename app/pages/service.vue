@@ -99,7 +99,7 @@ const services = [
     title: 'Dental Crown',
     desc: 'Durable ceramic or zirconium crowns that restore the strength and look of damaged teeth.',
     link: '/book-appointment',
-    image: '/dental-crown.png',
+    image: '/dental-crowns.jpg.webp',
     category: 'Restorative',
     includes: ['Tooth preparation', 'Custom crown fitting', 'Final polish'],
   },
@@ -107,7 +107,7 @@ const services = [
     title: 'Dental Veneer',
     desc: 'Thin custom shells that instantly improve the shape and color of your smile.',
     link: '/book-appointment',
-    image: '/dental-filling.jpg',
+    image: '/Dental-veneer.webp',
     category: 'Cosmetic',
     includes: ['Smile consultation', 'Custom veneer fitting', 'Final bonding'],
   },
@@ -126,6 +126,14 @@ const services = [
     image: '/Orthodontic.jpg',
     category: 'Alignment',
     includes: ['Initial consultation', 'Custom treatment plan', 'Regular adjustment visits'],
+  },
+  {
+    title: 'Denture',
+    desc: 'removable or fixed prosthetic devices designed to replace missing teeth and surrounding tissues.',
+    link: '/book-appointment',
+    image: '/Denture.jpg',
+    category: 'Alignment',
+    includes: ['Consultation and Exam ', 'Mouth Impressions', 'Bite Registration'],
   },
 ]
 

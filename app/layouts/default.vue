@@ -100,10 +100,61 @@
       <slot />
     </main>
 
-    <footer class="bg-[#F7EBD4] border-t border-stone-400 py-4 px-4">
-      <p class="text-center text-xs sm:text-sm text-[#354D24] font-medium tracking-wide">
-        © {{ year }} Toothsy Dental Clinic — Your Smile, Our Priority
-      </p>
+    <footer class="bg-[#F7EBD4] border-t border-stone-400 py-12 md:py-16 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          <!-- Phone -->
+          <div class="text-center md:text-left">
+            <h4 class="font-display text-base md:text-lg font-bold text-[#354D24] mb-3 tracking-wide uppercase">
+              Call Us
+            </h4>
+            <a
+              href="tel:+85512345678"
+              class="text-[#354D24] hover:text-[#1f9d63] transition-colors font-medium text-sm md:text-base"
+            >
+              +855 12 345 678
+            </a>
+            <p class="text-xs text-stone-500 mt-1">TODO: replace with real phone</p>
+          </div>
+
+          <!-- Address -->
+          <div class="text-center md:text-center">
+            <h4 class="font-display text-base md:text-lg font-bold text-[#354D24] mb-3 tracking-wide uppercase">
+              Visit Us
+            </h4>
+            <address class="not-italic text-[#354D24] text-sm md:text-base leading-relaxed">
+              123 Street 271, Sangkat Boeung Kak 2<br>
+              Khan Tuol Kork, Phnom Penh, Cambodia
+            </address>
+            <p class="text-xs text-stone-500 mt-1">TODO: replace with real address</p>
+          </div>
+
+          <!-- Opening Hours -->
+          <div class="text-center md:text-right">
+            <h4 class="font-display text-base md:text-lg font-bold text-[#354D24] mb-3 tracking-wide uppercase">
+              Opening Hours
+            </h4>
+            <dl class="text-[#354D24] text-sm md:text-base space-y-1">
+              <div class="flex justify-center md:justify-end gap-4">
+                <dt class="font-medium">Mon – Sat</dt>
+                <dd>8:00 AM – 6:00 PM</dd>
+              </div>
+              <div class="flex justify-center md:justify-end gap-4">
+                <dt class="font-medium">Sunday</dt>
+                <dd class="text-stone-500">Closed</dd>
+              </div>
+            </dl>
+            <p class="text-xs text-stone-500 mt-1 text-center md:text-right">TODO: verify hours</p>
+          </div>
+        </div>
+
+        <!-- Copyright line -->
+        <div class="mt-10 pt-6 border-t border-stone-300">
+          <p class="text-center text-xs sm:text-sm text-[#354D24] font-medium tracking-wide">
+            © {{ year }} Toothsy Dental Clinic — Your Smile, Our Priority
+          </p>
+        </div>
+      </div>
     </footer>
 
   </div>

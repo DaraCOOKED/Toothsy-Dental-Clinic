@@ -83,7 +83,7 @@
         <div class="flex justify-center pb-6">
           <NuxtLink
             class="px-8 py-2 rounded-full bg-[#036533] text-white text-sm font-medium hover:bg-amber-300"
-            to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
+            to="/book-appointment"
             target="_blank"
             rel="noopener noreferrer"
             @click="menuOpen = false"

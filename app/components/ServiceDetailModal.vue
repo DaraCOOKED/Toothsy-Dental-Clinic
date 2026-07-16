@@ -72,8 +72,8 @@
 
               <NuxtLink
                 v-if="service?.link"
-                :to="service.link"
-                class="inline-flex items-center justify-center w-full gap-2 text-sm font-semibold text-white bg-[#1f9d63] hover:bg-[#187a4d] rounded-xl py-3 transition-colors"
+                @click.prevent="bookService"
+                class="inline-flex items-center justify-center w-full gap-2 text-sm font-semibold text-white bg-[#1f9d63] hover:bg-[#187a4d] rounded-xl py-3 transition-colors cursor-pointer"
               >
                 Book this service
               </NuxtLink>
@@ -86,6 +86,9 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+import { nextTick } from 'vue'
+
 const props = defineProps({
   open: { type: Boolean, default: false },
   service: { type: Object, default: null }, // { title, desc, icon, price, includes, link }
@@ -95,11 +98,22 @@ const props = defineProps({
 
 const emit = defineEmits(['update:open', 'close'])
 
+const router = useRouter()
+
 const titleId = `service-modal-title-${Math.random().toString(36).slice(2, 9)}`
 
 function close() {
   emit('update:open', false)
   emit('close')
+}
+
+function bookService() {
+  if (!props.service?.title) return
+  // Close modal first, then navigate with service pre-selected
+  close()
+  nextTick(() => {
+    router.push({ path: '/book-appointment', query: { service: props.service.title } })
+  })
 }
 
 // lock body scroll while open

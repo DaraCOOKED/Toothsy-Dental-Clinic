@@ -8,96 +8,73 @@
     ════════════════════════════════════════════════════ -->
 
     <!-- Blob 1: top-left warm green glow -->
-    <div ref="blob1Ref" aria-hidden="true"
-      class="pointer-events-none select-none fixed z-0 will-change-transform"
+    <div ref="blob1Ref" aria-hidden="true" class="pointer-events-none select-none fixed z-0 will-change-transform"
       style="top:-8vh;left:-14vw;width:55vw;height:55vw;max-width:680px;max-height:680px;
              border-radius:50%;filter:blur(64px);
-             background:radial-gradient(circle,rgba(143,227,184,0.13) 0%,transparent 68%);"
-    ></div>
+             background:radial-gradient(circle,rgba(143,227,184,0.13) 0%,transparent 68%);"></div>
 
     <!-- Blob 2: right-mid teal -->
-    <div ref="blob2Ref" aria-hidden="true"
-      class="pointer-events-none select-none fixed z-0 will-change-transform"
+    <div ref="blob2Ref" aria-hidden="true" class="pointer-events-none select-none fixed z-0 will-change-transform"
       style="top:35vh;right:-16vw;width:48vw;height:48vw;max-width:600px;max-height:600px;
              border-radius:50%;filter:blur(72px);
-             background:radial-gradient(circle,rgba(91,191,160,0.10) 0%,transparent 65%);"
-    ></div>
+             background:radial-gradient(circle,rgba(91,191,160,0.10) 0%,transparent 65%);"></div>
 
     <!-- Blob 3: bottom-center cream -->
-    <div ref="blob3Ref" aria-hidden="true"
-      class="pointer-events-none select-none fixed z-0 will-change-transform"
+    <div ref="blob3Ref" aria-hidden="true" class="pointer-events-none select-none fixed z-0 will-change-transform"
       style="bottom:-20vh;left:15vw;width:60vw;height:60vw;max-width:760px;max-height:760px;
              border-radius:50%;filter:blur(80px);
-             background:radial-gradient(circle,rgba(212,240,234,0.16) 0%,transparent 60%);"
-    ></div>
+             background:radial-gradient(circle,rgba(212,240,234,0.16) 0%,transparent 60%);"></div>
 
     <!-- Watermark tooth — drifts entire page length -->
     <div ref="watermarkRef" aria-hidden="true"
       class="pointer-events-none select-none absolute z-0 will-change-transform"
-      style="top:6%;right:-60px;width:260px;opacity:0.055;"
-    >
+      style="top:6%;right:-60px;width:260px;opacity:0.055;">
       <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M100,20 C70,20 45,45 45,80 C45,110 55,135 50,165 C47,185 60,205 75,195
                  C85,188 88,170 100,170 C112,170 115,188 125,195 C140,205 153,185 150,165
-                 C145,135 155,110 155,80 C155,45 130,20 100,20 Z"
-          stroke="#111827" stroke-width="3" stroke-linejoin="round"/>
+                 C145,135 155,110 155,80 C155,45 130,20 100,20 Z" stroke="#111827" stroke-width="3"
+          stroke-linejoin="round" />
       </svg>
     </div>
 
     <!-- Accent ring 1: top-left, mouse + scroll reactive -->
     <div ref="accentRing1Ref" aria-hidden="true"
-      class="pointer-events-none select-none absolute z-0 will-change-transform"
-      style="top:12%;left:3%;width:80px;height:80px;border-radius:50%;
-             border:1.5px solid rgba(91,191,160,0.28);opacity:0.65;"
-    ></div>
+      class="pointer-events-none select-none absolute z-0 will-change-transform" style="top:12%;left:3%;width:80px;height:80px;border-radius:50%;
+             border:1.5px solid rgba(91,191,160,0.28);opacity:0.65;"></div>
 
     <!-- Accent square: mid-right -->
     <div ref="accentSquareRef" aria-hidden="true"
-      class="pointer-events-none select-none absolute z-0 will-change-transform"
-      style="top:48%;right:4%;width:40px;height:40px;border-radius:8px;
-             border:1.5px solid rgba(91,191,160,0.22);opacity:0.5;"
-    ></div>
+      class="pointer-events-none select-none absolute z-0 will-change-transform" style="top:48%;right:4%;width:40px;height:40px;border-radius:8px;
+             border:1.5px solid rgba(91,191,160,0.22);opacity:0.5;"></div>
 
     <!-- Dot grid: lower-left -->
-    <div ref="dotGridRef" aria-hidden="true"
-      class="pointer-events-none select-none absolute z-0 will-change-transform"
-      style="top:70%;left:5%;"
-    >
+    <div ref="dotGridRef" aria-hidden="true" class="pointer-events-none select-none absolute z-0 will-change-transform"
+      style="top:70%;left:5%;">
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <circle cx="8"  cy="8"  r="2.5" fill="#5bbfa0" opacity="0.30"/>
-        <circle cx="28" cy="8"  r="2.5" fill="#5bbfa0" opacity="0.20"/>
-        <circle cx="48" cy="8"  r="2.5" fill="#5bbfa0" opacity="0.15"/>
-        <circle cx="8"  cy="28" r="2.5" fill="#5bbfa0" opacity="0.20"/>
-        <circle cx="28" cy="28" r="2.5" fill="#5bbfa0" opacity="0.28"/>
-        <circle cx="48" cy="28" r="2.5" fill="#5bbfa0" opacity="0.13"/>
-        <circle cx="8"  cy="48" r="2.5" fill="#5bbfa0" opacity="0.13"/>
-        <circle cx="28" cy="48" r="2.5" fill="#5bbfa0" opacity="0.18"/>
-        <circle cx="48" cy="48" r="2.5" fill="#5bbfa0" opacity="0.22"/>
+        <circle cx="8" cy="8" r="2.5" fill="#5bbfa0" opacity="0.30" />
+        <circle cx="28" cy="8" r="2.5" fill="#5bbfa0" opacity="0.20" />
+        <circle cx="48" cy="8" r="2.5" fill="#5bbfa0" opacity="0.15" />
+        <circle cx="8" cy="28" r="2.5" fill="#5bbfa0" opacity="0.20" />
+        <circle cx="28" cy="28" r="2.5" fill="#5bbfa0" opacity="0.28" />
+        <circle cx="48" cy="28" r="2.5" fill="#5bbfa0" opacity="0.13" />
+        <circle cx="8" cy="48" r="2.5" fill="#5bbfa0" opacity="0.13" />
+        <circle cx="28" cy="48" r="2.5" fill="#5bbfa0" opacity="0.18" />
+        <circle cx="48" cy="48" r="2.5" fill="#5bbfa0" opacity="0.22" />
       </svg>
     </div>
 
     <!-- Accent ring 2: lower area -->
     <div ref="accentRing2Ref" aria-hidden="true"
-      class="pointer-events-none select-none absolute z-0 will-change-transform"
-      style="top:82%;left:8%;width:120px;height:120px;border-radius:50%;
-             border:1px solid rgba(91,191,160,0.18);opacity:0.5;"
-    ></div>
+      class="pointer-events-none select-none absolute z-0 will-change-transform" style="top:82%;left:8%;width:120px;height:120px;border-radius:50%;
+             border:1px solid rgba(91,191,160,0.18);opacity:0.5;"></div>
 
     <!-- Floating accent ring near hero -->
     <div ref="heroAccentRef" aria-hidden="true"
-      class="pointer-events-none select-none absolute z-0 will-change-transform"
-      style="top:8%;right:8%;width:140px;height:140px;border-radius:50%;
-             border:1px solid rgba(143,227,184,0.2);opacity:0.6;"
-    ></div>
+      class="pointer-events-none select-none absolute z-0 will-change-transform" style="top:8%;right:8%;width:140px;height:140px;border-radius:50%;
+             border:1px solid rgba(143,227,184,0.2);opacity:0.6;"></div>
 
-
-    <HeroSection
-      eyebrow="About Toothsy"
-      title="Gentle care"
-      highlight="people first"
-      description="Learn about our mission, specialists, and practical approach to calm, modern dental care."
-    />
-
+    <HeroSection eyebrow="About Toothsy" title="Gentle care" highlight="people first"
+      description="Learn about our mission, specialists, and practical approach to calm, modern dental care." />
 
     <!-- ════════════════════════════════════════════════════
       ② ABOUT CONTENT — all original HTML preserved exactly
@@ -106,32 +83,32 @@
       <div class="max-w-7xl mx-auto">
 
         <!-- Page Title -->
-        <h1 ref="titleRef"
-          class="text-center mb-12 text-3xl md:text-5xl font-bold text-[#111827] will-change-transform [font-family:'Poppins',sans-serif]">
-          About Us
-        </h1>
-
+       <div class="text-center mb-12">
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827] inline-block relative">
+            About Us
+          </h2>
+          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
+builds trust, highlights your services, and shows patients why they should choose you          </p>
+        </div>
         <!-- Mission Section -->
         <div ref="missionRef" class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16 items-start">
 
           <!-- Text: slides from left -->
-          <div ref="missionTextRef"
-            class="will-change-transform section-reveal-left"
-            :class="missionVisible ? 'is-visible' : ''"
-          >
-            <h2 class="text-2xl font-bold mb-4">Our Mission</h2>
-            <p class="text-sm leading-7 text-gray-600 font-sans">
-              At Northern Heights Dental, people come first. We help each of our patients
+          <div ref="missionTextRef" class="will-change-transform section-reveal-left"
+            :class="missionVisible ? 'is-visible' : ''">
+            <h2 class="font-display text-2xl md:text-3xl font-bold text-[#111827] inline-block relative">Our Mission</h2>
+            <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
+              At Toothsy Dental Clinic, people come first. We help each of our patients
               to achieve optimal wellness and health by using a whole body approach to oral
               health. This means not just focusing on cavities, but focusing on:
               cranio-facial development, bite and joint balance, oral flora, proper muscle
               balance/function, and bio-compatibility of dental materials. Great care and
               planning ensures that everything we do helps promote overall health and well being.
             </p>
-            <h3 class="text-lg font-bold mt-6 mb-3">
+            <h3 class="font-display text-xl md:text-2sm mt-5 font-bold text-[#111827] inline-block relative">
               More Than Anything Else We Love Creating Happy, Healthy Smiles.
             </h3>
-            <p class="text-sm leading-7 text-gray-600 font-sans">
+            <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
               We work hard to stay up to date with the most advanced techniques and
               technologies to ensure that our patients receive the best care possible.
             </p>
@@ -140,100 +117,89 @@
           <!-- Image: slides from right, continuous depth drift -->
           <div ref="missionImgWrapRef"
             class="rounded-2xl overflow-hidden h-64 md:h-100 group relative will-change-transform section-reveal-right"
-            :class="missionVisible ? 'is-visible' : ''"
-          >
-            <img ref="missionImgRef" :src="clinicImg" alt="Dentist at work"
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 will-change-transform"
-            />
+            :class="missionVisible ? 'is-visible' : ''">
+            <!-- parallax layer: oversized vertically so the scroll drift never exposes an edge -->
+            <div class="absolute -inset-y-10 inset-x-0 will-change-transform"
+              :style="{ transform: `translateY(${missionParallax}px)` }">
+              <img ref="missionImgRef" :src="clinic" alt="Dentist at work"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 will-change-transform" />
+            </div>
+
             <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full
-                        transition-transform duration-700 bg-gradient-to-r
-                        from-transparent via-white/30 to-transparent skew-x-12"/>
+           transition-transform duration-700 bg-gradient-to-r
+           from-transparent via-white/30 to-transparent skew-x-12" />
           </div>
         </div>
 
-        <div ref="specialistsRef" class="bg-[#EFF8FC] -mx-2 px-2 md:px-5 py-10 mb-4">
+        <div ref="specialistsRef" class="  item-center text-center -mx-2 px-2 md:px-5 py-10 mb-4">
           <h2 ref="specialistsTitleRef"
-            class="text-center text-2xl md:text-3xl font-bold mb-2 will-change-transform fade-up-reveal"
-            :class="specialistsVisible ? 'is-visible' : ''"
-          >Meet Our Specialists</h2>
-          <p class="text-center text-sm text-gray-500 font-sans mb-12 will-change-transform fade-up-reveal"
-            :class="specialistsVisible ? 'is-visible' : ''"
-            style="transition-delay:0.1s;"
-          >
-            We use only the best quality materials on the market in<br/>
+            class="font-display text-4xl md:text-2sm mt-5 font-bold text-[#111827] inline-block relative"
+            :class="specialistsVisible ? 'is-visible' : ''">Meet Our Specialists</h2>
+          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md"
+            :class="specialistsVisible ? 'is-visible' : ''" style="transition-delay:0.1s;">
+            We use only the best quality materials on the market in<br />
             order to provide the best products to our patients.
           </p>
 
-          <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            <article
-              v-for="(doctor, i) in doctors" :key="doctor.name"
-              :ref="(el) => setDoctorRef(el, i)"
-              class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl
+          <div class="max-w-6xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <article v-for="(doctor, i) in doctors" :key="doctor.name" :ref="(el) => setDoctorRef(el, i)" class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl
                      transition-shadow duration-300 will-change-transform doctor-reveal"
               :class="doctorVisible[i] ? 'is-visible' : ''"
-              :style="{ transitionDelay: doctorVisible[i] ? `${i * 100}ms` : '0ms' }"
-            >
+              :style="{ transitionDelay: doctorVisible[i] ? `${i * 100}ms` : '0ms' }">
               <div class="relative h-60 overflow-hidden group">
                 <img :src="doctor.photo" :alt="doctor.name"
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
-                <div class="absolute inset-0 bg-[#5bbfa0]/0 group-hover:bg-[#5bbfa0]/25 transition-all duration-500"/>
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div class="absolute inset-0 bg-[#5bbfa0]/0 group-hover:bg-[#5bbfa0]/25 transition-all duration-500" />
               </div>
               <div class="p-6">
-                <h3 class="text-lg font-bold text-gray-900">{{ doctor.name }}</h3>
-                <p class="text-xs font-sans font-semibold uppercase tracking-wide text-[#5bbfa0] mt-1">
+                <h3 class="font-display  text-sm md:text-xl font-bold">{{ doctor.name }}</h3>
+                <p class="text-[0.75rem] text-stone-600 p-2 ">
                   {{ doctor.specialty }}
                 </p>
-                <p class="text-sm leading-6 text-gray-600 font-sans mt-3 line-clamp-4">
+                <p class="text-[0.83rem] text-stone-500 leading-relaxed mb-5">
                   {{ doctor.bio }}
                 </p>
-                <button class="mt-5 bg-[#5bbfa0] text-white rounded-full px-6 py-2.5 text-sm font-sans
-                               shadow-md hover:shadow-[#5bbfa0]/50 hover:shadow-lg
-                               hover:-translate-y-0.5 transition-all duration-300">
-                  Book an appointment
-                </button>
+           
               </div>
             </article>
           </div>
         </div>
-        <!-- Services -->
-        
+    
+
 
         <!-- CTA + Video -->
-        <div ref="ctaRef"
-          class="text-center py-16 will-change-transform cta-reveal"
-          :class="ctaVisible ? 'is-visible' : ''"
-        >
-          <h2 class="text-2xl md:text-3xl font-extrabold leading-tight mb-3">
-            We're Welcoming New Patients<br/>And Can't Wait To Meet You.
+        <div ref="ctaRef" class="text-center py-16 will-change-transform cta-reveal"
+          :class="ctaVisible ? 'is-visible' : ''">
+          <h2 class="font-display text-4xl md:text-2sm mt-5 font-bold text-[#111827] inline-block relative">
+            We're Welcoming New Patients<br />And Can't Wait To Meet You.
           </h2>
-          <p class="text-sm text-gray-500 font-sans">
-            We use only the best quality materials on the market in<br/>
+          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
+            We use only the best quality materials on the market in<br />
             order to provide the best products to our patients.
           </p>
-          <div class="mt-8 rounded-xl overflow-hidden h-60 md:h-150 relative">
-            <video ref="ctaVideoRef"
-              class="absolute inset-0 w-full h-[130%] -top-[15%] object-cover will-change-transform"
-              autoplay loop muted playsinline
-            >
-              <source src="" type="video/mp4"/>
-            </video>
-          </div>
+         <div class="mt-8 rounded-xl overflow-hidden h-60 md:h-[600px] relative">
+  <Swiper
+    :modules="[Autoplay]"
+    :slides-per-view="1"
+    :loop="true"
+    :autoplay="{
+      delay: 3000,
+      disableOnInteraction: false
+    }"
+    :speed="1000"
+    class="w-full h-full"
+  >
+    <SwiperSlide><img :src="img1" class="w-full h-full object-cover" /></SwiperSlide>
+    <SwiperSlide><img :src="img2" class="w-full h-full object-cover" /></SwiperSlide>
+    <SwiperSlide><img :src="img3" class="w-full h-full object-cover" /></SwiperSlide>
+    <SwiperSlide><img :src="img4" class="w-full h-full object-cover" /></SwiperSlide>
+    <SwiperSlide><img :src="img5" class="w-full h-full object-cover" /></SwiperSlide>
+    <SwiperSlide><img :src="img6" class="w-full h-full object-cover" /></SwiperSlide>
+  </Swiper>
+</div>
         </div>
 
-        <!-- Footer -->
-        <div class="border-t border-gray-300 pt-6 flex flex-col sm:flex-row
-                    justify-between items-center gap-4 font-sans">
-          <p class="text-xs text-gray-400 text-center sm:text-left">
-            All rights reserved @ uifry.com | Terms and conditions apply!
-          </p>
-          <nav class="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm text-gray-700">
-            <a href="#">Home</a>
-            <a href="#">Service</a>
-            <a href="#">Blogs</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-          </nav>
-        </div>
+      
 
       </div>
     </section>
@@ -243,14 +209,19 @@
 
 
 <script setup>
-// ═══════════════════════════════════════════════════════════════
-//  ASSETS & CONTENT (unchanged from original)
-// ═══════════════════════════════════════════════════════════════
-import clinicImg    from '~/assets/images/clinic.png'
-import drBrentImg   from '~/assets/images/dr-brent.png'
-import drVashiImg   from '~/assets/images/dr-vashi.png'
-import drConnorsImg from '~/assets/images/dr-connors.png'
-import drFourthImg  from '~/assets/images/dr-fourth.png'
+
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Autoplay } from 'swiper/modules'
+import 'swiper/css'
+
+import clinic from '@/assets/images/clinic.png'
+import img1 from '@/assets/images/img1.png'
+import img2 from '@/assets/images/img2.jpg'
+import img3 from '@/assets/images/img3.jpg'
+import img4 from '@/assets/images/img4.jpg'
+import img5 from '@/assets/images/img5.jpg'
+import img6 from '@/assets/images/img6.jpg'
+
 
 useHead({
   title: 'About - Toothsy Dental Clinic',
@@ -259,98 +230,100 @@ useHead({
 
 const doctors = [
   {
-    name: 'DR. Brent',
-    specialty: 'Specialty in General & Cosmetic Service',
-    photo: drBrentImg,
-    bio: 'Dr. Brent provides general and cosmetic dentistry services at Northern Heights Dental in Flagstaff, Arizona. He has extensive experience in general and cosmetic dentistry, including full mouth restoration, dental veneers, crowns, bridges, dental implants, wisdom teeth extractions, Invisalign, and dentures. Dr. Brent and his younger sister grew up in Massachusetts with a mother who worked as a hygienist and a grandfather who was a general dentist.'
+    name: 'Dr. Sornn Ritheanin',
+    specialty: 'General Dentist',
+    photo: img1,
+    alt: 'Dr. Brent, General & Cosmetic Dentistry Specialist at Toothsy Dental Clinic',
+    bio: 'Dr. Brent provides general and cosmetic dentistry services at Toothsy Dental Clinic, He has extensive experience in general and cosmetic dentistry. '
   },
   {
-    name: 'DR. Ashish J. Vashi',
-    specialty: 'Specialty in Implant Dentistry',
-    photo: drVashiImg,
-    bio: 'Dr. Ashish J. Vashi has been practicing general, cosmetic and implant dentistry in California for over 18 years.'
+    name: 'Dr. Chheng Mesa',
+    specialty: 'Specialist Orthodontic',
+    photo: img2,
+    alt: 'Dr. Ashish J. Vashi, Implant Dentistry Specialist at Toothsy Dental Clinic',
+    bio: 'Dr. Ashish J. Vashi has been practicing general, cosmetic and implant dentistry for over 18 years.'
   },
   {
-    name: 'Dr. James Connors',
-    specialty: 'Specialty in Oral Surgeon',
-    photo: drConnorsImg,
+    name: 'Dr. Sornn Rithornu',
+    specialty: 'Prosthodontics',
+    photo: img3,
     bio: 'When it comes to oral surgeons, few can compare to Dr. James Connors.'
   },
 ]
 
 const services = [
   { title: 'Root Canal Treatment', description: 'Root canal treatment (endodontics) is a dental procedure used to treat infection at the centre of a tooth.' },
-  { title: 'Cosmetic Dentist',     description: 'Cosmetic dentistry is the branch of dentistry that focuses on improving the appearance of your smile.' },
-  { title: 'Dental Implants',      description: "A dental implant is an artificial tooth root that's placed into your jaw to hold a prosthetic tooth or bridge." }
+  { title: 'Cosmetic Dentist', description: 'Cosmetic dentistry is the branch of dentistry that focuses on improving the appearance of your smile.' },
+  { title: 'Dental Implants', description: "A dental implant is an artificial tooth root that's placed into your jaw to hold a prosthetic tooth or bridge." }
 ]
 
 
 // ═══════════════════════════════════════════════════════════════
 //  DOM REFS — ambient layer
 // ═══════════════════════════════════════════════════════════════
-const blob1Ref        = ref(null)
-const blob2Ref        = ref(null)
-const blob3Ref        = ref(null)
-const watermarkRef    = ref(null)
-const accentRing1Ref  = ref(null)
+const blob1Ref = ref(null)
+const blob2Ref = ref(null)
+const blob3Ref = ref(null)
+const watermarkRef = ref(null)
+const accentRing1Ref = ref(null)
 const accentSquareRef = ref(null)
-const dotGridRef      = ref(null)
-const accentRing2Ref  = ref(null)
-const heroAccentRef   = ref(null)
+const dotGridRef = ref(null)
+const accentRing2Ref = ref(null)
+const heroAccentRef = ref(null)
 
 // ═══════════════════════════════════════════════════════════════
 //  DOM REFS — hero section (7 independent layers)
 // ═══════════════════════════════════════════════════════════════
-const heroRef       = ref(null)
+const heroRef = ref(null)
 const videoLayerRef = ref(null)
-const videoRef      = ref(null)
-const overlayRef    = ref(null)
+const videoRef = ref(null)
+const overlayRef = ref(null)
 const heroFloatARef = ref(null)
 const heroFloatBRef = ref(null)
 const heroSquareRef = ref(null)
-const headingRef    = ref(null)
-const subRef        = ref(null)
+const headingRef = ref(null)
+const subRef = ref(null)
 const scrollHintRef = ref(null)
 
 // ═══════════════════════════════════════════════════════════════
 //  DOM REFS — about content
 // ═══════════════════════════════════════════════════════════════
-const titleRef           = ref(null)
-const missionRef         = ref(null)
-const missionTextRef     = ref(null)
-const missionImgWrapRef  = ref(null)
-const missionImgRef      = ref(null)
-const specialistsRef     = ref(null)
-const specialistsTitleRef= ref(null)
-const servicesRef        = ref(null)
-const ctaRef             = ref(null)
-const ctaVideoRef        = ref(null)
+const titleRef = ref(null)
+const missionRef = ref(null)
+const missionTextRef = ref(null)
+const missionImgWrapRef = ref(null)
+const missionImgRef = ref(null)
+const specialistsRef = ref(null)
+const specialistsTitleRef = ref(null)
+const servicesRef = ref(null)
+const ctaRef = ref(null)
+const ctaVideoRef = ref(null)
 
 // Dynamic ref arrays
-const doctorEls      = ref([])
+const doctorEls = ref([])
 const serviceCardEls = ref([])
-function setDoctorRef(el, i)      { doctorEls.value[i]      = el }
+function setDoctorRef(el, i) { doctorEls.value[i] = el }
 function setServiceCardRef(el, i) { serviceCardEls.value[i] = el }
 
 // Visibility flags for scroll-reveal
-const missionVisible     = ref(false)
+const missionVisible = ref(false)
 const specialistsVisible = ref(false)
-const ctaVisible         = ref(false)
-const doctorVisible      = reactive(doctors.map(() => false))
-const serviceVisible     = reactive(services.map(() => false))
+const ctaVisible = ref(false)
+const doctorVisible = reactive(doctors.map(() => false))
+const serviceVisible = reactive(services.map(() => false))
 
 
 // ═══════════════════════════════════════════════════════════════
 //  DEVICE DETECTION
 // ═══════════════════════════════════════════════════════════════
 let prefersReducedMotion = false
-let isMobile             = false
-let intensity            = 1.0   // global multiplier, halved on mobile
+let isMobile = false
+let intensity = 1.0   // global multiplier, halved on mobile
 
 function detectCapabilities() {
   prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  isMobile             = window.matchMedia('(max-width: 768px)').matches
-  const isLowPower     = (navigator.hardwareConcurrency ?? 8) < 4
+  isMobile = window.matchMedia('(max-width: 768px)').matches
+  const isLowPower = (navigator.hardwareConcurrency ?? 8) < 4
   return prefersReducedMotion || isLowPower
 }
 
@@ -363,7 +336,7 @@ function detectCapabilities() {
 const clamp = (n, a, b) => (n < a ? a : n > b ? b : n)
 
 /** Linear interpolation — core of every smooth animation */
-const lerp  = (a, b, t) => a + (b - a) * t
+const lerp = (a, b, t) => a + (b - a) * t
 
 /**
  * Viewport progress for an element.
@@ -391,7 +364,38 @@ function getHeroP() {
   return clamp(-rect.top / (window.innerHeight || 1), 0, 1.4)
 }
 
+const missionParallax = ref(0)
 
+const STRENGTH = 0.15    // how much the image drifts per pixel of scroll
+const MAX_OFFSET = 30    // px — stay under the 40px buffer from -inset-y-10
+
+const reduceMotion = typeof window !== 'undefined'
+  && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+function updateMissionParallax() {
+  if (reduceMotion || !missionImgWrapRef.value) return
+  const rect = missionImgWrapRef.value.getBoundingClientRect()
+  const raw = (rect.top + rect.height / 2 - window.innerHeight / 2) * STRENGTH
+  missionParallax.value = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, raw))
+}
+
+let ticking = false
+function onMissionScroll() {
+  if (ticking) return
+  ticking = true
+  requestAnimationFrame(() => { updateMissionParallax(); ticking = false })
+}
+
+onMounted(() => {
+  updateMissionParallax()
+  window.addEventListener('scroll', onMissionScroll, { passive: true })
+  window.addEventListener('resize', onMissionScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', onMissionScroll)
+  window.removeEventListener('resize', onMissionScroll)
+})
 // ═══════════════════════════════════════════════════════════════
 //  PARALLAX STATE
 //  Every animated property has a current (c) + target (t) pair.
@@ -399,55 +403,55 @@ function getHeroP() {
 // ═══════════════════════════════════════════════════════════════
 const s = {
   // ── Ambient blobs (page-scroll driven) ──
-  b1Y:0, tb1Y:0, b1X:0, tb1X:0,
-  b2Y:0, tb2Y:0, b2X:0, tb2X:0,
-  b3Y:0, tb3Y:0,
+  b1Y: 0, tb1Y: 0, b1X: 0, tb1X: 0,
+  b2Y: 0, tb2Y: 0, b2X: 0, tb2X: 0,
+  b3Y: 0, tb3Y: 0,
 
   // ── Watermark ──
-  wmY:0, twmY:0, wmR:0, twmR:0,
+  wmY: 0, twmY: 0, wmR: 0, twmR: 0,
 
   // ── Accent shapes ──
-  ar1Y:0, tar1Y:0, ar1X:0, tar1X:0, ar1R:0, tar1R:0,
-  asY:0,  tasY:0,  asX:0,  tasX:0,  asR:0,  tasR:0,
-  dgY:0,  tdgY:0,
-  ar2Y:0, tar2Y:0, ar2R:0, tar2R:0,
-  haY:0,  thaY:0,  haR:0,  thaR:0,  // hero accent ring
+  ar1Y: 0, tar1Y: 0, ar1X: 0, tar1X: 0, ar1R: 0, tar1R: 0,
+  asY: 0, tasY: 0, asX: 0, tasX: 0, asR: 0, tasR: 0,
+  dgY: 0, tdgY: 0,
+  ar2Y: 0, tar2Y: 0, ar2R: 0, tar2R: 0,
+  haY: 0, thaY: 0, haR: 0, thaR: 0,  // hero accent ring
 
   // ── Hero: video layer (0.12x, drift down + zoom) ──
-  vidY:0,  tVidY:0,  vidSc:1.08, tVidSc:1.08,
+  vidY: 0, tVidY: 0, vidSc: 1.08, tVidSc: 1.08,
 
   // ── Hero: overlay (0.06x, almost static) ──
-  ovY:0,   tOvY:0,
+  ovY: 0, tOvY: 0,
 
   // ── Hero: float blob A (0.65x upward + mouse) ──
-  faY:0, tfaY:0, faX:0, tfaX:0,
+  faY: 0, tfaY: 0, faX: 0, tfaX: 0,
 
   // ── Hero: float blob B (0.55x upward) ──
-  fbY:0, tfbY:0, fbX:0, tfbX:0,
+  fbY: 0, tfbY: 0, fbX: 0, tfbX: 0,
 
   // ── Hero: accent square (counter-rotates) ──
-  hsY:0, thsY:0, hsR:0, thsR:0,
+  hsY: 0, thsY: 0, hsR: 0, thsR: 0,
 
   // ── Hero: heading (0.42x, fades, pinches scale) ──
-  hY:0,  thY:0,  hOp:1, thOp:1, hSc:1, thSc:1,
+  hY: 0, thY: 0, hOp: 1, thOp: 1, hSc: 1, thSc: 1,
 
   // ── Hero: subtext (0.28x, trails heading) ──
-  pY:0,  tpY:0,  pOp:1, tpOp:1,
+  pY: 0, tpY: 0, pOp: 1, tpOp: 1,
 
   // ── Hero: scroll hint ──
-  hiOp:1, thiOp:1,
+  hiOp: 1, thiOp: 1,
 
   // ── Mouse (normalized -1…+1) ──
-  mX:0, tmX:0, mY:0, tmY:0,
+  mX: 0, tmX: 0, mY: 0, tmY: 0,
 
   // ── About: page title subtle lift ──
-  titY:0, ttitY:0,
+  titY: 0, ttitY: 0,
 
   // ── About: mission image depth drift ──
-  miY:0, tmiY:0,
+  miY: 0, tmiY: 0,
 
   // ── About: CTA video inner parallax ──
-  cvY:0, tcvY:0,
+  cvY: 0, tcvY: 0,
 }
 
 
@@ -456,7 +460,7 @@ const s = {
 // ═══════════════════════════════════════════════════════════════
 function onMouseMove(e) {
   if (isMobile) return
-  s.tmX = (e.clientX / window.innerWidth  - 0.5) * 2   // -1 → +1
+  s.tmX = (e.clientX / window.innerWidth - 0.5) * 2   // -1 → +1
   s.tmY = (e.clientY / window.innerHeight - 0.5) * 2
 }
 
@@ -471,32 +475,32 @@ function computeTargets() {
 
   // ── Ambient blobs: each direction is unique ──
   s.tb1Y = pageP * -200 * intensity
-  s.tb1X = pageP *  50  * intensity + (isMobile ? 0 : s.mX * -18 * intensity)
-  s.tb2Y = pageP *  150 * intensity
-  s.tb2X = pageP * -70  * intensity + (isMobile ? 0 : s.mX *  14 * intensity)
+  s.tb1X = pageP * 50 * intensity + (isMobile ? 0 : s.mX * -18 * intensity)
+  s.tb2Y = pageP * 150 * intensity
+  s.tb2X = pageP * -70 * intensity + (isMobile ? 0 : s.mX * 14 * intensity)
   s.tb3Y = pageP * -110 * intensity
 
   // ── Watermark: full page drift ──
   s.twmY = pageP * 1600 * intensity
-  s.twmR = pageP *  32  * intensity
+  s.twmR = pageP * 32 * intensity
 
   // ── Accent shapes: each rotates differently ──
   s.tar1Y = pageP * -380 * intensity
-  s.tar1R = pageP *  60  * intensity
+  s.tar1R = pageP * 60 * intensity
   s.tar1X = isMobile ? 0 : s.mX * -22 * intensity
-  s.tasY  = pageP * -240 * intensity
-  s.tasR  = pageP *  -50 * intensity
-  s.tasX  = isMobile ? 0 : s.mX *  16 * intensity
-  s.tdgY  = pageP * -160 * intensity
+  s.tasY = pageP * -240 * intensity
+  s.tasR = pageP * -50 * intensity
+  s.tasX = isMobile ? 0 : s.mX * 16 * intensity
+  s.tdgY = pageP * -160 * intensity
   s.tar2Y = pageP * -120 * intensity
-  s.tar2R = pageP *   25 * intensity
-  s.thaY  = pageP * -280 * intensity     // hero accent ring
-  s.thaR  = pageP *   40 * intensity
+  s.tar2R = pageP * 25 * intensity
+  s.thaY = pageP * -280 * intensity     // hero accent ring
+  s.thaR = pageP * 40 * intensity
 
   // ── HERO LAYERS ──
 
   // Video: drifts down slowly + subtle zoom
-  s.tVidY  = heroP *  80  * intensity
+  s.tVidY = heroP * 80 * intensity
   s.tVidSc = 1.08 + heroP * 0.14 * intensity
 
   // Overlay: even slower
@@ -508,19 +512,19 @@ function computeTargets() {
 
   // Float blob B: upward slightly slower
   s.tfbY = heroP * -130 * intensity
-  s.tfbX = isMobile ? 0 : s.mX *  14 * intensity
+  s.tfbX = isMobile ? 0 : s.mX * 14 * intensity
 
   // Hero accent square: counter-clockwise rotation
   s.thsY = heroP * -180 * intensity
-  s.thsR = heroP *  -60 * intensity
+  s.thsR = heroP * -60 * intensity
 
   // Heading: fastest text exit, fades + pinches
-  s.thY  = heroP * -160 * intensity
+  s.thY = heroP * -160 * intensity
   s.thOp = clamp(1 - heroP * 1.6, 0, 1)
   s.thSc = clamp(1 - heroP * 0.08, 0.92, 1)
 
   // Subtext: trails heading
-  s.tpY  = heroP * -100 * intensity
+  s.tpY = heroP * -100 * intensity
   s.tpOp = clamp(1 - heroP * 1.85, 0, 1)
 
   // Scroll hint: vanishes immediately
@@ -551,13 +555,13 @@ function computeTargets() {
 //  0.09  = direct              (mouse)
 // ═══════════════════════════════════════════════════════════════
 function interpolateAll() {
-  const eBlob  = 0.032
-  const eWm    = 0.038
-  const eAcc   = 0.065
-  const eVid   = 0.038
-  const eHFlt  = 0.060
-  const eHTxt  = 0.095
-  const eImg   = 0.08
+  const eBlob = 0.032
+  const eWm = 0.038
+  const eAcc = 0.065
+  const eVid = 0.038
+  const eHFlt = 0.060
+  const eHTxt = 0.095
+  const eImg = 0.08
   const eMouse = 0.09
 
   // Mouse first (value used in blob targets)
@@ -565,26 +569,26 @@ function interpolateAll() {
   s.mY = lerp(s.mY, s.tmY, eMouse)
 
   // Ambient blobs
-  s.b1Y = lerp(s.b1Y, s.tb1Y, eBlob);  s.b1X = lerp(s.b1X, s.tb1X, eBlob)
-  s.b2Y = lerp(s.b2Y, s.tb2Y, eBlob);  s.b2X = lerp(s.b2X, s.tb2X, eBlob)
+  s.b1Y = lerp(s.b1Y, s.tb1Y, eBlob); s.b1X = lerp(s.b1X, s.tb1X, eBlob)
+  s.b2Y = lerp(s.b2Y, s.tb2Y, eBlob); s.b2X = lerp(s.b2X, s.tb2X, eBlob)
   s.b3Y = lerp(s.b3Y, s.tb3Y, eBlob)
 
   // Watermark
-  s.wmY = lerp(s.wmY, s.twmY, eWm);    s.wmR = lerp(s.wmR, s.twmR, eWm)
+  s.wmY = lerp(s.wmY, s.twmY, eWm); s.wmR = lerp(s.wmR, s.twmR, eWm)
 
   // Accent shapes
   s.ar1Y = lerp(s.ar1Y, s.tar1Y, eAcc); s.ar1X = lerp(s.ar1X, s.tar1X, eAcc)
   s.ar1R = lerp(s.ar1R, s.tar1R, eAcc)
-  s.asY  = lerp(s.asY,  s.tasY,  eAcc); s.asX  = lerp(s.asX,  s.tasX,  eAcc)
-  s.asR  = lerp(s.asR,  s.tasR,  eAcc)
-  s.dgY  = lerp(s.dgY,  s.tdgY,  eAcc)
+  s.asY = lerp(s.asY, s.tasY, eAcc); s.asX = lerp(s.asX, s.tasX, eAcc)
+  s.asR = lerp(s.asR, s.tasR, eAcc)
+  s.dgY = lerp(s.dgY, s.tdgY, eAcc)
   s.ar2Y = lerp(s.ar2Y, s.tar2Y, eAcc); s.ar2R = lerp(s.ar2R, s.tar2R, eAcc)
-  s.haY  = lerp(s.haY,  s.thaY,  eAcc); s.haR  = lerp(s.haR,  s.thaR,  eAcc)
+  s.haY = lerp(s.haY, s.thaY, eAcc); s.haR = lerp(s.haR, s.thaR, eAcc)
 
   // Hero video + overlay
-  s.vidY  = lerp(s.vidY,  s.tVidY,  eVid)
+  s.vidY = lerp(s.vidY, s.tVidY, eVid)
   s.vidSc = lerp(s.vidSc, s.tVidSc, eVid)
-  s.ovY   = lerp(s.ovY,   s.tOvY,   eVid)
+  s.ovY = lerp(s.ovY, s.tOvY, eVid)
 
   // Hero floating blobs
   s.faY = lerp(s.faY, s.tfaY, eHFlt); s.faX = lerp(s.faX, s.tfaX, eHFlt)
@@ -594,15 +598,15 @@ function interpolateAll() {
   s.hsY = lerp(s.hsY, s.thsY, eAcc); s.hsR = lerp(s.hsR, s.thsR, eAcc)
 
   // Hero text
-  s.hY  = lerp(s.hY,  s.thY,  eHTxt); s.hOp = lerp(s.hOp, s.thOp, eHTxt)
+  s.hY = lerp(s.hY, s.thY, eHTxt); s.hOp = lerp(s.hOp, s.thOp, eHTxt)
   s.hSc = lerp(s.hSc, s.thSc, eHTxt)
-  s.pY  = lerp(s.pY,  s.tpY,  eHTxt); s.pOp = lerp(s.pOp, s.tpOp, eHTxt)
-  s.hiOp= lerp(s.hiOp,s.thiOp,eHTxt)
+  s.pY = lerp(s.pY, s.tpY, eHTxt); s.pOp = lerp(s.pOp, s.tpOp, eHTxt)
+  s.hiOp = lerp(s.hiOp, s.thiOp, eHTxt)
 
   // About content
   s.titY = lerp(s.titY, s.ttitY, eImg)
-  s.miY  = lerp(s.miY,  s.tmiY,  eImg)
-  s.cvY  = lerp(s.cvY,  s.tcvY,  eImg)
+  s.miY = lerp(s.miY, s.tmiY, eImg)
+  s.cvY = lerp(s.cvY, s.tcvY, eImg)
 }
 
 
@@ -654,13 +658,13 @@ function applyToDOM() {
   // Hero: heading
   if (headingRef.value) {
     headingRef.value.style.transform = `translate3d(0,${s.hY}px,0) scale(${s.hSc})`
-    headingRef.value.style.opacity   = s.hOp
+    headingRef.value.style.opacity = s.hOp
   }
 
   // Hero: subtext
   if (subRef.value) {
     subRef.value.style.transform = `translate3d(0,${s.pY}px,0)`
-    subRef.value.style.opacity   = s.pOp
+    subRef.value.style.opacity = s.pOp
   }
 
   // Hero: scroll hint
@@ -702,9 +706,9 @@ let revealObserver = null
 
 function setupReveal() {
   const targets = [
-    { el: missionRef.value,     cb: () => { missionVisible.value     = true } },
+    { el: missionRef.value, cb: () => { missionVisible.value = true } },
     { el: specialistsRef.value, cb: () => { specialistsVisible.value = true } },
-    { el: ctaRef.value,         cb: () => { ctaVisible.value         = true } },
+    { el: ctaRef.value, cb: () => { ctaVisible.value = true } },
     ...doctorEls.value.filter(Boolean).map((el, i) => ({
       el, cb: () => { doctorVisible[i] = true }
     })),
@@ -738,10 +742,10 @@ onMounted(() => {
   if (shouldSkip) {
     // Reduced-motion: show everything instantly, no RAF
     if (prefersReducedMotion) videoRef.value?.pause?.()
-    missionVisible.value     = true
+    missionVisible.value = true
     specialistsVisible.value = true
-    ctaVisible.value         = true
-    doctors.forEach((_, i)  => { doctorVisible[i]  = true })
+    ctaVisible.value = true
+    doctors.forEach((_, i) => { doctorVisible[i] = true })
     services.forEach((_, i) => { serviceVisible[i] = true })
     return
   }
@@ -766,76 +770,127 @@ onBeforeUnmount(() => {
 
 <style scoped>
 /* ── Hero: scroll hint bounce ─────────────────────────────── */
-.scroll-bounce { animation: hint-bounce 1.8s ease-in-out infinite; }
+.scroll-bounce {
+  animation: hint-bounce 1.8s ease-in-out infinite;
+}
+
 @keyframes hint-bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(10px); }
+
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(10px);
+  }
 }
 
 /* ── Mission: text ← left, image → right ─────────────────── */
 .section-reveal-left {
-  opacity: 0; filter: blur(5px);
+  opacity: 0;
+  filter: blur(5px);
   transform: translateX(-36px) translateY(14px);
-  transition: opacity .9s cubic-bezier(.22,1,.36,1),
-              transform .9s cubic-bezier(.22,1,.36,1),
-              filter .7s cubic-bezier(.22,1,.36,1);
+  transition: opacity .9s cubic-bezier(.22, 1, .36, 1),
+    transform .9s cubic-bezier(.22, 1, .36, 1),
+    filter .7s cubic-bezier(.22, 1, .36, 1);
 }
-.section-reveal-left.is-visible { opacity:1; transform:none; filter:blur(0); }
+
+.section-reveal-left.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
 
 .section-reveal-right {
-  opacity: 0; filter: blur(5px);
+  opacity: 0;
+  filter: blur(5px);
   transform: translateX(36px) translateY(14px);
-  transition: opacity .9s .13s cubic-bezier(.22,1,.36,1),
-              transform .9s .13s cubic-bezier(.22,1,.36,1),
-              filter .7s .13s cubic-bezier(.22,1,.36,1);
+  transition: opacity .9s .13s cubic-bezier(.22, 1, .36, 1),
+    transform .9s .13s cubic-bezier(.22, 1, .36, 1),
+    filter .7s .13s cubic-bezier(.22, 1, .36, 1);
 }
-.section-reveal-right.is-visible { opacity:1; transform:none; filter:blur(0); }
+
+.section-reveal-right.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
 
 /* ── Specialists: pure fade-up (different from mission) ───── */
 .fade-up-reveal {
-  opacity: 0; filter: blur(4px); transform: translateY(28px);
-  transition: opacity .8s cubic-bezier(.22,1,.36,1),
-              transform .8s cubic-bezier(.22,1,.36,1),
-              filter .65s cubic-bezier(.22,1,.36,1);
+  opacity: 0;
+  filter: blur(4px);
+  transform: translateY(28px);
+  transition: opacity .8s cubic-bezier(.22, 1, .36, 1),
+    transform .8s cubic-bezier(.22, 1, .36, 1),
+    filter .65s cubic-bezier(.22, 1, .36, 1);
 }
-.fade-up-reveal.is-visible { opacity:1; transform:none; filter:blur(0); }
+
+.fade-up-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
 
 /* ── Doctor rows: staggered slide-up + scale ──────────────── */
 .doctor-reveal {
-  opacity: 0; filter: blur(5px);
+  opacity: 0;
+  filter: blur(5px);
   transform: translateY(40px) scale(0.98);
-  transition: opacity .85s cubic-bezier(.22,1,.36,1),
-              transform .85s cubic-bezier(.22,1,.36,1),
-              filter .7s cubic-bezier(.22,1,.36,1);
+  transition: opacity .85s cubic-bezier(.22, 1, .36, 1),
+    transform .85s cubic-bezier(.22, 1, .36, 1),
+    filter .7s cubic-bezier(.22, 1, .36, 1);
 }
-.doctor-reveal.is-visible { opacity:1; transform:none; filter:blur(0); }
+
+.doctor-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
 
 /* ── Service cards: scale from slightly below ─────────────── */
 .service-card-reveal {
-  opacity: 0; filter: blur(6px);
+  opacity: 0;
+  filter: blur(6px);
   transform: translateY(44px) scale(0.95);
-  transition: opacity .8s cubic-bezier(.22,1,.36,1),
-              transform .8s cubic-bezier(.22,1,.36,1),
-              filter .65s cubic-bezier(.22,1,.36,1);
+  transition: opacity .8s cubic-bezier(.22, 1, .36, 1),
+    transform .8s cubic-bezier(.22, 1, .36, 1),
+    filter .65s cubic-bezier(.22, 1, .36, 1);
 }
-.service-card-reveal.is-visible { opacity:1; transform:none; filter:blur(0); }
+
+.service-card-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
 
 /* ── CTA: most dramatic scale + fade ─────────────────────── */
 .cta-reveal {
-  opacity: 0; filter: blur(5px);
+  opacity: 0;
+  filter: blur(5px);
   transform: translateY(40px) scale(0.97);
-  transition: opacity .9s cubic-bezier(.22,1,.36,1),
-              transform .9s cubic-bezier(.22,1,.36,1),
-              filter .75s cubic-bezier(.22,1,.36,1);
+  transition: opacity .9s cubic-bezier(.22, 1, .36, 1),
+    transform .9s cubic-bezier(.22, 1, .36, 1),
+    filter .75s cubic-bezier(.22, 1, .36, 1);
 }
-.cta-reveal.is-visible { opacity:1; transform:none; filter:blur(0); }
+
+.cta-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
 
 /* ── Reduced-motion: everything instant ───────────────────── */
 @media (prefers-reduced-motion: reduce) {
+
   .scroll-bounce,
-  .section-reveal-left, .section-reveal-right,
-  .fade-up-reveal, .doctor-reveal,
-  .service-card-reveal, .cta-reveal {
+  .section-reveal-left,
+  .section-reveal-right,
+  .fade-up-reveal,
+  .doctor-reveal,
+  .service-card-reveal,
+  .cta-reveal {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -845,5 +900,19 @@ onBeforeUnmount(() => {
 }
 
 /* ── GPU layer hint ───────────────────────────────────────── */
-.will-change-transform { will-change: transform; }
+.will-change-transform {
+  will-change: transform;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.body-font {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+}
+
+
 </style>

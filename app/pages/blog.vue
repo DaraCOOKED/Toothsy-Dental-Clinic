@@ -15,10 +15,10 @@
     >
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-10">
-          <h2 class="text-3xl md:text-4xl font-bold text-[#111827]">
-            From the Blog
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827] inline-block relative">
+From the Blog
           </h2>
-          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-md mx-auto leading-relaxed">
+          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
             Expert dental tips, oral health guides, and practical advice to help you keep your smile healthy and confident.
           </p>
         </div>
@@ -70,42 +70,42 @@ useHead({
 
 const posts = [
   {
-    image: '/blog1.jpg',
+    image: '/blog1.webp',
     category: 'Oral Care',
     author: '',
     title: 'How to Brush Your Teeth the Right Way',
     excerpt: 'Brushing for just two minutes with the proper technique can prevent cavities, reduce plaque, and keep your gums healthy.'
   },
   {
-    image: '/service1.png',
+    image: '/blog2.webp',
     category: 'Dental Health',
     author: '',
     title: '7 Signs You Should Visit a Dentist',
     excerpt: 'Persistent tooth pain, bleeding gums, bad breath, or sensitivity may be signs that it is time for a professional dental checkup.'
   },
   {
-    image: '/blog3.jpg',
+    image: '/teeth-whitening.webp',
     category: 'Cosmetic Dentistry',
     author: '',
     title: 'Teeth Whitening: What Really Works?',
     excerpt: 'Learn the difference between professional whitening treatments, over-the-counter products, and common myths about whitening your teeth.'
   },
   {
-    image: '/blog4.jpg',
+    image: '/blog4.webp',
     category: 'Preventive Care',
     author: '',
     title: 'Why Regular Dental Checkups Matter',
     excerpt: 'Routine dental exams help detect problems early, prevent costly treatments, and keep your teeth and gums in excellent condition.'
   },
   {
-    image: '/blog5.jpg',
+    image: '/blog5.webp',
     category: 'Oral Hygiene',
     author: '',
     title: 'How to Prevent Cavities',
     excerpt: 'Simple daily habits like brushing, flossing, eating a balanced diet, and limiting sugary drinks can greatly reduce your risk of cavities.'
   },
   {
-    image: '/blog6.jpg',
+    image: '/blog6.webp',
     category: 'Pediatric Dentistry',
     author: '',
     title: 'Caring for Your Child is Teeth',
@@ -177,5 +177,14 @@ onBeforeUnmount(() => {
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.body-font {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
 }
 </style>

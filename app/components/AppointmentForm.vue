@@ -173,7 +173,7 @@ watch(() => props.preselectedService, (newVal) => {
 </script>
 
 <template>
-  <div class="max-w-xl mx-auto p-6 bg-white rounded-xl shadow">
+  <div class="max-w-xl bg-white p-1">
     <h2 class="text-2xl font-bold mb-6">Book Appointment</h2>
 
     <form @submit.prevent="sendEmail" class="space-y-5" novalidate>

@@ -100,7 +100,7 @@
       <slot />
     </main>
 
-    <footer class="bg-[#F7EBD4] border-t border-stone-400 py-12 md:py-4 px-4">
+    <footer class=" bg-gradient-to-br from-[#F8F6F2] via-[#F4F0DC] to-[#F8F6F2] py-12 md:py-4 px-4">
       <div class="max-w-6xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           <!-- Phone -->

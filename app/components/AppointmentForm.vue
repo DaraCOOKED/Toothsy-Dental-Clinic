@@ -242,15 +242,35 @@ watch(() => props.preselectedService, (newVal) => {
 
       <div>
         <label for="time" class="block text-sm font-medium text-gray-700 mb-1.5">Preferred Time</label>
-        <input
+        <select
           id="time"
           v-model="form.time"
-          type="time"
-          class="w-full border border-gray-300 rounded-lg px-4 py-4 text-base focus:outline-none focus:ring-2 focus:ring-[#8FE3B8] focus:border-transparent transition-all appearance-none"
+          class="w-full border border-gray-300 rounded-lg px-4 py-4 text-base focus:outline-none focus:ring-2 focus:ring-[#8FE3B8] focus:border-transparent transition-all appearance-none bg-white cursor-pointer"
           :class="{ 'border-red-400 focus:ring-red-200': errors.time }"
           required
-          autocomplete="off"
-        />
+        >
+          <option value="">Select Time</option>
+          <option value="08:00">8:00 AM</option>
+          <option value="08:30">8:30 AM</option>
+          <option value="09:00">9:00 AM</option>
+          <option value="09:30">9:30 AM</option>
+          <option value="10:00">10:00 AM</option>
+          <option value="10:30">10:30 AM</option>
+          <option value="11:00">11:00 AM</option>
+          <option value="11:30">11:30 AM</option>
+          <option value="12:00">12:00 PM</option>
+          <option value="12:30">12:30 PM</option>
+          <option value="13:00">1:00 PM</option>
+          <option value="13:30">1:30 PM</option>
+          <option value="14:00">2:00 PM</option>
+          <option value="14:30">2:30 PM</option>
+          <option value="15:00">3:00 PM</option>
+          <option value="15:30">3:30 PM</option>
+          <option value="16:00">4:00 PM</option>
+          <option value="16:30">4:30 PM</option>
+          <option value="17:00">5:00 PM</option>
+          <option value="17:30">5:30 PM</option>
+        </select>
         <p v-if="errors.time" class="mt-1.5 text-sm text-red-500" role="alert">{{ errors.time }}</p>
       </div>
 

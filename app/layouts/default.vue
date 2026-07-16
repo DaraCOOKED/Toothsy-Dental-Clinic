@@ -7,8 +7,8 @@
       <div class="relative z-10 flex items-center justify-between px-4 py-1 md:px-8">
 
         <!-- Logo -->
-        <NuxtLink to="/" class="flex items-center gap-2 rounded-xl px-3 py-1.5">
-          <img ref="logoRef" src="/companylogo.png" class="h-18 w-22" alt="Toothsy Dental Clinic logo">
+        <NuxtLink to="/" class="flex items-center gap-2 rounded-xl px-1 py-1.5">
+          <img ref="logoRef" src="/companylogo.png" class="h-17 w-20" alt="Toothsy Dental Clinic logo">
         </NuxtLink>
 
         <!-- Mobile menu button -->
@@ -62,11 +62,11 @@
         <div class="flex items-center justify-between px-2 border-b border-stone-100">
           <div class="flex justify-center items-center">
             <NuxtLink to="/" class="text-lg font-bold" @click="menuOpen = false">
-              <img src="/companylogo.png" class="h-13 mb-2 mt-1 w-14" alt="Toothsy Dental Clinic logo">
+              <img src="/companylogo.png" class="h-18.5 mb-2 mt-1 w-21" alt="Toothsy Dental Clinic logo">
             </NuxtLink>
           </div>
           <button @click="menuOpen = false" aria-label="Close menu" class="text-amber-500 px-2">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/>
             </svg>
           </button>

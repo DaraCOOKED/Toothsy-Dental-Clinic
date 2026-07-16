@@ -177,13 +177,27 @@ builds trust, highlights your services, and shows patients why they should choos
             We use only the best quality materials on the market in<br />
             order to provide the best products to our patients.
           </p>
-          <div class="mt-8 rounded-xl overflow-hidden h-60 md:h-150 relative">
-            <video ref="ctaVideoRef"
-              class="absolute inset-0 w-full h-[130%] -top-[15%] object-cover will-change-transform" autoplay loop muted
-              playsinline>
-              <source src="" type="video/mp4" />
-            </video>
-          </div>
+         <div class="mt-8 rounded-xl overflow-hidden h-60 md:h-[600px] relative">
+  <Swiper
+    :modules="[Autoplay]"
+    :slides-per-view="1"
+    :loop="true"
+    :autoplay="{
+      delay: 3000,
+      disableOnInteraction: false
+    }"
+    :speed="1000"
+    class="w-full h-full"
+  >
+    <SwiperSlide><img :src="clinic" class="w-full h-full object-cover" /></SwiperSlide>
+    <SwiperSlide><img :src="img1" class="w-full h-full object-cover" /></SwiperSlide>
+    <SwiperSlide><img :src="img2" class="w-full h-full object-cover" /></SwiperSlide>
+    <SwiperSlide><img :src="img3" class="w-full h-full object-cover" /></SwiperSlide>
+    <SwiperSlide><img :src="img4" class="w-full h-full object-cover" /></SwiperSlide>
+    <SwiperSlide><img :src="img5" class="w-full h-full object-cover" /></SwiperSlide>
+    <SwiperSlide><img :src="img6" class="w-full h-full object-cover" /></SwiperSlide>
+  </Swiper>
+</div>
         </div>
 
       
@@ -196,12 +210,19 @@ builds trust, highlights your services, and shows patients why they should choos
 
 
 <script setup>
-// ═══════════════════════════════════════════════════════════════
-//  ASSETS & CONTENT (unchanged from original)
-// ═══════════════════════════════════════════════════════════════
-import clinicImg from '~/assets/images/clinic.png'
-import drBrentImg from '~/assets/images/dr-brent.png'
-import drVashiImg from '~/assets/images/dr-vashi.png'
+
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Autoplay } from 'swiper/modules'
+import 'swiper/css'
+
+import clinic from '@/assets/images/clinic.png'
+import img1 from '@/assets/images/img1.png'
+import img2 from '@/assets/images/img2.jpg'
+import img3 from '@/assets/images/img3.jpg'
+import img4 from '@/assets/images/img4.jpg'
+import img5 from '@/assets/images/img5.jpg'
+import img6 from '@/assets/images/img6.jpg'
+
 
 useHead({
   title: 'About - Toothsy Dental Clinic',
@@ -212,21 +233,21 @@ const doctors = [
   {
     name: 'Dr. Sornn Ritheanin',
     specialty: 'General Dentist',
-    photo: drBrentImg,
+    photo: img1,
     alt: 'Dr. Brent, General & Cosmetic Dentistry Specialist at Toothsy Dental Clinic',
     bio: 'Dr. Brent provides general and cosmetic dentistry services at Toothsy Dental Clinic, He has extensive experience in general and cosmetic dentistry. '
   },
   {
     name: 'Dr. Chheng Mesa',
-    specialty: 'Orthodontic',
-    photo: drVashiImg,
+    specialty: 'Specialist Orthodontic',
+    photo: img2,
     alt: 'Dr. Ashish J. Vashi, Implant Dentistry Specialist at Toothsy Dental Clinic',
     bio: 'Dr. Ashish J. Vashi has been practicing general, cosmetic and implant dentistry for over 18 years.'
   },
   {
     name: 'Dr. Sornn Rithornu',
     specialty: 'Prosthodontics',
-    photo: drVashiImg,
+    photo: img3,
     bio: 'When it comes to oral surgeons, few can compare to Dr. James Connors.'
   },
 ]

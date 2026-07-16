@@ -35,21 +35,22 @@
     </div>
 
     <!-- Social -->
-    <div>
-      <p class="text-sm font-bold text-[#111827] mb-3">Follow Us</p>
-      <div class="flex gap-3">
-        <a
-          v-for="s in socials"
-          :key="s.name"
-          :href="s.href"
-          target="_blank"
-          rel="noopener noreferrer"
-          :aria-label="s.name"
-          class="w-10 h-10 rounded-full bg-white border border-stone-200 text-[#111827] flex items-center justify-center hover:bg-[#1f9d63] hover:text-white hover:border-[#1f9d63] transition-colors duration-200"
-          v-html="s.svg"
-        ></a>
-      </div>
-    </div>
+   <div class="text-center">
+  <p class="text-sm md:text-base text-stone-500 mb-5">Follow us</p>
+
+  <div class="flex justify-center items-center gap-5">
+    <a
+      v-for="social in socials"
+      :key="social.name"
+      :href="social.href"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center justify-center w-16 h-16 rounded-full bg-white shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+    >
+      <span class="w-8 h-8 flex items-center justify-center" v-html="social.svg" />
+    </a>
+  </div>
+</div>
   </div>
 </template>
 
@@ -83,12 +84,30 @@ const infoRows = [
 ]
 
 const socials = [
-  { name: 'Facebook', href: '#', svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h-3a4 4 0 0 0-4 4v3H6v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>` },
-  { name: 'Instagram', href: '#', svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>` },
-  { name: 'Telegram', href: '#', svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>` },
-  { name: 'TikTok', href: '#', svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c0 2.5 2 4.5 4.5 4.5"/></svg>` }
+  {
+    name: 'Facebook',
+    href: 'https://www.facebook.com/people/Toothsy-Dental-Clinic-%E1%9E%94%E1%9E%93%E1%9F%92%E1%9E%91%E1%9E%94%E1%9F%8B%E1%9E%96%E1%9E%B7%E1%9E%82%E1%9F%92%E1%9E%9A%E1%9F%84%E1%9F%87%E1%9E%96%E1%9F%92%E1%9E%99%E1%9E%B6%E1%9E%94%E1%9E%B6%E1%9E%9B%E1%9E%87%E1%9E%98%E1%9F%92%E1%9E%84%E1%9E%BA%E1%9E%98%E1%9E%B6%E1%9E%8F%E1%9F%8B%E1%9E%92%E1%9F%92%E1%9E%98%E1%9F%81%E1%9E%89%E1%9E%92%E1%9E%BC%E1%9E%9F%E1%9F%8A%E1%9E%B8/61581044186260/#',
+    svg: `<svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/></svg>`
+  },
+  {
+    name: 'Telegram',
+    href: 'https://t.me/TheaninTSDC',
+    svg: `<svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 8.16c-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212-.07-.062-.174-.041-.249-.024-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.475-1.635.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472z" fill="#26A5E4"/></svg>`
+  },
+  {
+    name: 'TikTok',
+    href: 'https://www.tiktok.com/@dr.nindentist',
+    svg: `<svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(-1.2,-1.2)">
+        <path d="M17.9 8.7c1.28.9 2.85 1.43 4.53 1.43v-3.2a5.4 5.4 0 0 1-1.05-.12v2.52a8.6 8.6 0 0 1-4.53-1.43v6.62c0 3.31-2.68 6-6 6a5.97 5.97 0 0 1-3.35-1.02A5.99 5.99 0 0 0 11.9 22.9c3.31 0 6-2.68 6-6V10.2c-.01 0 0 0 0 0V8.7z" fill="#FE2C55"/>
+      </g>
+      <g transform="translate(-0.6,-0.6)">
+        <path d="M17.3 8.1c1.28.9 2.85 1.43 4.53 1.43V6.34a5.4 5.4 0 0 1-1.05-.12V8.7a8.6 8.6 0 0 1-4.53-1.43v6.62c0 3.31-2.68 6-6 6a5.97 5.97 0 0 1-3.35-1.02A5.99 5.99 0 0 0 11.3 22.3c3.31 0 6-2.68 6-6V9.63c-.01 0 0 0 0 0V8.1z" fill="#25F4EE"/>
+      </g>
+      <path d="M16.7 7.5c1.28.9 2.85 1.43 4.53 1.43V5.74a5.4 5.4 0 0 1-2.85-1.6 5.36 5.36 0 0 1-1.32-2.9h-3.03v16.02c0 1.42-1.15 2.57-2.57 2.57a2.57 2.57 0 0 1-2.57-2.57 2.57 2.57 0 0 1 2.57-2.57c.24 0 .47.03.69.1V11.8a5.6 5.6 0 0 0-.69-.04 5.6 5.6 0 0 0-5.6 5.6 5.6 5.6 0 0 0 5.6 5.6c3.09 0 5.6-2.51 5.6-5.6V9.03a8.6 8.6 0 0 0 4.53 1.43V7.5c-1.24 0-2.4-.4-3.34-1.08l-1.55 1.08z" fill="#000000"/>
+    </svg>`
+  }
 ]
-
 onMounted(() => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (prefersReducedMotion) {

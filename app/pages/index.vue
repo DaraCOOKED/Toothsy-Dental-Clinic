@@ -138,9 +138,9 @@
 
 
   
-<!-- time story -->
+<!-- ═══════════════════ OUR STORY — horizontal timeline, heavy parallax ═══════════════════ -->
 <section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-20">
-  <div class="text-center mb-12">
+  <div class="text-center mb-14 md:mb-16">
     <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">
       Our Story
     </span>
@@ -155,33 +155,87 @@
     </p>
   </div>
 
-  <div class="grid grid-cols-1 gap-10 md:gap-16 items-center">
+  <!-- Desktop/tablet: horizontal line, dot per item, labels alternating above/below.
+       storyVisualRef gets a mouse-driven perspective tilt on top of the per-item
+       scroll-parallax that each dot/label drives independently in tick(). -->
+  <div
+    ref="storyVisualRef"
+    class="relative hidden md:block h-[300px] will-change-transform"
+    @mousemove="handleStoryMouseMove"
+    @mouseleave="handleStoryMouseLeave"
+  >
+    <!-- the connecting line — stretches horizontally as the section scrolls through view -->
+    <div
+      ref="storyLineRef"
+      class="absolute left-0 right-0 top-1/2 h-[2px] bg-[#1f9d63]/25 -translate-y-1/2 will-change-transform"
+    ></div>
 
-    <!-- Text column -->
-    <div class="space-y-7 order-2 md:order-1">
+    <div class="absolute inset-0 grid grid-cols-3">
       <div
         v-for="(item, i) in storyItems"
         :key="item.year"
         :ref="(el) => setTimelineRef(el, i)"
-        class="flex items-start gap-3 transition-all duration-700 ease-out"
-        :class="timelineVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'"
+        class="relative transition-all duration-700 ease-out"
+        :class="timelineVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
       >
-        <span class="mt-2.5 w-2 h-2 rounded-full bg-[#1f9d63] flex-shrink-0"></span>
+        <!-- DOT ANCHOR: this div owns ALL static centering (left-1/2, top-1/2, -translate-1/2)
+             and its classes are NEVER touched by the parallax loop. The loop only sets
+             `transform` on the inner span below, so it can't ever cancel out the centering. -->
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+          <span
+            :ref="(el) => setStoryDotRef(el, i)"
+            class="relative block w-3.5 h-3.5 will-change-transform"
+          >
+            <span class="dot-pulse absolute inset-0 rounded-full bg-[#1f9d63] ring-4 ring-[#EFF8FC]"></span>
+          </span>
+        </div>
 
-        <div>
-          <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] mb-1.5">
-            {{ item.year }} — {{ item.title }}
-          </h3>
+        <!-- LABEL ANCHOR (odd items, above the line): same pattern — this div does the
+             static left-1/2 centering + width + text-align, untouched by JS. The parallax
+             transform lands on the inner div only.
+             Reading top-to-bottom: desc, title, year (year closest to the dot). -->
+        <div
+          v-if="i % 2 === 1"
+          class="absolute left-1/2 -translate-x-1/2 bottom-[calc(50%+24px)] w-[230px] text-center"
+        >
+          <div :ref="(el) => setStoryLabelRef(el, i)" class="will-change-transform">
+            <p class="text-[0.78rem] text-stone-500 leading-relaxed mb-2">{{ item.desc }}</p>
+            <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] leading-tight mb-1">{{ item.title }}</h3>
+            <p class="text-[0.8rem] font-bold text-[#1f9d63]">{{ item.year }}</p>
+          </div>
+        </div>
 
-          <p class="text-[0.85rem] text-stone-500 leading-relaxed">
-            {{ item.desc }}
-          </p>
+        <!-- LABEL ANCHOR (even items, below the line). Reading top-to-bottom: year, title, desc -->
+        <div
+          v-else
+          class="absolute left-1/2 -translate-x-1/2 top-[calc(50%+24px)] w-[230px] text-center"
+        >
+          <div :ref="(el) => setStoryLabelRef(el, i)" class="will-change-transform">
+            <p class="text-[0.8rem] font-bold text-[#1f9d63] mb-1">{{ item.year }}</p>
+            <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] leading-tight mb-2">{{ item.title }}</h3>
+            <p class="text-[0.78rem] text-stone-500 leading-relaxed">{{ item.desc }}</p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
-
-
+  <!-- Mobile: the horizontal layout doesn't have room to breathe on narrow screens,
+       so it falls back to the original simple vertical list (no parallax needed here) -->
+  <div class="md:hidden space-y-7">
+    <div
+      v-for="item in storyItems"
+      :key="'m-' + item.year"
+      class="flex items-start gap-3"
+    >
+      <span class="mt-2.5 w-2 h-2 rounded-full bg-[#1f9d63] flex-shrink-0"></span>
+      <div>
+        <h3 class="font-display text-lg font-bold text-[#111827] mb-1.5">
+          {{ item.year }} — {{ item.title }}
+        </h3>
+        <p class="text-[0.85rem] text-stone-500 leading-relaxed">{{ item.desc }}</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -411,11 +465,26 @@ const heroDotsRef = ref(null)
 const ctaImgRef = ref(null)
 const ctaIconRef = ref(null)
 
+// Our Story timeline — dedicated parallax refs.
+// Note: these refs point at the INNER moving elements only. The outer anchor divs
+// in the template (left-1/2, -translate-x-1/2, etc.) handle static centering and
+// are never referenced here, so JS can't ever knock the dot off-center from its label.
+const storyVisualRef = ref(null)   // outer wrapper: gets the mouse-tilt
+const storyLineRef = ref(null)     // the connecting line: gets a scroll-driven stretch
+const storyDotEls = ref([])        // per-item dot (inner span — the anchor div wrapping it is untouched)
+const storyLabelEls = ref([])      // per-item label block (inner div — its anchor wrapper is untouched)
+function setStoryDotRef(el, i) { storyDotEls.value[i] = el }
+function setStoryLabelRef(el, i) { storyLabelEls.value[i] = el }
+
 const w = { y: 0, ty: 0, rot: 0, trot: 0 }
 const heroImg = { y: 0, ty: 0 }
 const tilt = { rx: 0, ry: 0, trx: 0, tryY: 0 }
+const storyLine = { scale: 1 }
+const storyTilt = { rx: 0, ry: 0, trx: 0, tryY: 0 }
 
 let parallaxItems = []
+let storyDotItems = []
+let storyLabelItems = []
 let rafId = null
 
 function setupParallax() {
@@ -426,6 +495,22 @@ function setupParallax() {
     { el: ctaImgRef.value, strength: 30 },
     { el: ctaIconRef.value, strength: 46, invert: true }
   ].filter((item) => item.el)
+
+  // dots drift the same direction as their label, just with less travel
+  storyDotItems = storyDotEls.value
+    .map((el, i) => ({ el, dirY: i % 2 === 1 ? -1 : 1 }))
+    .filter((item) => item.el)
+
+  // labels fan outward from the line as the section scrolls through the viewport:
+  // above-the-line item rises, below-the-line items sink, and the two outer items
+  // also drift sideways in opposite directions for the "fan" effect
+  storyLabelItems = storyLabelEls.value
+    .map((el, i) => ({
+      el,
+      dirY: i % 2 === 1 ? -1 : 1,
+      dirX: i === 0 ? -1 : i === 2 ? 1 : 0
+    }))
+    .filter((item) => item.el)
 }
 
 function handleHeroMouseMove(e) {
@@ -440,6 +525,20 @@ function handleHeroMouseMove(e) {
 function handleHeroMouseLeave() {
   tilt.trx = 0
   tilt.tryY = 0
+}
+
+function handleStoryMouseMove(e) {
+  if (prefersReducedMotion || !storyVisualRef.value) return
+  const rect = storyVisualRef.value.getBoundingClientRect()
+  const relX = (e.clientX - rect.left) / rect.width - 0.5
+  const relY = (e.clientY - rect.top) / rect.height - 0.5
+  storyTilt.trx = relY * -6
+  storyTilt.tryY = relX * 8
+}
+
+function handleStoryMouseLeave() {
+  storyTilt.trx = 0
+  storyTilt.tryY = 0
 }
 
 function tick() {
@@ -480,6 +579,55 @@ function tick() {
     item.y = lerp(item.y ?? 0, item.ty, 0.1)
     item.el.style.transform = `translate3d(0, ${item.y}px, 0) rotate(${item.baseRotate || 0}deg)`
   })
+
+  // Our Story — connecting line stretches as the section scrolls through view
+  if (storyLineRef.value) {
+    const rect = storyLineRef.value.getBoundingClientRect()
+    const centerY = rect.top + rect.height / 2
+    const progress = clamp(1 - centerY / vh, 0, 1)
+    const scaleTarget = 0.86 + progress * 0.26
+    storyLine.scale = lerp(storyLine.scale, scaleTarget, 0.08)
+    storyLineRef.value.style.transform = `scaleX(${storyLine.scale})`
+  }
+
+  // Our Story — dots bounce off the line and swell slightly at the extremes.
+  // No -50%/centering here anymore — the wrapping anchor div in the template already
+  // centers this span, so this transform is a pure delta on top of that fixed position.
+  storyDotItems.forEach((item) => {
+    const rect = item.el.getBoundingClientRect()
+    const centerY = rect.top + rect.height / 2
+    const progress = clamp(1 - centerY / vh, 0, 1)
+    const depth = (progress - 0.5) * 2
+    item.ty = depth * 16 * item.dirY
+    item.ts = 1 + Math.abs(depth) * 0.3
+    item.y = lerp(item.y ?? 0, item.ty, 0.12)
+    item.sc = lerp(item.sc ?? 1, item.ts, 0.12)
+    item.el.style.transform = `translate3d(0, ${item.y}px, 0) scale(${item.sc})`
+  })
+
+  // Our Story — labels fan out from the line: the strongest movement in the section.
+  // Same deal — the anchor div already centers this, so this is a pure delta.
+  storyLabelItems.forEach((item) => {
+    const rect = item.el.getBoundingClientRect()
+    const centerY = rect.top + rect.height / 2
+    const progress = clamp(1 - centerY / vh, 0, 1)
+    const depth = (progress - 0.5) * 2
+    item.ty = depth * 60 * item.dirY
+    item.tx = depth * 26 * item.dirX
+    item.trot = depth * 5 * item.dirX
+    item.y = lerp(item.y ?? 0, item.ty, 0.1)
+    item.x = lerp(item.x ?? 0, item.tx, 0.1)
+    item.rot = lerp(item.rot ?? 0, item.trot, 0.1)
+    item.el.style.transform = `translate3d(${item.x}px, ${item.y}px, 0) rotate(${item.rot}deg)`
+  })
+
+  // Our Story — the whole timeline tilts toward the cursor, layered on top of the scroll drift above
+  if (storyVisualRef.value) {
+    storyTilt.rx = lerp(storyTilt.rx, storyTilt.trx, 0.08)
+    storyTilt.ry = lerp(storyTilt.ry, storyTilt.tryY, 0.08)
+    storyVisualRef.value.style.transform =
+      `perspective(1400px) rotateX(${storyTilt.rx}deg) rotateY(${storyTilt.ry}deg)`
+  }
 
   rafId = requestAnimationFrame(tick)
 }
@@ -552,17 +700,23 @@ const servicesPreview = [
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* idle float, applied to inner elements only — never on a node the JS parallax loop also transforms */
+/* idle float / pulse, applied to inner elements only — never on a node the JS parallax loop also transforms */
 .badge-float { animation: floatY 3.2s ease-in-out infinite; }
 .cta-icon-float { animation: floatY 2.6s ease-in-out infinite; }
+.dot-pulse { animation: dotPulse 2.4s ease-in-out infinite; }
 
 @keyframes floatY {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
 
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(31, 157, 99, 0.35); }
+  50% { box-shadow: 0 0 0 7px rgba(31, 157, 99, 0); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-about-enter > * { animation: none; opacity: 1; transform: none; }
-  .badge-float, .cta-icon-float { animation: none; }
+  .badge-float, .cta-icon-float, .dot-pulse { animation: none; }
 }
 </style>

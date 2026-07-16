@@ -24,9 +24,9 @@ useSeoMeta({
       >
         <!-- Left Side -->
         <div
-          class="hidden lg:flex flex-col justify-center bg-[#1f9d63] text-white p-12"
+          class="hidden lg:flex flex-col bg-[#1f9d63] text-white p-12"
         >
-         <div class="flex items-center gap-5 mb-10">
+         <div class="flex items-center mt-10 gap-5 mb-10">
   <div class="bg-white rounded-2xl p-2 shadow-lg">
     <img
       src="/companylogo.png"

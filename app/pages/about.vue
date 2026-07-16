@@ -94,8 +94,8 @@
           <div ref="missionTextRef" class="will-change-transform section-reveal-left"
             :class="missionVisible ? 'is-visible' : ''">
             <h2 class="text-2xl font-bold mb-4">Our Mission</h2>
-            <p class="mt-4 text-stone-500 text-sm md:text-base leading-relaxed">
-              At Northern Heights Dental, people come first. We help each of our patients
+            <p class="text-sm leading-7 text-gray-600 font-sans">
+              At Toothsy Dental Clinic, people come first. We help each of our patients
               to achieve optimal wellness and health by using a whole body approach to oral
               health. This means not just focusing on cavities, but focusing on:
               cranio-facial development, bite and joint balance, oral flora, proper muscle
@@ -227,13 +227,15 @@ const doctors = [
     name: 'Dr. Sornn Ritheanin',
     specialty: 'General Dentist',
     photo: drBrentImg,
-    bio: 'Dr. Brent provides general and cosmetic dentistry services at Northern Heights Dental in Flagstaff, Arizona. He has extensive experience in general and cosmetic dentistry, including full mouth restoration, dental veneers, crowns, bridges, dental implants, wisdom teeth extractions, Invisalign, and dentures. Dr. Brent and his younger sister grew up in Massachusetts with a mother who worked as a hygienist and a grandfather who was a general dentist.'
+    alt: 'Dr. Brent, General & Cosmetic Dentistry Specialist at Toothsy Dental Clinic',
+    bio: 'Dr. Brent provides general and cosmetic dentistry services at Toothsy Dental Clinic. He has extensive experience in general and cosmetic dentistry, including full mouth restoration, dental veneers, crowns, bridges, dental implants, wisdom teeth extractions, Invisalign, and dentures.'
   },
   {
     name: 'Dr. Chheng Mesa',
     specialty: 'Specialist Orthodontic',
     photo: drVashiImg,
-    bio: 'Dr. Ashish J. Vashi has been practicing general, cosmetic and implant dentistry in California for over 18 years.'
+    alt: 'Dr. Ashish J. Vashi, Implant Dentistry Specialist at Toothsy Dental Clinic',
+    bio: 'Dr. Ashish J. Vashi has been practicing general, cosmetic and implant dentistry for over 18 years.'
   },
   {
     name: 'Dr. Sornn Rithornu',

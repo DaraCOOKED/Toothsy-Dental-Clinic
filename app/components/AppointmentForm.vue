@@ -1,8 +1,16 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted, watch } from "vue";
 import emailjs from "@emailjs/browser";
+import { serviceTitles } from '~/composables/useServices'
 
 const config = useRuntimeConfig();
+
+const props = defineProps({
+  preselectedService: {
+    type: String,
+    default: ''
+  }
+})
 
 const form = reactive({
   name: "",
@@ -23,6 +31,23 @@ const popup = reactive({
 
 const isSubmitting = ref(false);
 const errors = reactive({});
+
+// Service options from shared composable
+const serviceOptions = serviceTitles
+
+// Auto-select service from query param when component mounts
+onMounted(() => {
+  if (props.preselectedService && serviceOptions.includes(props.preselectedService)) {
+    form.service = props.preselectedService
+  }
+})
+
+// Also watch for prop changes (e.g., if navigating without full reload)
+watch(() => props.preselectedService, (newVal) => {
+  if (newVal && serviceOptions.includes(newVal)) {
+    form.service = newVal
+  }
+})
 
 const validateForm = () => {
   errors.value = {};
@@ -131,6 +156,20 @@ const closePopup = () => {
 
 // Set min date to today for date input
 const minDate = new Date().toISOString().split("T")[0];
+
+// Auto-select service from query param when component mounts
+onMounted(() => {
+  if (props.preselectedService && serviceOptions.includes(props.preselectedService)) {
+    form.service = props.preselectedService
+  }
+})
+
+// Also watch for prop changes (e.g., if navigating without full reload)
+watch(() => props.preselectedService, (newVal) => {
+  if (newVal && serviceOptions.includes(newVal)) {
+    form.service = newVal
+  }
+})
 </script>
 
 <template>
@@ -225,11 +264,7 @@ const minDate = new Date().toISOString().split("T")[0];
           required
         >
           <option value="">Select Service</option>
-          <option>General Checkup</option>
-          <option>Teeth Cleaning</option>
-          <option>Tooth Extraction</option>
-          <option>Dental Filling</option>
-          <option>Braces Consultation</option>
+          <option v-for="svc in serviceOptions" :key="svc" :value="svc">{{ svc }}</option>
         </select>
         <p v-if="errors.service" class="mt-1.5 text-sm text-red-500" role="alert">{{ errors.service }}</p>
       </div>

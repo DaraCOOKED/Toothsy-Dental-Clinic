@@ -29,7 +29,7 @@
     <!-- Human Image -->
     <img
       src="/team-member.png"
-      alt="Team Member"
+      alt="Toothsy Dental Clinic team member smiling in clinical setting"
       class="
         absolute
         bottom-0

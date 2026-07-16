@@ -8,10 +8,9 @@
       class="pointer-events-none select-none absolute -left-16 top-32 z-0 w-[260px] md:w-[400px] opacity-[0.06] will-change-transform"
     >
       <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path
-          d="M2 8C20 2 40 14 60 8C80 2 100 14 118 8"
-          stroke="#1f9d63" stroke-width="4" stroke-linecap="round"
-          :style="underlineStyle"
+        <path
+          d="M100,20 C70,20 45,45 45,80 C45,110 55,135 50,165 C47,185 60,205 75,195 C85,188 88,170 100,170 C112,170 115,188 125,195 C140,205 153,185 150,165 C145,135 155,110 155,80 C155,45 130,20 100,20 Z"
+          stroke="#111827" stroke-width="3" stroke-linejoin="round"
         />
       </svg>
     </div>
@@ -39,7 +38,7 @@
             to="/book-appointment"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-block bg-[#1f9d63] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
+            class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
           >Book a Visit</NuxtLink>
         </div>
       </div>
@@ -54,7 +53,7 @@
           <svg width="60" height="60" viewBox="0 0 64 64" fill="none">
             <circle cx="10" cy="10" r="5" fill="#f4b8b8" />
             <circle cx="34" cy="6" r="3.5" fill="#9fe0d4" />
-            <circle cx="50" cy="24" r="6" fill="#1f9d63" opacity="0.55" />
+            <circle cx="50" cy="24" r="6" fill="#6BCE9F" opacity="0.55" />
             <circle cx="16" cy="40" r="4" fill="#9fe0d4" />
           </svg>
         </div>
@@ -67,15 +66,12 @@
         <img
           ref="heroImgRef"
           class="absolute inset-0 z-10 w-[100%] h-[86%] mx-auto mt-[6%] object-cover object-top rounded-[2rem] will-change-transform"
-          src="/homepage-viproom.webp"
+          src="/homepage-viproom.png"
           alt="Toothsy dental team in the clinic"
-          width="800"
-          height="600"
-          loading="eager"
         />
 
         <div ref="heroBadgeRef" class="absolute left-1 md:-left-3 bottom-3 md:bottom-8 z-20 will-change-transform">
-          <div class="badge-float bg-[#1f9d63] text-white rounded-2xl px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.18)] flex items-center gap-2.5">
+          <div class="badge-float bg-[#6BCE9F] text-white rounded-2xl px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.18)] flex items-center gap-2.5">
             <span class="flex-shrink-0 w-6 h-6 rounded-full bg-white/25 flex items-center justify-center">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M2 6.5L4.5 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -109,9 +105,6 @@
           :src="svc.image"
           :alt="svc.title"
           class="block w-full h-full object-cover object-center"
-          loading="lazy"
-          width="400"
-          height="225"
         />
       </div>
       <div class="px-[18px] pt-[18px] pb-[22px]">
@@ -128,7 +121,7 @@
   <div class="flex items-center justify-center gap-4 mt-8">
     <NuxtLink
       to="/service"
-      class="inline-flex items-center gap-1.5 border-2 border-[#1f9d63] text-[#036533] font-semibold text-sm px-6 py-3 rounded-full transition-colors hover:bg-[#dff0e0] hover:border-[#036533]"
+      class="inline-flex items-center gap-1.5 border-2 border-[#6BCE9F] text-[#036533] font-semibold text-sm px-6 py-3 rounded-full transition-colors hover:bg-[#dff0e0] hover:border-[#036533]"
     >
       See all services
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -136,7 +129,7 @@
     <NuxtLink
       to="/book-appointment"
       target="_blank" rel="noopener noreferrer"
-      class="inline-block bg-[#1f9d63] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
+      class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
     >Book an appointment</NuxtLink>
   </div>
 </section>
@@ -146,105 +139,105 @@
 
   
 <!-- ═══════════════════ OUR STORY — horizontal timeline, heavy parallax ═══════════════════ -->
-  <section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-20">
-    <div class="text-center mb-14 md:mb-16">
-      <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">
-        Our Story
-      </span>
+<section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-20">
+  <div class="text-center mb-14 md:mb-16">
+    <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">
+      Our Story
+    </span>
 
-      <h2 class="font-display text-2xl md:text-[2rem] font-bold tracking-tight max-w-lg mx-auto">
-        A new clinic dedicated to healthier, happier smiles
-      </h2>
+    <h2 class="font-display text-2xl md:text-[2rem] font-bold tracking-tight max-w-lg mx-auto">
+      A new clinic dedicated to healthier, happier smiles
+    </h2>
 
-      <p class="mt-4 text-stone-500 max-w-2xl mx-auto leading-relaxed">
-        Since opening in November 2025, Toothsy Clinic has focused on providing
-        gentle, modern, and patient-first dental care in a welcoming environment.
-      </p>
-    </div>
+    <p class="mt-4 text-stone-500 max-w-2xl mx-auto leading-relaxed">
+      Since opening in November 2025, Toothsy Clinic has focused on providing
+      gentle, modern, and patient-first dental care in a welcoming environment.
+    </p>
+  </div>
 
-    <!-- Desktop/tablet: horizontal line, dot per item, labels alternating above/below.
-         storyVisualRef gets a mouse-driven perspective tilt on top of the per-item
-         scroll-parallax that each dot/label drives independently in tick(). -->
+  <!-- Desktop/tablet: horizontal line, dot per item, labels alternating above/below.
+       storyVisualRef gets a mouse-driven perspective tilt on top of the per-item
+       scroll-parallax that each dot/label drives independently in tick(). -->
+  <div
+    ref="storyVisualRef"
+    class="relative hidden md:block h-[300px] will-change-transform"
+    @mousemove="handleStoryMouseMove"
+    @mouseleave="handleStoryMouseLeave"
+  >
+    <!-- the connecting line — stretches horizontally as the section scrolls through view -->
     <div
-      v-if="!isMobile"
-      ref="storyVisualRef"
-      class="relative h-[300px] will-change-transform"
-      @mousemove="handleStoryMouseMove"
-      @mouseleave="handleStoryMouseLeave"
-    >
-      <!-- the connecting line — stretches horizontally as the section scrolls through view -->
+      ref="storyLineRef"
+      class="absolute left-0 right-0 top-1/2 h-[2px] bg-[#1f9d63]/25 -translate-y-1/2 will-change-transform"
+    ></div>
+
+    <div class="absolute inset-0 grid grid-cols-3">
       <div
-        ref="storyLineRef"
-        class="absolute left-0 right-0 top-1/2 h-[2px] bg-[#1f9d63]/25 -translate-y-1/2 will-change-transform"
-      ></div>
-
-      <div class="absolute inset-0 grid grid-cols-3">
-        <div
-          v-for="(item, i) in storyItems"
-          :key="item.year"
-          :ref="(el) => setTimelineRef(el, i)"
-          class="relative transition-all duration-700 ease-out"
-          :class="timelineVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
-        >
-          <!-- DOT ANCHOR: this div owns ALL static centering (left-1/2, top-1/2, -translate-1/2)
-               and its classes are NEVER touched by the parallax loop. The loop only sets
-               `transform` on the inner span below, so it can't ever cancel out the centering. -->
-          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-            <span
-              :ref="(el) => setStoryDotRef(el, i)"
-              class="relative block w-3.5 h-3.5 will-change-transform"
-            >
-              <span class="dot-pulse absolute inset-0 rounded-full bg-[#1f9d63] ring-4 ring-[#EFF8FC]"></span>
-            </span>
-          </div>
-
-          <!-- LABEL ANCHOR (odd items, above the line): same pattern — this div does the
-               static left-1/2 centering + width + text-align, untouched by JS. The parallax
-               transform lands on the inner div only.
-               Reading top-to-bottom: desc, title, year (year closest to the dot). -->
-          <div
-            v-if="i % 2 === 1"
-            class="absolute left-1/2 -translate-x-1/2 bottom-[calc(50%+24px)] w-[230px] text-center"
-          >
-            <div :ref="(el) => setStoryLabelRef(el, i)" class="will-change-transform">
-              <p class="text-[0.78rem] text-stone-500 leading-relaxed mb-2">{{ item.desc }}</p>
-              <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] leading-tight mb-1">{{ item.title }}</h3>
-              <p class="text-[0.8rem] font-bold text-[#1f9d63]">{{ item.year }}</p>
-            </div>
-          </div>
-
-          <!-- LABEL ANCHOR (even items, below the line). Reading top-to-bottom: year, title, desc -->
-          <div
-            v-else
-            class="absolute left-1/2 -translate-x-1/2 top-[calc(50%+24px)] w-[230px] text-center"
-          >
-            <div :ref="(el) => setStoryLabelRef(el, i)" class="will-change-transform">
-              <p class="text-[0.8rem] font-bold text-[#1f9d63] mb-1">{{ item.year }}</p>
-              <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] leading-tight mb-2">{{ item.title }}</h3>
-              <p class="text-[0.78rem] text-stone-500 leading-relaxed">{{ item.desc }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile: simple vertical list (no parallax needed) -->
-    <div v-else class="space-y-7">
-      <div
-        v-for="item in storyItems"
+        v-for="(item, i) in storyItems"
         :key="item.year"
-        class="flex items-start gap-3"
+        :ref="(el) => setTimelineRef(el, i)"
+        class="relative transition-all duration-700 ease-out"
+        :class="timelineVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
       >
-        <span class="mt-2.5 w-2 h-2 rounded-full bg-[#1f9d63] flex-shrink-0"></span>
-        <div>
-          <h3 class="font-display text-lg font-bold text-[#111827] mb-1.5">
-            {{ item.year }} — {{ item.title }}
-          </h3>
-          <p class="text-[0.85rem] text-stone-500 leading-relaxed">{{ item.desc }}</p>
+        <!-- DOT ANCHOR: this div owns ALL static centering (left-1/2, top-1/2, -translate-1/2)
+             and its classes are NEVER touched by the parallax loop. The loop only sets
+             `transform` on the inner span below, so it can't ever cancel out the centering. -->
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+          <span
+            :ref="(el) => setStoryDotRef(el, i)"
+            class="relative block w-3.5 h-3.5 will-change-transform"
+          >
+            <span class="dot-pulse absolute inset-0 rounded-full bg-[#1f9d63] ring-4 ring-[#EFF8FC]"></span>
+          </span>
+        </div>
+
+        <!-- LABEL ANCHOR (odd items, above the line): same pattern — this div does the
+             static left-1/2 centering + width + text-align, untouched by JS. The parallax
+             transform lands on the inner div only.
+             Reading top-to-bottom: desc, title, year (year closest to the dot). -->
+        <div
+          v-if="i % 2 === 1"
+          class="absolute left-1/2 -translate-x-1/2 bottom-[calc(50%+24px)] w-[230px] text-center"
+        >
+          <div :ref="(el) => setStoryLabelRef(el, i)" class="will-change-transform">
+            <p class="text-[0.78rem] text-stone-500 leading-relaxed mb-2">{{ item.desc }}</p>
+            <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] leading-tight mb-1">{{ item.title }}</h3>
+            <p class="text-[0.8rem] font-bold text-[#1f9d63]">{{ item.year }}</p>
+          </div>
+        </div>
+
+        <!-- LABEL ANCHOR (even items, below the line). Reading top-to-bottom: year, title, desc -->
+        <div
+          v-else
+          class="absolute left-1/2 -translate-x-1/2 top-[calc(50%+24px)] w-[230px] text-center"
+        >
+          <div :ref="(el) => setStoryLabelRef(el, i)" class="will-change-transform">
+            <p class="text-[0.8rem] font-bold text-[#1f9d63] mb-1">{{ item.year }}</p>
+            <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] leading-tight mb-2">{{ item.title }}</h3>
+            <p class="text-[0.78rem] text-stone-500 leading-relaxed">{{ item.desc }}</p>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- Mobile: the horizontal layout doesn't have room to breathe on narrow screens,
+       so it falls back to the original simple vertical list (no parallax needed here) -->
+  <div class="md:hidden space-y-7">
+    <div
+      v-for="item in storyItems"
+      :key="'m-' + item.year"
+      class="flex items-start gap-3"
+    >
+      <span class="mt-2.5 w-2 h-2 rounded-full bg-[#1f9d63] flex-shrink-0"></span>
+      <div>
+        <h3 class="font-display text-lg font-bold text-[#111827] mb-1.5">
+          {{ item.year }} — {{ item.title }}
+        </h3>
+        <p class="text-[0.85rem] text-stone-500 leading-relaxed">{{ item.desc }}</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
@@ -296,11 +289,8 @@
         <img
           ref="ctaImgRef"
           class="absolute inset-0 w-full h-[140%] -top-[20%] object-cover will-change-transform"
-          src="/frontmain.webp"
+          src="/frontmain.jpg"
           alt="Inside the Toothsy clinic"
-          loading="lazy"
-          width="1200"
-          height="800"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
         <div ref="ctaIconRef" class="absolute top-6 right-6 md:top-8 md:right-10 will-change-transform">
@@ -312,7 +302,7 @@
         to="/book-appointment"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-block mt-8 bg-[#1f9d63] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
+        class="inline-block mt-8 bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
       >Book an Appointment</NuxtLink>
     </section>
 
@@ -385,21 +375,16 @@ const values = [
 ]
 
 const team = [
-  { name: 'Dr. Sornn Rithean', role: 'General Dentist', img: '/team/dr-1.png', alt: 'Dr. Sornn Rithean, General Dentist at Toothsy Dental Clinic' },
-  { name: 'Dr. Chheng Mesa', role: 'Specialist Orthodontic', img: '/team/dr-2.png', alt: 'Dr. Chheng Mesa, Specialist Orthodontic at Toothsy Dental Clinic' },
-  { name: 'Dr. Sornn Rithornu', role: 'Prosthodontics', img: '/team/dr-3.png', alt: 'Dr. Sornn Rithornu, Prosthodontics at Toothsy Dental Clinic' },
+  { name: 'Dr. Sornn Rithean', role: 'General Dentist', img: '/team/dr-1.png', alt: 'Dr. SOKThea Liyo, Orthodontics specialist' },
+  { name: 'Dr. Chheng Mesa', role: 'Specialist Orthodontic', img: '/team/dr-2.png', alt: 'Dr. Channary Pich, Endodontics and Root Canal specialist' },
+  { name: 'Dr. Sornn Rithornu', role: 'Prosthodontics', img: '/team/dr-3.png', alt: 'Dr. Vibol Heng, Family and Pediatric Dentistry specialist' },
 ]
 
 let prefersReducedMotion = false
-let isMobile = false
 
 /* ---------- helpers ---------- */
 function clamp(n, min, max) { return Math.min(max, Math.max(min, n)) }
 function lerp(a, b, t) { return a + (b - a) * t }
-
-function checkMobile() {
-  isMobile = window.innerWidth < 768
-}
 
 /* ---------- scroll reveal (timeline / bento / team / cta) + stats trigger ---------- */
 const timelineEls = ref([])
@@ -649,10 +634,6 @@ function tick() {
 
 onMounted(() => {
   prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  checkMobile()
-
-  const handleResize = () => checkMobile()
-  window.addEventListener('resize', handleResize, { passive: true })
 
   nextTick(() => {
     setupReveal()
@@ -661,18 +642,12 @@ onMounted(() => {
       rafId = requestAnimationFrame(tick)
     }
   })
-
-  // Store cleanup function
-  window.__toothsyCleanup = () => {
-    window.removeEventListener('resize', handleResize)
-  }
 })
 
 onBeforeUnmount(() => {
   if (rafId) cancelAnimationFrame(rafId)
   if (statsRafId) cancelAnimationFrame(statsRafId)
   if (observer) observer.disconnect()
-  if (window.__toothsyCleanup) window.__toothsyCleanup()
 })
 const servicesPreview = [
   {

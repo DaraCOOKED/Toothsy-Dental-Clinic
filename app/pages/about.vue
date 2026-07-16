@@ -152,7 +152,7 @@ builds trust, highlights your services, and shows patients why they should choos
                 <div class="absolute inset-0 bg-[#5bbfa0]/0 group-hover:bg-[#5bbfa0]/25 transition-all duration-500" />
               </div>
               <div class="p-6">
-                <h3 class="font-display text-sm md:text-base font-bold">{{ doctor.name }}</h3>
+                <h3 class="font-display  text-sm md:text-xl font-bold">{{ doctor.name }}</h3>
                 <p class="text-[0.75rem] text-stone-600 p-2 ">
                   {{ doctor.specialty }}
                 </p>

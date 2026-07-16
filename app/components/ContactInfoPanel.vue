@@ -130,3 +130,17 @@ onBeforeUnmount(() => {
   if (observer) observer.disconnect()
 })
 </script>
+<style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.body-font {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+}
+
+
+</style>

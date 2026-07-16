@@ -83,18 +83,21 @@
       <div class="max-w-7xl mx-auto">
 
         <!-- Page Title -->
-        <h1 ref="titleRef" class="text-3xl md:text-4xl font-bold text-[#111827] mb-5 text-center will-change-transform">
-          About Us
-        </h1>
-
+       <div class="text-center mb-12">
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827] inline-block relative">
+            About Us
+          </h2>
+          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
+builds trust, highlights your services, and shows patients why they should choose you          </p>
+        </div>
         <!-- Mission Section -->
         <div ref="missionRef" class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16 items-start">
 
           <!-- Text: slides from left -->
           <div ref="missionTextRef" class="will-change-transform section-reveal-left"
             :class="missionVisible ? 'is-visible' : ''">
-            <h2 class="text-2xl font-bold mb-4">Our Mission</h2>
-            <p class="text-sm leading-7 text-gray-600 font-sans">
+            <h2 class="font-display text-2xl md:text-3xl font-bold text-[#111827] inline-block relative">Our Mission</h2>
+            <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
               At Toothsy Dental Clinic, people come first. We help each of our patients
               to achieve optimal wellness and health by using a whole body approach to oral
               health. This means not just focusing on cavities, but focusing on:
@@ -102,10 +105,10 @@
               balance/function, and bio-compatibility of dental materials. Great care and
               planning ensures that everything we do helps promote overall health and well being.
             </p>
-            <h3 class="text-lg font-bold mt-6 mb-3">
+            <h3 class="font-display text-xl md:text-2sm mt-5 font-bold text-[#111827] inline-block relative">
               More Than Anything Else We Love Creating Happy, Healthy Smiles.
             </h3>
-            <p class="mt-4 text-stone-500 text-sm md:text-base leading-relaxed">
+            <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
               We work hard to stay up to date with the most advanced techniques and
               technologies to ensure that our patients receive the best care possible.
             </p>
@@ -128,17 +131,17 @@
           </div>
         </div>
 
-        <div ref="specialistsRef" class="bg-[#EFF8FC] -mx-2 px-2 md:px-5 py-10 mb-4">
+        <div ref="specialistsRef" class="  item-center text-center -mx-2 px-2 md:px-5 py-10 mb-4">
           <h2 ref="specialistsTitleRef"
-            class="text-center text-2xl md:text-3xl font-bold mb-2 will-change-transform fade-up-reveal"
+            class="font-display text-4xl md:text-2sm mt-5 font-bold text-[#111827] inline-block relative"
             :class="specialistsVisible ? 'is-visible' : ''">Meet Our Specialists</h2>
-          <p class="mt-4 text-stone-500 text-sm md:text-base leading-relaxed text-center mb-8 will-change-transform fade-up-reveal"
+          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md"
             :class="specialistsVisible ? 'is-visible' : ''" style="transition-delay:0.1s;">
             We use only the best quality materials on the market in<br />
             order to provide the best products to our patients.
           </p>
 
-          <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div class="max-w-6xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             <article v-for="(doctor, i) in doctors" :key="doctor.name" :ref="(el) => setDoctorRef(el, i)" class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl
                      transition-shadow duration-300 will-change-transform doctor-reveal"
               :class="doctorVisible[i] ? 'is-visible' : ''"
@@ -149,32 +152,28 @@
                 <div class="absolute inset-0 bg-[#5bbfa0]/0 group-hover:bg-[#5bbfa0]/25 transition-all duration-500" />
               </div>
               <div class="p-6">
-                <h3 class="text-lg font-bold text-gray-900">{{ doctor.name }}</h3>
-                <p class="text-xs font-sans font-semibold uppercase tracking-wide text-[#5bbfa0] mt-1">
+                <h3 class="font-display text-sm md:text-base font-bold">{{ doctor.name }}</h3>
+                <p class="text-[0.75rem] text-stone-600 p-2 ">
                   {{ doctor.specialty }}
                 </p>
-                <p class="mt-4 text-stone-500 text-sm md:text-base leading-relaxed line-clamp-4">
+                <p class="text-[0.83rem] text-stone-500 leading-relaxed mb-5">
                   {{ doctor.bio }}
                 </p>
-                <button class="mt-5 bg-[#5bbfa0] text-white rounded-full px-6 py-2.5 text-sm font-sans
-                               shadow-md hover:shadow-[#5bbfa0]/50 hover:shadow-lg
-                               hover:-translate-y-0.5 transition-all duration-300">
-                  Book an appointment
-                </button>
+           
               </div>
             </article>
           </div>
         </div>
-        <!-- Services -->
+    
 
 
         <!-- CTA + Video -->
         <div ref="ctaRef" class="text-center py-16 will-change-transform cta-reveal"
           :class="ctaVisible ? 'is-visible' : ''">
-          <h2 class="text-2xl md:text-3xl font-extrabold leading-tight mb-3">
+          <h2 class="font-display text-4xl md:text-2sm mt-5 font-bold text-[#111827] inline-block relative">
             We're Welcoming New Patients<br />And Can't Wait To Meet You.
           </h2>
-          <p class="text-stone-500 text-sm md:text-base leading-relaxed">
+          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
             We use only the best quality materials on the market in<br />
             order to provide the best products to our patients.
           </p>
@@ -187,20 +186,7 @@
           </div>
         </div>
 
-        <!-- Footer -->
-        <div class="border-t border-gray-300 pt-6 flex flex-col sm:flex-row
-                    justify-between items-center gap-4 font-sans">
-          <p class="text-xs text-gray-400 text-center sm:text-left">
-            All rights reserved @ uifry.com | Terms and conditions apply!
-          </p>
-          <nav class="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm text-gray-700">
-            <a href="#">Home</a>
-            <a href="#">Service</a>
-            <a href="#">Blogs</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-          </nav>
-        </div>
+      
 
       </div>
     </section>
@@ -228,11 +214,11 @@ const doctors = [
     specialty: 'General Dentist',
     photo: drBrentImg,
     alt: 'Dr. Brent, General & Cosmetic Dentistry Specialist at Toothsy Dental Clinic',
-    bio: 'Dr. Brent provides general and cosmetic dentistry services at Toothsy Dental Clinic. He has extensive experience in general and cosmetic dentistry, including full mouth restoration, dental veneers, crowns, bridges, dental implants, wisdom teeth extractions, Invisalign, and dentures.'
+    bio: 'Dr. Brent provides general and cosmetic dentistry services at Toothsy Dental Clinic, He has extensive experience in general and cosmetic dentistry. '
   },
   {
     name: 'Dr. Chheng Mesa',
-    specialty: 'Specialist Orthodontic',
+    specialty: 'Orthodontic',
     photo: drVashiImg,
     alt: 'Dr. Ashish J. Vashi, Implant Dentistry Specialist at Toothsy Dental Clinic',
     bio: 'Dr. Ashish J. Vashi has been practicing general, cosmetic and implant dentistry for over 18 years.'
@@ -897,4 +883,16 @@ onBeforeUnmount(() => {
 .will-change-transform {
   will-change: transform;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.body-font {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+}
+
+
 </style>

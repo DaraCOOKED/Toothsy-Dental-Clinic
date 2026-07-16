@@ -13,10 +13,10 @@
 
         <!-- Mobile menu button -->
         <button @click="menuOpen = true" class="md:hidden flex flex-col gap-1" aria-label="Open menu">
-  <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
-  <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
-  <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
-</button>
+        <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
+        <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
+        <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
+      </button>
 
         <!-- Desktop nav pill -->
         <nav ref="navRef" class="hidden md:flex relative items-center gap-1 bg-[#8FE3B8] rounded-full p-1.5 text-sm font-medium">
@@ -100,7 +100,7 @@
       <slot />
     </main>
 
-    <footer class="bg-[#F7EBD4] border-t border-stone-400 py-12 md:py-16 px-4">
+    <footer class="bg-[#F7EBD4] border-t border-stone-400 py-12 md:py-4 px-4">
       <div class="max-w-6xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           <!-- Phone -->

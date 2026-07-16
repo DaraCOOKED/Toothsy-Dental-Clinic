@@ -121,7 +121,7 @@ builds trust, highlights your services, and shows patients why they should choos
             <!-- parallax layer: oversized vertically so the scroll drift never exposes an edge -->
             <div class="absolute -inset-y-10 inset-x-0 will-change-transform"
               :style="{ transform: `translateY(${missionParallax}px)` }">
-              <img ref="missionImgRef" :src="clinicImg" alt="Dentist at work"
+              <img ref="missionImgRef" :src="clinic" alt="Dentist at work"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 will-change-transform" />
             </div>
 
@@ -189,7 +189,6 @@ builds trust, highlights your services, and shows patients why they should choos
     :speed="1000"
     class="w-full h-full"
   >
-    <SwiperSlide><img :src="clinic" class="w-full h-full object-cover" /></SwiperSlide>
     <SwiperSlide><img :src="img1" class="w-full h-full object-cover" /></SwiperSlide>
     <SwiperSlide><img :src="img2" class="w-full h-full object-cover" /></SwiperSlide>
     <SwiperSlide><img :src="img3" class="w-full h-full object-cover" /></SwiperSlide>

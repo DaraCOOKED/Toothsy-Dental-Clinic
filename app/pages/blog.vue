@@ -70,42 +70,42 @@ useHead({
 
 const posts = [
   {
-    image: '/blog1.jpg',
+    image: '/blog1.webp',
     category: 'Oral Care',
     author: '',
     title: 'How to Brush Your Teeth the Right Way',
     excerpt: 'Brushing for just two minutes with the proper technique can prevent cavities, reduce plaque, and keep your gums healthy.'
   },
   {
-    image: '/blog2.jpg',
+    image: '/blog2.webp',
     category: 'Dental Health',
     author: '',
     title: '7 Signs You Should Visit a Dentist',
     excerpt: 'Persistent tooth pain, bleeding gums, bad breath, or sensitivity may be signs that it is time for a professional dental checkup.'
   },
   {
-    image: 'teeth-whitening.webp',
+    image: '/teeth-whitening.webp',
     category: 'Cosmetic Dentistry',
     author: '',
     title: 'Teeth Whitening: What Really Works?',
     excerpt: 'Learn the difference between professional whitening treatments, over-the-counter products, and common myths about whitening your teeth.'
   },
   {
-    image: '/blog4.jpg',
+    image: '/blog4.webp',
     category: 'Preventive Care',
     author: '',
     title: 'Why Regular Dental Checkups Matter',
     excerpt: 'Routine dental exams help detect problems early, prevent costly treatments, and keep your teeth and gums in excellent condition.'
   },
   {
-    image: '/blog5.jpg',
+    image: '/blog5.webp',
     category: 'Oral Hygiene',
     author: '',
     title: 'How to Prevent Cavities',
     excerpt: 'Simple daily habits like brushing, flossing, eating a balanced diet, and limiting sugary drinks can greatly reduce your risk of cavities.'
   },
   {
-    image: '/blog6.jpg',
+    image: '/blog6.webp',
     category: 'Pediatric Dentistry',
     author: '',
     title: 'Caring for Your Child is Teeth',

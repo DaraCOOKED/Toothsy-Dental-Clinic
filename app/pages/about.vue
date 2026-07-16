@@ -121,7 +121,7 @@
           >
             <h2 class="text-2xl font-bold mb-4">Our Mission</h2>
             <p class="text-sm leading-7 text-gray-600 font-sans">
-              At Northern Heights Dental, people come first. We help each of our patients
+              At Toothsy Dental Clinic, people come first. We help each of our patients
               to achieve optimal wellness and health by using a whole body approach to oral
               health. This means not just focusing on cavities, but focusing on:
               cranio-facial development, bite and joint balance, oral flora, proper muscle
@@ -142,8 +142,11 @@
             class="rounded-2xl overflow-hidden h-64 md:h-100 group relative will-change-transform section-reveal-right"
             :class="missionVisible ? 'is-visible' : ''"
           >
-            <img ref="missionImgRef" :src="clinicImg" alt="Dentist at work"
+            <img ref="missionImgRef" :src="clinicImg" alt="Toothsy Dental Clinic dentist performing treatment on patient in modern operatory"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 will-change-transform"
+              loading="lazy"
+              width="800"
+              height="600"
             />
             <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full
                         transition-transform duration-700 bg-gradient-to-r
@@ -174,8 +177,12 @@
               :style="{ transitionDelay: doctorVisible[i] ? `${i * 100}ms` : '0ms' }"
             >
               <div class="relative h-60 overflow-hidden group">
-                <img :src="doctor.photo" :alt="doctor.name"
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+                <img :src="doctor.photo" :alt="doctor.alt"
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  width="400"
+                  height="400"
+                />
                 <div class="absolute inset-0 bg-[#5bbfa0]/0 group-hover:bg-[#5bbfa0]/25 transition-all duration-500"/>
               </div>
               <div class="p-6">
@@ -262,18 +269,21 @@ const doctors = [
     name: 'DR. Brent',
     specialty: 'Specialty in General & Cosmetic Service',
     photo: drBrentImg,
-    bio: 'Dr. Brent provides general and cosmetic dentistry services at Northern Heights Dental in Flagstaff, Arizona. He has extensive experience in general and cosmetic dentistry, including full mouth restoration, dental veneers, crowns, bridges, dental implants, wisdom teeth extractions, Invisalign, and dentures. Dr. Brent and his younger sister grew up in Massachusetts with a mother who worked as a hygienist and a grandfather who was a general dentist.'
+    alt: 'Dr. Brent, General & Cosmetic Dentistry Specialist at Toothsy Dental Clinic',
+    bio: 'Dr. Brent provides general and cosmetic dentistry services at Toothsy Dental Clinic. He has extensive experience in general and cosmetic dentistry, including full mouth restoration, dental veneers, crowns, bridges, dental implants, wisdom teeth extractions, Invisalign, and dentures.'
   },
   {
     name: 'DR. Ashish J. Vashi',
     specialty: 'Specialty in Implant Dentistry',
     photo: drVashiImg,
-    bio: 'Dr. Ashish J. Vashi has been practicing general, cosmetic and implant dentistry in California for over 18 years.'
+    alt: 'Dr. Ashish J. Vashi, Implant Dentistry Specialist at Toothsy Dental Clinic',
+    bio: 'Dr. Ashish J. Vashi has been practicing general, cosmetic and implant dentistry for over 18 years.'
   },
   {
     name: 'Dr. James Connors',
-    specialty: 'Specialty in Oral Surgeon',
+    specialty: 'Specialty in Oral Surgery',
     photo: drConnorsImg,
+    alt: 'Dr. James Connors, Oral Surgery Specialist at Toothsy Dental Clinic',
     bio: 'When it comes to oral surgeons, few can compare to Dr. James Connors.'
   },
 ]

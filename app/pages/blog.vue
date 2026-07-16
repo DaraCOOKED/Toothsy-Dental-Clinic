@@ -15,10 +15,10 @@
     >
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-10">
-          <h2 class="text-3xl md:text-4xl font-bold text-[#111827]">
-            From the Blog
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827] inline-block relative">
+From the Blog
           </h2>
-          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-md mx-auto leading-relaxed">
+          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
             Expert dental tips, oral health guides, and practical advice to help you keep your smile healthy and confident.
           </p>
         </div>
@@ -177,5 +177,14 @@ onBeforeUnmount(() => {
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.body-font {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
 }
 </style>

@@ -8,7 +8,7 @@
 
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center gap-2 rounded-xl px-3 py-1.5">
-          <img ref="logoRef" src="/companylogo.png" class="h-16 w-17" alt="Toothsy Dental Clinic logo">
+          <img ref="logoRef" src="/companylogo.png" class="h-18 w-22" alt="Toothsy Dental Clinic logo">
         </NuxtLink>
 
         <!-- Mobile menu button -->

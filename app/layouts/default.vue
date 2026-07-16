@@ -75,7 +75,7 @@
         <nav class="flex flex-col gap-5 px-5 py-6 text-xl text-[#036533] font-medium">
           <NuxtLink to="/" exact-active-class="text-amber-600 underline underline-offset-4" @click="menuOpen = false" class="hover:text-amber-600">Home</NuxtLink>
           <NuxtLink to="/service" active-class="text-amber-600 underline underline-offset-4" @click="menuOpen = false" class="hover:text-amber-600">Services</NuxtLink>
-          <NuxtLink to="/blog" active-class="text-amber-600 underline underline-offset-4" @click="menuOpen = false" class="hover:text-amber-600">Blog</NuxtLink>
+          <NuxtLink to="/blog" active-class="text-amber-600 underline underline-offset-4" @click="menuOpen = false" class="hover:text-amber-600">Dental Care</NuxtLink>
           <NuxtLink to="/about" active-class="text-amber-600 underline underline-offset-4" @click="menuOpen = false" class="hover:text-amber-600">About</NuxtLink>
           <NuxtLink to="/contact" active-class="text-amber-600 underline underline-offset-4" @click="menuOpen = false" class="hover:text-amber-600">Contact Us</NuxtLink>
         </nav>

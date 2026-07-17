@@ -13,7 +13,7 @@
           <span class="bg-[#111827] text-white text-[11px] font-semibold px-3 py-1.5 rounded-full whitespace-nowrap">{{ category }}</span>
           <span class="text-[11px] text-stone-400 whitespace-nowrap">~{{ author }}</span>
         </div>
-      <h3 class="font-display text-base font-bold text-[#064e35] uppercase tracking-[0.03em] leading-tight mb-1.5">{{ title }}</h3>
+      <h2 class="font-display font-bold text-[#064e35] uppercase tracking-[0.03em] leading-tight mb-1.5">{{ title }}</h2>
         <p class="text-[0.83rem] text-stone-500 leading-relaxed mb-5">{{ excerpt }}</p>
       </div>
     </div>

@@ -7,16 +7,16 @@
       <div class="relative z-10 flex items-center justify-between px-4 py-1 md:px-8">
 
         <!-- Logo -->
-        <NuxtLink to="/" class="flex items-center gap-2 rounded-xl px-3 py-1.5">
-          <img ref="logoRef" src="/companylogo.png" class="h-18 w-22" alt="Toothsy Dental Clinic logo">
+        <NuxtLink to="/" class="flex items-center gap-2 rounded-xl px-1 py-1.5">
+          <img ref="logoRef" src="/companylogo.png" class="h-17 w-20" alt="Toothsy Dental Clinic logo">
         </NuxtLink>
 
         <!-- Mobile menu button -->
         <button @click="menuOpen = true" class="md:hidden flex flex-col gap-1" aria-label="Open menu">
-  <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
-  <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
-  <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
-</button>
+        <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
+        <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
+        <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
+      </button>
 
         <!-- Desktop nav pill -->
         <nav ref="navRef" class="hidden md:flex relative items-center gap-1 bg-[#8FE3B8] rounded-full p-1.5 text-sm font-medium">
@@ -62,11 +62,11 @@
         <div class="flex items-center justify-between px-2 border-b border-stone-100">
           <div class="flex justify-center items-center">
             <NuxtLink to="/" class="text-lg font-bold" @click="menuOpen = false">
-              <img src="/companylogo.png" class="h-13 mb-2 mt-1 w-14" alt="Toothsy Dental Clinic logo">
+              <img src="/companylogo.png" class="h-18.5 mb-2 mt-1 w-21" alt="Toothsy Dental Clinic logo">
             </NuxtLink>
           </div>
           <button @click="menuOpen = false" aria-label="Close menu" class="text-amber-500 px-2">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/>
             </svg>
           </button>
@@ -100,7 +100,7 @@
       <slot />
     </main>
 
-    <footer class="bg-[#F7EBD4] border-t border-stone-400 py-12 md:py-16 px-4">
+    <footer class=" bg-gradient-to-br from-[#F8F6F2] via-[#F4F0DC] to-[#F8F6F2] py-12 md:py-4 px-4">
       <div class="max-w-6xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           <!-- Phone -->

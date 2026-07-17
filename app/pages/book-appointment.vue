@@ -19,10 +19,10 @@ const preselectedService = route.query.service || ''
      
   <main
    
-    class="min-h-screen flex items-center justify-center px-6 py-12 bg-gradient-to-br from-[#F8F6F2] via-[#F4F0DC] to-[#F8F6F2]"
+    class="min-h-screen flex items-center justify-center px-3 py-10 bg-gradient-to-br from-[#F8F6F2] via-[#F4F0DC] to-[#F8F6F2]"
   >
    
-    <div class="w-full max-w-6xl">
+    <div class="w-full max-w-7xl">
       <div
         class="grid lg:grid-cols-2 bg-white rounded-3xl overflow-hidden shadow-2xl"
       >

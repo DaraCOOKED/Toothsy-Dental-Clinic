@@ -36,7 +36,7 @@
          
           <NuxtLink
             to="/book-appointment"
-            target="_blank"
+        
             rel="noopener noreferrer"
             class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
           >Book a Visit</NuxtLink>
@@ -128,7 +128,7 @@
     </NuxtLink>
     <NuxtLink
       to="/book-appointment"
-      target="_blank" rel="noopener noreferrer"
+      rel="noopener noreferrer"
       class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
     >Book an appointment</NuxtLink>
   </div>
@@ -300,7 +300,6 @@
 
       <NuxtLink
         to="/book-appointment"
-        target="_blank"
         rel="noopener noreferrer"
         class="inline-block mt-8 bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
       >Book an Appointment</NuxtLink>

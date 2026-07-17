@@ -36,7 +36,6 @@
         <div class="hidden md:block">
           <NuxtLink
             to="book-appointment"
-            target="_blank"
             rel="noopener noreferrer"
             class="relative z-10 ml-1 px-5 py-2 rounded-full bg-[#6BCE9F] text-white hover:bg-[#036533] transition-colors duration-300"
           >Book Now</NuxtLink>

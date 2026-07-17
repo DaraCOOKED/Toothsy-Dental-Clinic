@@ -77,19 +77,21 @@
       description="Learn about our mission, specialists, and practical approach to calm, modern dental care." />
 
     <!-- ════════════════════════════════════════════════════
-      ② ABOUT CONTENT — all original HTML preserved exactly
+      ② ABOUT CONTENT
     ════════════════════════════════════════════════════ -->
     <section class="min-h-screen py-10 px-4 relative z-10">
       <div class="max-w-7xl mx-auto">
 
         <!-- Page Title -->
-       <div class="text-center mb-12">
+        <div class="text-center mb-12">
           <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827] inline-block relative">
             About Us
           </h2>
-          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
-builds trust, highlights your services, and shows patients why they should choose you          </p>
+          <p class="mt-4 text-stone-500 text-[0.95rem] leading-relaxed max-w-md mx-auto">
+            Twenty years of whole body dental care, built on trust and getting to know every patient by name.
+          </p>
         </div>
+
         <!-- Mission Section -->
         <div ref="missionRef" class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16 items-start">
 
@@ -97,7 +99,7 @@ builds trust, highlights your services, and shows patients why they should choos
           <div ref="missionTextRef" class="will-change-transform section-reveal-left"
             :class="missionVisible ? 'is-visible' : ''">
             <h2 class="font-display text-2xl md:text-3xl font-bold text-[#111827] inline-block relative">Our Mission</h2>
-            <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
+            <p class="mt-4 text-stone-500 text-[0.95rem] leading-relaxed">
               At Toothsy Dental Clinic, people come first. We help each of our patients
               to achieve optimal wellness and health by using a whole body approach to oral
               health. This means not just focusing on cavities, but focusing on:
@@ -105,13 +107,13 @@ builds trust, highlights your services, and shows patients why they should choos
               balance/function, and bio-compatibility of dental materials. Great care and
               planning ensures that everything we do helps promote overall health and well being.
             </p>
-            <h3 class="font-display text-xl md:text-2sm mt-5 font-bold text-[#111827] inline-block relative">
+            <h3 class="font-display text-xl md:text-2xl mt-5 font-bold text-[#111827] inline-block relative">
               More Than Anything Else We Love Creating Happy, Healthy Smiles.
             </h3>
-            <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
+            <p class="mt-4 text-stone-500 text-[0.95rem] leading-relaxed">
               We work hard to stay up to date with the most advanced techniques and
               technologies to ensure that our patients receive the best care possible.
-            </p>
+            </p>            
           </div>
 
           <!-- Image: slides from right, continuous depth drift -->
@@ -128,14 +130,16 @@ builds trust, highlights your services, and shows patients why they should choos
             <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full
            transition-transform duration-700 bg-gradient-to-r
            from-transparent via-white/30 to-transparent skew-x-12" />
+
+            
           </div>
         </div>
 
-        <div ref="specialistsRef" class="  item-center text-center -mx-2 px-2 md:px-5 py-10 mb-4">
+        <div ref="specialistsRef" class="item-center text-center -mx-2 px-2 md:px-5 py-10 mb-4">
           <h2 ref="specialistsTitleRef"
-            class="font-display text-4xl md:text-2sm mt-5 font-bold text-[#111827] inline-block relative"
+            class="font-display text-3xl md:text-4xl font-bold text-[#111827] inline-block relative"
             :class="specialistsVisible ? 'is-visible' : ''">Meet Our Specialists</h2>
-          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md"
+          <p class="mt-4 text-stone-500 text-[0.95rem] leading-relaxed max-w-md mx-auto"
             :class="specialistsVisible ? 'is-visible' : ''" style="transition-delay:0.1s;">
             We use only the best quality materials on the market in<br />
             order to provide the best products to our patients.
@@ -152,54 +156,57 @@ builds trust, highlights your services, and shows patients why they should choos
                 <div class="absolute inset-0 bg-[#5bbfa0]/0 group-hover:bg-[#5bbfa0]/25 transition-all duration-500" />
               </div>
               <div class="p-6">
-                <h3 class="font-display text-sm md:text-base font-bold">{{ doctor.name }}</h3>
-                <p class="text-[0.75rem] text-stone-600 p-2 ">
+                <h3 class="font-display text-lg font-bold text-[#111827]">{{ doctor.name }}</h3>
+                <span class="inline-block text-xs font-medium text-[#3d8f74] bg-[#5bbfa0]/10 px-2.5 py-1 rounded-full mt-1.5 mb-2">
                   {{ doctor.specialty }}
-                </p>
-                <p class="text-[0.83rem] text-stone-500 leading-relaxed mb-5">
+                </span>
+                <p class="text-[0.83rem] text-stone-500 leading-relaxed">
                   {{ doctor.bio }}
                 </p>
-           
               </div>
             </article>
           </div>
         </div>
-    
-
 
         <!-- CTA + Video -->
         <div ref="ctaRef" class="text-center py-16 will-change-transform cta-reveal"
           :class="ctaVisible ? 'is-visible' : ''">
-          <h2 class="font-display text-4xl md:text-2sm mt-5 font-bold text-[#111827] inline-block relative">
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827] inline-block relative">
             We're Welcoming New Patients<br />And Can't Wait To Meet You.
           </h2>
-          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
-            We use only the best quality materials on the market in<br />
-            order to provide the best products to our patients.
+          <p class="mt-4 text-stone-500 text-[0.95rem] leading-relaxed max-w-md mx-auto">
+            Book a consultation and let's start with a conversation about your smile.
           </p>
-         <div class="mt-8 rounded-xl overflow-hidden h-60 md:h-[600px] relative">
-  <Swiper
-    :modules="[Autoplay]"
-    :slides-per-view="1"
-    :loop="true"
-    :autoplay="{
-      delay: 3000,
-      disableOnInteraction: false
-    }"
-    :speed="1000"
-    class="w-full h-full"
-  >
-    <SwiperSlide><img :src="img1" class="w-full h-full object-cover" /></SwiperSlide>
-    <SwiperSlide><img :src="img2" class="w-full h-full object-cover" /></SwiperSlide>
-    <SwiperSlide><img :src="img3" class="w-full h-full object-cover" /></SwiperSlide>
-    <SwiperSlide><img :src="img4" class="w-full h-full object-cover" /></SwiperSlide>
-    <SwiperSlide><img :src="img5" class="w-full h-full object-cover" /></SwiperSlide>
-    <SwiperSlide><img :src="img6" class="w-full h-full object-cover" /></SwiperSlide>
-  </Swiper>
-</div>
-        </div>
 
-      
+          <a href="#booking" class="mt-6 inline-flex items-center gap-2 bg-[#5bbfa0] hover:bg-[#4da88f] text-white text-sm font-semibold px-6 py-3 rounded-full transition-colors">
+            Book an appointment
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+
+          <div class="mt-8 rounded-xl overflow-hidden h-60 md:h-[480px] relative">
+            <Swiper
+              :modules="[Autoplay]"
+              :slides-per-view="1"
+              :loop="true"
+              :autoplay="{
+                delay: 3000,
+                disableOnInteraction: false
+              }"
+              :speed="1000"
+              class="w-full h-full"
+            >
+              <SwiperSlide><img :src="img1" class="w-full h-full object-cover" /></SwiperSlide>
+              <SwiperSlide><img :src="img2" class="w-full h-full object-cover" /></SwiperSlide>
+              <SwiperSlide><img :src="img3" class="w-full h-full object-cover" /></SwiperSlide>
+              <SwiperSlide><img :src="img4" class="w-full h-full object-cover" /></SwiperSlide>
+              <SwiperSlide><img :src="img5" class="w-full h-full object-cover" /></SwiperSlide>
+              <SwiperSlide><img :src="img6" class="w-full h-full object-cover" /></SwiperSlide>
+            </Swiper>
+          </div>
+        </div>
 
       </div>
     </section>

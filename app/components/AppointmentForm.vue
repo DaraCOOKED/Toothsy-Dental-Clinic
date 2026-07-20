@@ -35,22 +35,29 @@ const errors = reactive({});
 // Service options from shared composable
 const serviceOptions = serviceTitles
 
-// Auto-select service from query param when component mounts
+// Auto-select service from query param when component mounts,
+// and keep it in sync if the prop changes without a full reload
 onMounted(() => {
   if (props.preselectedService && serviceOptions.includes(props.preselectedService)) {
     form.service = props.preselectedService
   }
 })
 
-// Also watch for prop changes (e.g., if navigating without full reload)
 watch(() => props.preselectedService, (newVal) => {
   if (newVal && serviceOptions.includes(newVal)) {
     form.service = newVal
   }
 })
 
+// `errors` is a reactive OBJECT, not a ref, so `errors.value = {}` silently
+// creates a stray "value" key instead of clearing anything. This helper
+// actually empties it out.
+const clearErrors = () => {
+  Object.keys(errors).forEach((key) => delete errors[key]);
+};
+
 const validateForm = () => {
-  errors.value = {};
+  clearErrors();
   let isValid = true;
 
   if (!form.name.trim()) {
@@ -97,7 +104,7 @@ const validateForm = () => {
     isValid = false;
   }
 
-  // Honeypot check - if filled, likely a bot
+  // Honeypot check - if filled, likely a bot. Fail silently, no error shown.
   if (form.website) {
     console.warn("Honeypot triggered");
     return false;
@@ -140,7 +147,7 @@ const sendEmail = async () => {
       message: "",
       website: "",
     });
-    errors.value = {};
+    clearErrors();
   } catch (error) {
     console.error(error);
     popup.type = "error";
@@ -156,149 +163,271 @@ const closePopup = () => {
 
 // Set min date to today for date input
 const minDate = new Date().toISOString().split("T")[0];
-
-// Auto-select service from query param when component mounts
-onMounted(() => {
-  if (props.preselectedService && serviceOptions.includes(props.preselectedService)) {
-    form.service = props.preselectedService
-  }
-})
-
-// Also watch for prop changes (e.g., if navigating without full reload)
-watch(() => props.preselectedService, (newVal) => {
-  if (newVal && serviceOptions.includes(newVal)) {
-    form.service = newVal
-  }
-})
 </script>
 
 <template>
-  <div class="max-w-xl bg-white p-1">
-    <h2 class="text-2xl font-bold mb-6">Book Appointment</h2>
+  <div class="w-full max-w-xl">
+    <h2 class="font-display text-2xl font-bold text-gray-900">Book Appointment</h2>
+    <p class="mt-1 mb-6 text-sm text-gray-500">Fields marked <span class="text-red-400">*</span> are required.</p>
 
     <form @submit.prevent="sendEmail" class="space-y-5" novalidate>
+      <!-- Full Name -->
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 mb-1.5">Full Name</label>
-        <input
-          id="name"
-          v-model="form.name"
-          type="text"
-          placeholder="Full Name"
-          class="w-full border border-gray-300 rounded-lg px-4 py-4 text-base focus:outline-none focus:ring-2 focus:ring-[#8FE3B8] focus:border-transparent transition-all"
-          :class="{ 'border-red-400 focus:ring-red-200': errors.name }"
-          required
-          autocomplete="name"
-          inputmode="text"
-        />
-        <p v-if="errors.name" class="mt-1.5 text-sm text-red-500" role="alert">{{ errors.name }}</p>
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1.5">
+          Full Name <span class="text-red-400">*</span>
+        </label>
+        <div class="relative">
+          <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </span>
+          <input
+            id="name"
+            v-model="form.name"
+            type="text"
+            placeholder="e.g. Sok Dara"
+            class="w-full border border-gray-300 rounded-xl pl-12 pr-4 py-3.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1f9d63]/25 focus:border-[#1f9d63] transition-all"
+            :class="{ 'border-red-400 focus:ring-red-100 focus:border-red-400': errors.name }"
+            required
+            autocomplete="name"
+            inputmode="text"
+            :aria-invalid="!!errors.name"
+            :aria-describedby="errors.name ? 'name-error' : undefined"
+            @input="errors.name = ''"
+          />
+        </div>
+        <p v-if="errors.name" id="name-error" class="mt-1.5 flex items-center gap-1 text-sm text-red-500" role="alert">
+          <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-7-4a1 1 0 10-2 0v4a1 1 0 102 0V6zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+          </svg>
+          {{ errors.name }}
+        </p>
       </div>
 
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
-        <input
-          id="email"
-          v-model="form.email"
-          type="email"
-          placeholder="Email"
-          class="w-full border border-gray-300 rounded-lg px-4 py-4 text-base focus:outline-none focus:ring-2 focus:ring-[#8FE3B8] focus:border-transparent transition-all"
-          :class="{ 'border-red-400 focus:ring-red-200': errors.email }"
-          required
-          autocomplete="email"
-          inputmode="email"
-        />
-        <p v-if="errors.email" class="mt-1.5 text-sm text-red-500" role="alert">{{ errors.email }}</p>
+      <!-- Email + Phone side by side on larger screens -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">
+            Email <span class="text-red-400">*</span>
+          </label>
+          <div class="relative">
+            <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </span>
+            <input
+              id="email"
+              v-model="form.email"
+              type="email"
+              placeholder="you@example.com"
+              class="w-full border border-gray-300 rounded-xl pl-12 pr-4 py-3.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1f9d63]/25 focus:border-[#1f9d63] transition-all"
+              :class="{ 'border-red-400 focus:ring-red-100 focus:border-red-400': errors.email }"
+              required
+              autocomplete="email"
+              inputmode="email"
+              :aria-invalid="!!errors.email"
+              :aria-describedby="errors.email ? 'email-error' : undefined"
+              @input="errors.email = ''"
+            />
+          </div>
+          <p v-if="errors.email" id="email-error" class="mt-1.5 flex items-center gap-1 text-sm text-red-500" role="alert">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-7-4a1 1 0 10-2 0v4a1 1 0 102 0V6zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+            </svg>
+            {{ errors.email }}
+          </p>
+        </div>
+
+        <div>
+          <label for="phone" class="block text-sm font-medium text-gray-700 mb-1.5">
+            Phone Number <span class="text-red-400">*</span>
+          </label>
+          <div class="relative">
+            <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </span>
+            <input
+              id="phone"
+              v-model="form.phone"
+              type="tel"
+              placeholder="+855 12 345 678"
+              class="w-full border border-gray-300 rounded-xl pl-12 pr-4 py-3.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1f9d63]/25 focus:border-[#1f9d63] transition-all"
+              :class="{ 'border-red-400 focus:ring-red-100 focus:border-red-400': errors.phone }"
+              required
+              autocomplete="tel"
+              inputmode="tel"
+              :aria-invalid="!!errors.phone"
+              :aria-describedby="errors.phone ? 'phone-error' : undefined"
+              @input="errors.phone = ''"
+            />
+          </div>
+          <p v-if="errors.phone" id="phone-error" class="mt-1.5 flex items-center gap-1 text-sm text-red-500" role="alert">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-7-4a1 1 0 10-2 0v4a1 1 0 102 0V6zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+            </svg>
+            {{ errors.phone }}
+          </p>
+        </div>
       </div>
 
-      <div>
-        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1.5">Phone Number</label>
-        <input
-          id="phone"
-          v-model="form.phone"
-          type="tel"
-          placeholder="Phone Number"
-          class="w-full border border-gray-300 rounded-lg px-4 py-4 text-base focus:outline-none focus:ring-2 focus:ring-[#8FE3B8] focus:border-transparent transition-all"
-          :class="{ 'border-red-400 focus:ring-red-200': errors.phone }"
-          required
-          autocomplete="tel"
-          inputmode="tel"
-        />
-        <p v-if="errors.phone" class="mt-1.5 text-sm text-red-500" role="alert">{{ errors.phone }}</p>
+      <!-- Date + Time side by side on larger screens -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label for="date" class="block text-sm font-medium text-gray-700 mb-1.5">
+            Preferred Date <span class="text-red-400">*</span>
+          </label>
+          <div class="relative">
+            <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+            </span>
+            <input
+              id="date"
+              v-model="form.date"
+              type="date"
+              :min="minDate"
+              class="w-full border border-gray-300 rounded-xl pl-12 pr-4 py-3.5 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1f9d63]/25 focus:border-[#1f9d63] transition-all appearance-none"
+              :class="{ 'border-red-400 focus:ring-red-100 focus:border-red-400': errors.date }"
+              required
+              autocomplete="off"
+              :aria-invalid="!!errors.date"
+              :aria-describedby="errors.date ? 'date-error' : undefined"
+              @change="errors.date = ''"
+            />
+          </div>
+          <p v-if="errors.date" id="date-error" class="mt-1.5 flex items-center gap-1 text-sm text-red-500" role="alert">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-7-4a1 1 0 10-2 0v4a1 1 0 102 0V6zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+            </svg>
+            {{ errors.date }}
+          </p>
+        </div>
+
+        <div>
+          <label for="time" class="block text-sm font-medium text-gray-700 mb-1.5">
+            Preferred Time <span class="text-red-400">*</span>
+          </label>
+          <div class="relative">
+            <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400 z-10">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12,6 12,12 16,14" />
+              </svg>
+            </span>
+            <select
+              id="time"
+              v-model="form.time"
+              class="w-full border border-gray-300 rounded-xl pl-12 pr-11 py-3.5 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1f9d63]/25 focus:border-[#1f9d63] transition-all appearance-none bg-white cursor-pointer"
+              :class="{ 'border-red-400 focus:ring-red-100 focus:border-red-400': errors.time }"
+              required
+              :aria-invalid="!!errors.time"
+              :aria-describedby="errors.time ? 'time-error' : undefined"
+              @change="errors.time = ''"
+            >
+              <option value="">Select Time</option>
+              <optgroup label="Morning">
+                <option value="08:00">8:00 AM</option>
+                <option value="08:30">8:30 AM</option>
+                <option value="09:00">9:00 AM</option>
+                <option value="09:30">9:30 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="10:30">10:30 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="11:30">11:30 AM</option>
+              </optgroup>
+              <optgroup label="Afternoon">
+                <option value="12:00">12:00 PM</option>
+                <option value="12:30">12:30 PM</option>
+                <option value="13:00">1:00 PM</option>
+                <option value="13:30">1:30 PM</option>
+                <option value="14:00">2:00 PM</option>
+                <option value="14:30">2:30 PM</option>
+                <option value="15:00">3:00 PM</option>
+                <option value="15:30">3:30 PM</option>
+                <option value="16:00">4:00 PM</option>
+                <option value="16:30">4:30 PM</option>
+              </optgroup>
+              <optgroup label="Evening">
+                <option value="17:00">5:00 PM</option>
+                <option value="17:30">5:30 PM</option>
+              </optgroup>
+            </select>
+          </div>
+          <p v-if="errors.time" id="time-error" class="mt-1.5 flex items-center gap-1 text-sm text-red-500" role="alert">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-7-4a1 1 0 10-2 0v4a1 1 0 102 0V6zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+            </svg>
+            {{ errors.time }}
+          </p>
+        </div>
       </div>
 
+      <!-- Service -->
       <div>
-        <label for="date" class="block text-sm font-medium text-gray-700 mb-1.5">Preferred Date</label>
-        <input
-          id="date"
-          v-model="form.date"
-          type="date"
-          :min="minDate"
-          class="w-full border border-gray-300 rounded-lg px-4 py-4 text-base focus:outline-none focus:ring-2 focus:ring-[#8FE3B8] focus:border-transparent transition-all appearance-none"
-          :class="{ 'border-red-400 focus:ring-red-200': errors.date }"
-          required
-          autocomplete="off"
-        />
-        <p v-if="errors.date" class="mt-1.5 text-sm text-red-500" role="alert">{{ errors.date }}</p>
+        <label for="service" class="block text-sm font-medium text-gray-700 mb-1.5">
+          Service <span class="text-red-400">*</span>
+        </label>
+        <div class="relative">
+          <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400 z-10">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="8" y1="6" x2="21" y2="6" />
+              <line x1="8" y1="12" x2="21" y2="12" />
+              <line x1="8" y1="18" x2="21" y2="18" />
+              <line x1="3" y1="6" x2="3.01" y2="6" />
+              <line x1="3" y1="12" x2="3.01" y2="12" />
+              <line x1="3" y1="18" x2="3.01" y2="18" />
+            </svg>
+          </span>
+          <select
+            id="service"
+            v-model="form.service"
+            class="w-full border border-gray-300 rounded-xl pl-12 pr-11 py-3.5 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1f9d63]/25 focus:border-[#1f9d63] transition-all appearance-none bg-white cursor-pointer"
+            :class="{ 'border-red-400 focus:ring-red-100 focus:border-red-400': errors.service }"
+            required
+            :aria-invalid="!!errors.service"
+            :aria-describedby="errors.service ? 'service-error' : undefined"
+            @change="errors.service = ''"
+          >
+            <option value="">Select Service</option>
+            <option v-for="svc in serviceOptions" :key="svc" :value="svc">{{ svc }}</option>
+          </select>
+        </div>
+        <p v-if="errors.service" id="service-error" class="mt-1.5 flex items-center gap-1 text-sm text-red-500" role="alert">
+          <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-7-4a1 1 0 10-2 0v4a1 1 0 102 0V6zm-1 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+          </svg>
+          {{ errors.service }}
+        </p>
       </div>
 
-      <div>
-        <label for="time" class="block text-sm font-medium text-gray-700 mb-1.5">Preferred Time</label>
-        <select
-          id="time"
-          v-model="form.time"
-          class="w-full border border-gray-300 rounded-lg px-4 py-4 text-base focus:outline-none focus:ring-2 focus:ring-[#8FE3B8] focus:border-transparent transition-all appearance-none bg-white cursor-pointer"
-          :class="{ 'border-red-400 focus:ring-red-200': errors.time }"
-          required
-        >
-          <option value="">Select Time</option>
-          <option value="08:00">8:00 AM</option>
-          <option value="08:30">8:30 AM</option>
-          <option value="09:00">9:00 AM</option>
-          <option value="09:30">9:30 AM</option>
-          <option value="10:00">10:00 AM</option>
-          <option value="10:30">10:30 AM</option>
-          <option value="11:00">11:00 AM</option>
-          <option value="11:30">11:30 AM</option>
-          <option value="12:00">12:00 PM</option>
-          <option value="12:30">12:30 PM</option>
-          <option value="13:00">1:00 PM</option>
-          <option value="13:30">1:30 PM</option>
-          <option value="14:00">2:00 PM</option>
-          <option value="14:30">2:30 PM</option>
-          <option value="15:00">3:00 PM</option>
-          <option value="15:30">3:30 PM</option>
-          <option value="16:00">4:00 PM</option>
-          <option value="16:30">4:30 PM</option>
-          <option value="17:00">5:00 PM</option>
-          <option value="17:30">5:30 PM</option>
-        </select>
-        <p v-if="errors.time" class="mt-1.5 text-sm text-red-500" role="alert">{{ errors.time }}</p>
-      </div>
-
-      <div>
-        <label for="service" class="block text-sm font-medium text-gray-700 mb-1.5">Service</label>
-        <select
-          id="service"
-          v-model="form.service"
-          class="w-full border border-gray-300 rounded-lg px-4 py-4 text-base focus:outline-none focus:ring-2 focus:ring-[#8FE3B8] focus:border-transparent transition-all appearance-none bg-white cursor-pointer"
-          :class="{ 'border-red-400 focus:ring-red-200': errors.service }"
-          required
-        >
-          <option value="">Select Service</option>
-          <option v-for="svc in serviceOptions" :key="svc" :value="svc">{{ svc }}</option>
-        </select>
-        <p v-if="errors.service" class="mt-1.5 text-sm text-red-500" role="alert">{{ errors.service }}</p>
-      </div>
-
+      <!-- Message (optional) -->
       <div>
         <label for="message" class="block text-sm font-medium text-gray-700 mb-1.5">Message (Optional)</label>
-        <textarea
-          id="message"
-          v-model="form.message"
-          rows="4"
-          placeholder="Message"
-          class="w-full border border-gray-300 rounded-lg px-4 py-4 text-base focus:outline-none focus:ring-2 focus:ring-[#8FE3B8] focus:border-transparent transition-all resize-y"
-          autocomplete="off"
-        ></textarea>
+        <div class="relative">
+          <span class="pointer-events-none absolute top-0 left-0 flex items-start pl-4 pt-3.5 text-gray-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+            </svg>
+          </span>
+          <textarea
+            id="message"
+            v-model="form.message"
+            rows="4"
+            placeholder="Anything we should know before your visit?"
+            class="w-full border border-gray-300 rounded-xl pl-12 pr-4 py-3.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1f9d63]/25 focus:border-[#1f9d63] transition-all resize-y"
+            autocomplete="off"
+          ></textarea>
+        </div>
       </div>
 
       <!-- Honeypot field - hidden from users -->
@@ -316,7 +445,7 @@ watch(() => props.preselectedService, (newVal) => {
       <button
         type="submit"
         :disabled="isSubmitting"
-        class="w-full bg-[#8FE3B8] text-white py-4 px-6 rounded-lg font-semibold text-base hover:bg-[#1f9d63] transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#8FE3B8] focus:outline-none focus:ring-2 focus:ring-[#8FE3B8] focus:ring-offset-2 min-h-[48px] touch-manipulation"
+        class="w-full bg-[#1f9d63] text-white py-4 px-6 rounded-xl font-semibold text-base hover:bg-[#178a54] transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#1f9d63] focus:outline-none focus:ring-2 focus:ring-[#1f9d63] focus:ring-offset-2 min-h-[48px] touch-manipulation shadow-sm shadow-[#1f9d63]/20"
       >
         <span v-if="isSubmitting" class="flex items-center justify-center gap-2">
           <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -327,6 +456,7 @@ watch(() => props.preselectedService, (newVal) => {
         </span>
         <span v-else>Book Appointment</span>
       </button>
+      <p class="text-center text-xs text-gray-400">We'll confirm your booking by email within 24 hours.</p>
     </form>
   </div>
 
@@ -352,27 +482,24 @@ watch(() => props.preselectedService, (newVal) => {
           </svg>
         </button>
 
-        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mx-auto mb-5">
-          <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="flex items-center justify-center w-20 h-20 rounded-full bg-[#e6faf6] mx-auto mb-5">
+          <svg class="w-10 h-10 text-[#1f9d63]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
           </svg>
         </div>
 
-        <h3 class="text-xl font-bold text-gray-800 mb-2">Thank You So Much! 🙏</h3>
-        <p class="text-gray-500 text-sm leading-relaxed mb-1">
-          Your appointment request has been received successfully.
-        </p>
+        <h3 class="font-display text-xl font-bold text-gray-800 mb-2">Thank You So Much! 🙏</h3>
         <p class="text-gray-500 text-sm leading-relaxed mb-6">
-          We truly appreciate you choosing our service. Our team will review your request and get in touch with you shortly to confirm your booking.
+          Your appointment request is in. We truly appreciate you choosing Toothsy — our team will review it and reach out shortly to confirm your booking.
         </p>
 
-        <div class="bg-green-50 border border-green-100 rounded-xl px-4 py-3 mb-6 text-sm text-green-700">
+        <div class="bg-[#e6faf6] border border-[#d1fae5] rounded-xl px-4 py-3 mb-6 text-sm text-[#1f9d63]">
           📩 Please check your email for a confirmation message.
         </div>
 
         <button
           @click="closePopup"
-          class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-xl transition-colors min-h-[48px] touch-manipulation"
+          class="w-full bg-[#1f9d63] hover:bg-[#178a54] text-white font-semibold py-3 rounded-xl transition-colors min-h-[48px] touch-manipulation"
         >
           Done, Got It!
         </button>
@@ -399,7 +526,7 @@ watch(() => props.preselectedService, (newVal) => {
           </svg>
         </div>
 
-        <h3 class="text-xl font-bold text-gray-800 mb-2">Oops, Something Went Wrong</h3>
+        <h3 class="font-display text-xl font-bold text-gray-800 mb-2">Oops, Something Went Wrong</h3>
         <p class="text-gray-500 text-sm leading-relaxed mb-6">
           We're sorry for the inconvenience. Your request could not be sent at this time. Please check your internet connection and try again, or contact us directly.
         </p>
@@ -442,7 +569,7 @@ watch(() => props.preselectedService, (newVal) => {
   transition: transform 0.3s ease;
 }
 
-/* iOS Safari date/time input styling */
+/* iOS Safari date/time input styling - tint the native calendar icon brand green */
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
@@ -465,13 +592,12 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-/* Better select styling on iOS */
+/* Custom chevron for selects, positioned to clear the pr-11 padding */
 select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 12px center;
+  background-position: right 14px center;
   background-size: 20px;
-  padding-right: 44px;
 }
 
 /* Ensure touch targets are at least 44x44px */
@@ -491,7 +617,7 @@ textarea {
 
 /* Focus visible for accessibility */
 :focus-visible {
-  outline: 2px solid #8FE3B8;
+  outline: 2px solid #1f9d63;
   outline-offset: 2px;
 }
 
@@ -505,7 +631,14 @@ input[autocomplete="off"]::-webkit-contacts-auto-fill-button,
 input[autocomplete="off"]::-webkit-credentials-auto-fill-button {
   display: none;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.body-font {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+}
 </style>
-
-
-

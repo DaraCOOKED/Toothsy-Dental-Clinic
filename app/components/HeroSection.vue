@@ -34,7 +34,7 @@
         ref="headingRef"
         class="text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight will-change-transform "
       >
-        {{ title }}<span v-if="highlight" class="text-[#8FE3B8]"> {{ highlight }}</span>
+        {{ title }} <span v-if="highlight" class="text-[#8FE3B8]"> {{ highlight }}</span>
       </h1>
       <p
         ref="subRef"

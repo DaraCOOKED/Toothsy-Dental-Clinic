@@ -181,9 +181,7 @@
         class="relative transition-all duration-700 ease-out"
         :class="timelineVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
       >
-        <!-- DOT ANCHOR: this div owns ALL static centering (left-1/2, top-1/2, -translate-1/2)
-             and its classes are NEVER touched by the parallax loop. The loop only sets
-             `transform` on the inner span below, so it can't ever cancel out the centering. -->
+
         <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
           <span
             :ref="(el) => setStoryDotRef(el, i)"
@@ -192,11 +190,6 @@
             <span class="dot-pulse absolute inset-0 rounded-full bg-[#1f9d63] ring-4 ring-[#EFF8FC]"></span>
           </span>
         </div>
-
-        <!-- LABEL ANCHOR (odd items, above the line): same pattern — this div does the
-             static left-1/2 centering + width + text-align, untouched by JS. The parallax
-             transform lands on the inner div only.
-             Reading top-to-bottom: desc, title, year (year closest to the dot). -->
         <div
           v-if="i % 2 === 1"
           class="absolute left-1/2 -translate-x-1/2 bottom-[calc(50%+24px)] w-[230px] text-center"
@@ -287,14 +280,15 @@
       </p>
 
       <div class="relative max-w-3xl mx-auto rounded-[2.5rem] overflow-hidden h-[260px] md:h-[320px]">
-  <img
-    :src="ctaImages[currentCtaIndex].src"
-    :alt="ctaImages[currentCtaIndex].alt"
-    class="absolute inset-0 w-full h-[140%] -top-[20%] object-cover transition-opacity duration-500"
-  />
-
- 
-</div>
+        <Transition name="cta-fade">
+          <img
+            :key="ctaImages[currentCtaIndex].src"
+            :src="ctaImages[currentCtaIndex].src"
+            :alt="ctaImages[currentCtaIndex].alt"
+            class="absolute inset-0 w-full h-[140%] -top-[20%] object-cover"
+          />
+        </Transition>
+      </div>
 
       <NuxtLink
         to="/book-appointment"
@@ -324,19 +318,6 @@ const ctaImages = [
 ];
 
 const currentCtaIndex = ref(0);
-
-let interval;
-
-onMounted(() => {
-  interval = setInterval(() => {
-    currentCtaIndex.value =
-      (currentCtaIndex.value + 1) % ctaImages.length;
-  }, 3000); // Change every 2 seconds
-});
-
-onBeforeUnmount(() => {
-  clearInterval(interval);
-});
 
 /* ---------- content ---------- */
 const stats = [
@@ -441,7 +422,7 @@ const team = [
   { name: 'Dr. Sornn Rithornu', role: 'Prosthodontics', img: '/team/dr-3.png', alt: 'Dr. Vibol Heng, Family and Pediatric Dentistry specialist' },
 ]
 
-
+// Single source of truth for the CTA slideshow timer.
 let ctaSlideInterval = null
 
 function setupCtaSlideshow() {
@@ -779,8 +760,24 @@ onBeforeUnmount(() => {
   50% { box-shadow: 0 0 0 7px rgba(31, 157, 99, 0); }
 }
 
+/* CTA slideshow crossfade.
+   The <img> keeps `absolute inset-0` at all times (it's a static class on the element
+   itself, not something Vue toggles), so the outgoing and incoming <img> nodes stack
+   perfectly on top of one another inside the `overflow-hidden` wrapper. Vue's default
+   <Transition> mode runs enter and leave at the same time — exactly what a crossfade
+   needs — so we just animate opacity on both. */
+.cta-fade-enter-active,
+.cta-fade-leave-active {
+  transition: opacity 0.9s ease;
+}
+.cta-fade-enter-from,
+.cta-fade-leave-to {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-about-enter > * { animation: none; opacity: 1; transform: none; }
   .badge-float, .cta-icon-float, .dot-pulse { animation: none; }
+  .cta-fade-enter-active, .cta-fade-leave-active { transition: none; }
 }
 </style>

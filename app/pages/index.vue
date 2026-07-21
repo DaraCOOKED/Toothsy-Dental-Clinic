@@ -97,8 +97,9 @@
     <div
       v-for="svc in servicesPreview"
       :key="svc.title"
-      class="rounded-[24px] overflow-hidden transition-transform duration-200 hover:-translate-y-1"
+      class="rounded-[24px] overflow-hidden transition-transform duration-200 hover:-translate-y-1 cursor-pointer"
       :class="svc.bg"
+      @click="openServiceModal(svc)"
     >
       <div class="w-full h-[168px] overflow-hidden" :class="svc.thumbBg">
         <img
@@ -132,6 +133,11 @@
       class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
     >Book an appointment</NuxtLink>
   </div>
+
+  <ServiceDetailModal
+    v-model:open="isModalOpen"
+    :service="selectedService"
+  />
 </section>
 
 
@@ -155,9 +161,6 @@
     </p>
   </div>
 
-  <!-- Desktop/tablet: horizontal line, dot per item, labels alternating above/below.
-       storyVisualRef gets a mouse-driven perspective tilt on top of the per-item
-       scroll-parallax that each dot/label drives independently in tick(). -->
   <div
     ref="storyVisualRef"
     class="relative hidden md:block h-[300px] will-change-transform"
@@ -220,8 +223,6 @@
     </div>
   </div>
 
-  <!-- Mobile: the horizontal layout doesn't have room to breathe on narrow screens,
-       so it falls back to the original simple vertical list (no parallax needed here) -->
   <div class="md:hidden space-y-7">
     <div
       v-for="item in storyItems"
@@ -286,17 +287,14 @@
       </p>
 
       <div class="relative max-w-3xl mx-auto rounded-[2.5rem] overflow-hidden h-[260px] md:h-[320px]">
-        <img
-          ref="ctaImgRef"
-          class="absolute inset-0 w-full h-[140%] -top-[20%] object-cover will-change-transform"
-          src="/frontmain.jpg"
-          alt="Inside the Toothsy clinic"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
-        <div ref="ctaIconRef" class="absolute top-6 right-6 md:top-8 md:right-10 will-change-transform">
-          
-        </div>
-      </div>
+  <img
+    :src="ctaImages[currentCtaIndex].src"
+    :alt="ctaImages[currentCtaIndex].alt"
+    class="absolute inset-0 w-full h-[140%] -top-[20%] object-cover transition-opacity duration-500"
+  />
+
+ 
+</div>
 
       <NuxtLink
         to="/book-appointment"
@@ -309,6 +307,37 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onBeforeUnmount } from "vue";
+const ctaImages = [
+  {
+    src: "frontmain.jpg",
+    alt: "CTA Image 1",
+  },
+  {
+    src: "imgsilde1.jpg",
+    alt: "CTA Image 2",
+  },
+  {
+    src: "imgsilde2.jpg",
+    alt: "CTA Image 3",
+  },
+];
+
+const currentCtaIndex = ref(0);
+
+let interval;
+
+onMounted(() => {
+  interval = setInterval(() => {
+    currentCtaIndex.value =
+      (currentCtaIndex.value + 1) % ctaImages.length;
+  }, 3000); // Change every 2 seconds
+});
+
+onBeforeUnmount(() => {
+  clearInterval(interval);
+});
+
 /* ---------- content ---------- */
 const stats = [
   { value: 15, suffix: '+', label: 'Years in practice' },
@@ -373,11 +402,68 @@ const values = [
   }
 ]
 
+const servicesPreview = [
+  {
+    badge: 'General', 
+    bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
+    title: 'Tooth Cleaning',
+    desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
+    price: 'From $25',
+    image: '/clean-teeth.jpeg',
+    includes: ['Full examination', 'Scale and polish', 'Oral health check'],
+    link: true
+  },
+  {
+    badge: 'Cosmetic',
+    bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
+    title: 'Teeth Whitening',
+    desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
+    price: 'From $80',
+    image: '/teeth-whitening.webp',
+    includes: ['Shade consultation', 'Single-visit whitening', 'Aftercare tips'],
+    link: true
+  },
+  {
+    badge: 'Restorative', 
+    bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
+    title: 'Dental Filling',
+    desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
+    price: 'From $60',
+    image: '/dental-filling.jpg',
+    includes: ['Decay removal', 'Tooth-coloured composite', 'Bite check'],
+    link: true
+  },
+]
+
 const team = [
   { name: 'Dr. Sornn Rithean', role: 'General Dentist', img: '/team/dr-1.png', alt: 'Dr. SOKThea Liyo, Orthodontics specialist' },
   { name: 'Dr. Chheng Mesa', role: 'Specialist Orthodontic', img: '/team/dr-2.png', alt: 'Dr. Channary Pich, Endodontics and Root Canal specialist' },
   { name: 'Dr. Sornn Rithornu', role: 'Prosthodontics', img: '/team/dr-3.png', alt: 'Dr. Vibol Heng, Family and Pediatric Dentistry specialist' },
 ]
+
+
+let ctaSlideInterval = null
+
+function setupCtaSlideshow() {
+  ctaSlideInterval = setInterval(() => {
+    currentCtaIndex.value = (currentCtaIndex.value + 1) % ctaImages.length
+  }, 5000)
+}
+
+function stopCtaSlideshow() {
+  if (ctaSlideInterval) {
+    clearInterval(ctaSlideInterval)
+    ctaSlideInterval = null
+  }
+}
+
+// State for the click-to-open popup on the homepage cards above
+const isModalOpen = ref(false)
+const selectedService = ref(null)
+function openServiceModal(svc) {
+  selectedService.value = svc
+  isModalOpen.value = true
+}
 
 let prefersReducedMotion = false
 
@@ -637,6 +723,7 @@ onMounted(() => {
   nextTick(() => {
     setupReveal()
     setupParallax()
+    setupCtaSlideshow()
     if (!prefersReducedMotion) {
       rafId = requestAnimationFrame(tick)
     }
@@ -647,30 +734,8 @@ onBeforeUnmount(() => {
   if (rafId) cancelAnimationFrame(rafId)
   if (statsRafId) cancelAnimationFrame(statsRafId)
   if (observer) observer.disconnect()
+  stopCtaSlideshow()
 })
-const servicesPreview = [
-  {
-    badge: 'General', price: 'From $25',
-    bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
-    title: 'Checkup & clean',
-    desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
-    image: '/clean-teeth.jpeg'
-  },
-  {
-    badge: 'Cosmetic', price: 'From $80',
-    bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
-    title: 'Teeth whitening',
-    desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
-    image: '/teeth-whitening.webp'
-  },
-  {
-    badge: 'Restorative', price: 'From $60',
-    bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
-    title: 'Fillings',
-    desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
-    image: '/dental-filling.jpg'
-  },
-]
 </script>
 
 <style scoped>

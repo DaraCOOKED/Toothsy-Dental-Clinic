@@ -6,7 +6,13 @@
   >
     <!-- Map -->
     <div class="relative rounded-2xl overflow-hidden border border-[#bfe6da] h-[220px] mb-5">
-    <iframe class="w-[100%]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3907.6264222235827!2d104.9139173!3d11.6499473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109534d095a86f5%3A0x76f62d7f485de94!2sToothsy%20Dental%20clinic!5e0!3m2!1sen!2skh!4v1783390807731!5m2!1sen!2skh" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <iframe
+        class="w-[100%]"
+        :src="contact.mapEmbedUrl"
+        width="600" height="450" style="border:0;"
+        allowfullscreen="" loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
 
       <div class="absolute bottom-3 left-3 right-3 bg-white rounded-xl shadow-md px-4 py-3 flex items-center gap-3">
         <span class="flex-shrink-0 w-9 h-9 rounded-full bg-[#1f9d63] flex items-center justify-center">
@@ -17,7 +23,7 @@
         </span>
         <div>
           <p class="text-sm font-bold text-[#111827]">Office Address</p>
-          <p class="text-[0.78rem] text-stone-500">Street 271, Phnom Penh, Cambodia</p>
+          <p class="text-[0.78rem] text-stone-500">{{ contact.address }}</p>
         </div>
       </div>
     </div>
@@ -38,16 +44,7 @@
     <div>
       <p class="text-sm font-bold text-[#111827] mb-3">Follow Us</p>
       <div class="flex gap-3">
-        <a
-          v-for="s in socials"
-          :key="s.name"
-          :href="s.href"
-          target="_blank"
-          rel="noopener noreferrer"
-          :aria-label="s.name"
-          class="w-10 h-10 rounded-full bg-white border border-stone-200 text-[#111827] flex items-center justify-center hover:bg-[#1f9d63] hover:text-white hover:border-[#1f9d63] transition-colors duration-200"
-          v-html="s.svg"
-        ></a>
+        <a v-for="s in socials" :key="s.name" :href="s.href" target="_blank" rel="noopener noreferrer" :aria-label="s.name" class="w-10 h-10 rounded-full bg-white border border-stone-200 text-[#111827] flex items-center justify-center hover:bg-[#1f9d63] hover:text-white hover:border-[#1f9d63] transition-colors duration-200" v-html="s.svg"></a>
       </div>
     </div>
   </div>
@@ -58,36 +55,47 @@ const panelRef = ref(null)
 const visible = ref(false)
 let observer = null
 
-const infoRows = [
-  {
-    label: 'Office Timings',
-    value: 'Monday – Saturday: 8am – 6pm',
-    value2: 'Sunday: Closed',
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>`
-  },
-  {
-    label: 'Email Address',
-    value: 'hello@toothsy.com',
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>`
-  },
-  {
-    label: 'Phone Number',
-    value: '+855 12 345 6789',
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.11-1.11a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`
-  },
-  {
-    label: 'Live Chat / Telegram',
-    value: '@toothsyclinic',
-    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`
-  }
-]
+const { find } = useStrapi()
 
-const socials = [
-  { name: 'Facebook', href: '#', svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h-3a4 4 0 0 0-4 4v3H6v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>` },
-  { name: 'Instagram', href: '#', svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>` },
-  { name: 'Telegram', href: '#', svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>` },
-  { name: 'TikTok', href: '#', svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c0 2.5 2 4.5 4.5 4.5"/></svg>` }
-]
+const { data } = await useAsyncData('contact-info', () =>
+  find('contact-info')
+)
+
+const contact = computed(() => data.value?.data ?? {})
+
+const infoRows = computed(() => {
+  const hoursLines = (contact.value.hours ?? '').split('\n')
+  return [
+    {
+      label: 'Office Timings',
+      value: hoursLines[0] ?? '',
+      value2: hoursLines[1] ?? '',
+      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>`
+    },
+    {
+      label: 'Email Address',
+      value: contact.value.email ?? '',
+      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>`
+    },
+    {
+      label: 'Phone Number',
+      value: contact.value.phone ?? '',
+      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.11-1.11a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`
+    },
+    {
+      label: 'Live Chat / Telegram',
+      value: contact.value.telegramHandle ?? '',
+      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`
+    }
+  ]
+})
+
+const socials = computed(() => [
+  { name: 'Facebook', href: contact.value.facebookUrl || '#', svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h-3a4 4 0 0 0-4 4v3H6v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>` },
+  { name: 'Instagram', href: contact.value.instagramUrl || '#', svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>` },
+  { name: 'Telegram', href: contact.value.telegramUrl || '#', svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>` },
+  { name: 'TikTok', href: contact.value.tiktokUrl || '#', svg: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c0 2.5 2 4.5 4.5 4.5"/></svg>` }
+])
 
 onMounted(() => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches

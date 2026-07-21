@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
 
-  modules: ["@nuxtjs/strapi"],
+
 
   css: [
     "./app/assets/css/main.css",
@@ -21,19 +21,14 @@ export default defineNuxtConfig({
     },
   },
 
-  runtimeConfig: {
-    public: {
-      emailjsServiceId: "service_09csxvs",
-      emailjsTemplateId: "template_kh59r91",
-      emailjsPublicKey: "T8FLPsFfvUtRLmlaa",
-    },
+runtimeConfig: {
+  public: {
+    strapiUrl: process.env.STRAPI_URL || "http://localhost:1337",
+    emailjsServiceId: "service_09csxvs",
+    emailjsTemplateId: "template_kh59r91",
+    emailjsPublicKey: "T8FLPsFfvUtRLmlaa",
   },
-
-  strapi: {
-    url: process.env.STRAPI_URL || "http://localhost:1337",
-    prefix: "/api",
-    version: "v5",
-  },
+},
 
   app: {
     baseURL: "/toothsy-detal-clinic/",

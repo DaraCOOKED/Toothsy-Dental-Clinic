@@ -90,6 +90,15 @@ export const services = [
     category: 'Alignment',
     includes: ['Consultation and Exam', 'Mouth Impressions', 'Bite Registration'],
   },
+  {
+    id: 'teeth-whitening',
+    title: 'Teeth Whitening',
+    desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
+    link: '/book-appointment',
+    image: '/teeth-whitening.webp',
+    category: 'Cosmetic',
+    includes: ['Shade consultation', 'Single-visit whitening', 'Aftercare tips'],
+  },
 ]
 
 // Helper to get service titles for dropdown

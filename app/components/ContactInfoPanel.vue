@@ -17,7 +17,7 @@
         </span>
         <div>
           <p class="text-sm font-bold text-[#111827]">Office Address</p>
-          <p class="text-[0.78rem] text-stone-500">Street 271, Phnom Penh, Cambodia</p>
+          <p class="text-[0.78rem] text-stone-500">Sangkat Prek leap, khan Chroy chongva, Phnom Penh, Cambodia.</p>
         </div>
       </div>
     </div>
@@ -62,23 +62,23 @@ let observer = null
 const infoRows = [
   {
     label: 'Office Timings',
-    value: 'Monday – Saturday: 8am – 6pm',
-    value2: 'Sunday: Closed',
+    value: 'Monday – Saturday: 9am – 7pm',
+    value2: 'Saturday: 9am – 4pm',
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>`
   },
   {
     label: 'Email Address',
-    value: 'hello@toothsy.com',
+    value: ' ritheanin85@gmail.com',
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>`
   },
   {
     label: 'Phone Number',
-    value: '+855 12 345 6789',
+    value: '+855 858 899 56',
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.11-1.11a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`
   },
   {
     label: 'Live Chat / Telegram',
-    value: '@toothsyclinic',
+    value: '@TheaninTSDC',
     icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`
   }
 ]

@@ -113,7 +113,6 @@
             >
               +855 858 899 56
             </a>
-            <p class="text-xs text-stone-500 mt-1">TODO: replace with real phone</p>
           </div>
 
           <!-- Address -->
@@ -124,7 +123,6 @@
             <address class="not-italic text-[#354D24] text-sm md:text-base leading-relaxed">
               No.F02, street GS, Sangkat Prek leap, khan Chroy chongva, Phnom Penh, Cambodia.
             </address>
-            <p class="text-xs text-stone-500 mt-1">TODO: replace with real address</p>
           </div>
 
           <!-- Opening Hours -->
@@ -139,10 +137,9 @@
               </div>
               <div class="flex justify-center md:justify-end gap-4">
                 <dt class="font-medium">Sunday</dt>
-                <dd>9:00 Am – 7:00 PM</dd>
+                <dd>9:00 Am – 4:00 PM</dd>
               </div>
             </dl>
-            <p class="text-xs text-stone-500 mt-1 text-center md:text-right">TODO: verify hours</p>
           </div>
         </div>
 

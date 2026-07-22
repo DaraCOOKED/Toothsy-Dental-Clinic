@@ -285,7 +285,7 @@
             :key="ctaImages[currentCtaIndex].src"
             :src="ctaImages[currentCtaIndex].src"
             :alt="ctaImages[currentCtaIndex].alt"
-            class="absolute inset-0 w-full h-[140%] -top-[20%] object-cover"
+            class="absolute inset-0 w-full h-[140%] -top-[20%] object-fill"
           />
         </Transition>
       </div>

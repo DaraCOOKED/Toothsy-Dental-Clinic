@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, onMounted, watch } from "vue";
+import { reactive, ref, computed, onMounted, onBeforeUnmount, watch } from "vue";
 import emailjs from "@emailjs/browser";
 import { serviceTitles } from '~/composables/useServices'
 
@@ -161,8 +161,203 @@ const closePopup = () => {
   popup.show = false;
 };
 
-// Set min date to today for date input
-const minDate = new Date().toISOString().split("T")[0];
+// Shared "today at midnight" reference the calendar uses to grey out past
+// days and highlight today. (validateForm below computes its own fresh
+// version at submit time, which matters more - this one is just for display.)
+const startOfToday = new Date();
+startOfToday.setHours(0, 0, 0, 0);
+
+// --- Custom date picker (replaces the native <input type="date">) ---
+// A button that opens a small calendar dropdown. Past days are rendered
+// disabled and unclickable, so there's no way to pick one in the first
+// place (rather than allowing it and only catching it on submit).
+const showDateDropdown = ref(false);
+const dateSelectRef = ref(null); // wraps the toggle button + panel, used for click-outside detection
+
+// Which month the calendar is currently displaying - defaults to this month
+const viewYear = ref(startOfToday.getFullYear());
+const viewMonth = ref(startOfToday.getMonth()); // 0-indexed (0 = January)
+
+const monthLabel = computed(() =>
+  new Date(viewYear.value, viewMonth.value, 1).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  })
+);
+
+// Can't navigate to a month before the current one - nothing bookable there
+const isViewingCurrentMonth = computed(
+  () => viewYear.value === startOfToday.getFullYear() && viewMonth.value === startOfToday.getMonth()
+);
+
+function prevMonth() {
+  if (isViewingCurrentMonth.value) return;
+  if (viewMonth.value === 0) {
+    viewMonth.value = 11;
+    viewYear.value -= 1;
+  } else {
+    viewMonth.value -= 1;
+  }
+}
+
+function nextMonth() {
+  if (viewMonth.value === 11) {
+    viewMonth.value = 0;
+    viewYear.value += 1;
+  } else {
+    viewMonth.value += 1;
+  }
+}
+
+// Builds the grid for the currently viewed month: `null` for the leading
+// blank cells (so day 1 lines up under the right weekday), then one entry
+// per day with the info the template needs to style/disable it.
+const calendarDays = computed(() => {
+  const firstOfMonth = new Date(viewYear.value, viewMonth.value, 1);
+  const leadingBlanks = firstOfMonth.getDay(); // 0 = Sunday
+  const daysInMonth = new Date(viewYear.value, viewMonth.value + 1, 0).getDate();
+
+  const cells = Array(leadingBlanks).fill(null);
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateObj = new Date(viewYear.value, viewMonth.value, d);
+    cells.push({
+      day: d,
+      value: `${viewYear.value}-${String(viewMonth.value + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`,
+      isPast: dateObj < startOfToday,
+      isToday: dateObj.getTime() === startOfToday.getTime(),
+    });
+  }
+
+  return cells;
+});
+
+function toggleDateDropdown() {
+  const next = !showDateDropdown.value;
+  showDateDropdown.value = next;
+  if (next) showTimeDropdown.value = false; // only one dropdown open at a time
+}
+
+function selectDate(cell) {
+  if (!cell || cell.isPast) return;
+  form.date = cell.value;
+  errors.date = "";
+  showDateDropdown.value = false;
+}
+
+// Text shown on the toggle button itself
+const selectedDateLabel = computed(() => {
+  if (!form.date) return "Select Date";
+  const [year, month, day] = form.date.split("-").map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+});
+
+// --- Dynamic time slots based on clinic hours ---
+// Mon-Sat: 9:00 AM - 7:00 PM | Sunday: 9:00 AM - 4:00 PM
+// Lunch break (no bookable slots) 11:00 AM - 1:00 PM every day.
+
+// Builds {value, label} slots in 30-min steps between two times.
+// startMinutes/endMinutes are minutes-since-midnight; end is EXCLUSIVE,
+// so the last slot generated always starts 30 min before endMinutes
+// (e.g. a 19:00 close produces a last slot of 18:30).
+function generateSlots(startMinutes, endMinutes) {
+  const slots = [];
+  for (let mins = startMinutes; mins < endMinutes; mins += 30) {
+    const h24 = Math.floor(mins / 60);
+    const m = mins % 60;
+    const value = `${String(h24).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+    const period = h24 < 12 ? "AM" : "PM";
+    const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+    const label = `${h12}:${String(m).padStart(2, "0")} ${period}`;
+    slots.push({ value, label });
+  }
+  return slots;
+}
+
+// Recomputes Morning/Afternoon slot groups whenever the picked date changes.
+const timeSlots = computed(() => {
+  if (!form.date) return { morning: [], afternoon: [] };
+
+  // Parse "YYYY-MM-DD" into local date parts manually. Using
+  // `new Date(form.date)` directly parses it as UTC midnight, which can
+  // roll the day forward/backward depending on the visitor's timezone
+  // offset - this keeps the day-of-week check accurate everywhere.
+  const [year, month, day] = form.date.split("-").map(Number);
+  const selected = new Date(year, month - 1, day);
+  const isSunday = selected.getDay() === 0; // 0 = Sunday
+
+  const closingMinutes = (isSunday ? 16 : 19) * 60; // 4 PM Sunday, 7 PM Mon-Sat
+
+  return {
+    morning: generateSlots(9 * 60, 11 * 60 + 30), // 9:00 - 11:00 AM
+    afternoon: generateSlots(13 * 60, closingMinutes), // 1:00 PM - closing
+  };
+});
+
+// If a previously picked time is no longer valid for the newly picked date
+// (e.g. they had 6:30 PM selected then switched to a Sunday), clear it so
+// they don't accidentally submit a time the clinic isn't open for.
+watch(
+  () => form.date,
+  () => {
+    const stillValid = [...timeSlots.value.morning, ...timeSlots.value.afternoon].some(
+      (slot) => slot.value === form.time
+    );
+    if (!stillValid) form.time = "";
+    showTimeDropdown.value = false;
+  }
+);
+
+// --- Custom time picker (replaces the long scrolling native <select>) ---
+// A button that toggles a small dropdown panel showing Morning/Afternoon
+// slots as a button grid instead of one long vertical list, so there's much
+// less scrolling to find a slot.
+const showTimeDropdown = ref(false);
+const timeSelectRef = ref(null); // wraps the toggle button + panel, used for click-outside detection
+
+function toggleTimeDropdown() {
+  const next = !showTimeDropdown.value;
+  showTimeDropdown.value = next;
+  if (next) showDateDropdown.value = false; // only one dropdown open at a time
+}
+
+function selectTime(value) {
+  form.time = value;
+  errors.time = "";
+  showTimeDropdown.value = false;
+}
+
+// Text shown on the toggle button itself
+const selectedTimeLabel = computed(() => {
+  if (!form.date) return "Select a date first";
+  if (!form.time) return "Select Time";
+  const all = [...timeSlots.value.morning, ...timeSlots.value.afternoon];
+  const match = all.find((slot) => slot.value === form.time);
+  return match ? match.label : "Select Time";
+});
+
+// Closes whichever dropdown (date or time) is open when a click lands
+// outside both of them
+function handleClickOutside(event) {
+  if (dateSelectRef.value && !dateSelectRef.value.contains(event.target)) {
+    showDateDropdown.value = false;
+  }
+  if (timeSelectRef.value && !timeSelectRef.value.contains(event.target)) {
+    showTimeDropdown.value = false;
+  }
+}
+
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("click", handleClickOutside);
+});
 </script>
 
 <template>
@@ -278,12 +473,12 @@ const minDate = new Date().toISOString().split("T")[0];
 
       <!-- Date + Time side by side on larger screens -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
+        <div ref="dateSelectRef">
           <label for="date" class="block text-sm font-medium text-gray-700 mb-1.5">
             Preferred Date <span class="text-red-400">*</span>
           </label>
           <div class="relative">
-            <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+            <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400 z-10">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                 <line x1="16" y1="2" x2="16" y2="6" />
@@ -291,19 +486,90 @@ const minDate = new Date().toISOString().split("T")[0];
                 <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
             </span>
-            <input
+            <!-- Toggle button stands in for the old native <input type="date"> -->
+            <button
               id="date"
-              v-model="form.date"
-              type="date"
-              :min="minDate"
-              class="w-full border border-gray-300 rounded-xl pl-12 pr-4 py-3.5 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1f9d63]/25 focus:border-[#1f9d63] transition-all appearance-none"
+              type="button"
+              @click="toggleDateDropdown"
+              class="w-full flex items-center justify-between border border-gray-300 rounded-xl pl-12 pr-4 py-3.5 text-base text-left focus:outline-none focus:ring-2 focus:ring-[#1f9d63]/25 focus:border-[#1f9d63] transition-all bg-white"
               :class="{ 'border-red-400 focus:ring-red-100 focus:border-red-400': errors.date }"
-              required
-              autocomplete="off"
               :aria-invalid="!!errors.date"
               :aria-describedby="errors.date ? 'date-error' : undefined"
-              @change="errors.date = ''"
-            />
+              aria-haspopup="dialog"
+              :aria-expanded="showDateDropdown"
+            >
+              <span :class="form.date ? 'text-gray-900' : 'text-gray-400'">{{ selectedDateLabel }}</span>
+              <svg
+                class="w-4 h-4 text-gray-400 flex-shrink-0 transition-transform"
+                :class="{ 'rotate-180': showDateDropdown }"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"
+              >
+                <polyline points="6,9 12,15 18,9" />
+              </svg>
+            </button>
+
+            <!-- Calendar dropdown: past days are rendered disabled so they
+                 simply can't be clicked, rather than being pickable and
+                 only caught afterwards -->
+            <div
+              v-if="showDateDropdown"
+              class="absolute z-20 mt-2 w-72 max-w-[90vw] bg-white border border-gray-200 rounded-xl shadow-lg p-4"
+            >
+              <div class="flex items-center justify-between mb-3">
+                <button
+                  type="button"
+                  @click="prevMonth"
+                  :disabled="isViewingCurrentMonth"
+                  class="p-1.5 rounded-lg text-gray-500 hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+                  aria-label="Previous month"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                    <polyline points="15,18 9,12 15,6" />
+                  </svg>
+                </button>
+                <p class="text-sm font-semibold text-gray-800">{{ monthLabel }}</p>
+                <button
+                  type="button"
+                  @click="nextMonth"
+                  class="p-1.5 rounded-lg text-gray-500 hover:bg-gray-100"
+                  aria-label="Next month"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                    <polyline points="9,18 15,12 9,6" />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="grid grid-cols-7 gap-1 mb-1">
+                <span v-for="d in ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']" :key="d" class="text-[11px] font-medium text-gray-400 text-center py-1">
+                  {{ d }}
+                </span>
+              </div>
+
+              <div class="grid grid-cols-7 gap-1">
+                <template v-for="(cell, idx) in calendarDays" :key="idx">
+                  <span v-if="!cell"></span>
+                  <button
+                    v-else
+                    type="button"
+                    :disabled="cell.isPast"
+                    @click="selectDate(cell)"
+                    class="text-sm py-2 rounded-lg transition-colors"
+                    :class="[
+                      cell.isPast ? 'text-gray-300 cursor-not-allowed' : 'text-gray-700 hover:bg-[#e6faf6] cursor-pointer',
+                      form.date === cell.value ? 'bg-[#1f9d63] text-white hover:bg-[#1f9d63]' : '',
+                      cell.isToday && form.date !== cell.value ? 'ring-1 ring-[#1f9d63] ring-inset' : '',
+                    ]"
+                  >
+                    {{ cell.day }}
+                  </button>
+                </template>
+              </div>
+
+              <p class="mt-3 pt-3 border-t border-gray-100 text-[11px] text-gray-400 text-center">
+                Open Mon–Sat 9AM–7PM · Sun 9AM–4PM
+              </p>
+            </div>
           </div>
           <p v-if="errors.date" id="date-error" class="mt-1.5 flex items-center gap-1 text-sm text-red-500" role="alert">
             <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -313,7 +579,7 @@ const minDate = new Date().toISOString().split("T")[0];
           </p>
         </div>
 
-        <div>
+        <div ref="timeSelectRef">
           <label for="time" class="block text-sm font-medium text-gray-700 mb-1.5">
             Preferred Time <span class="text-red-400">*</span>
           </label>
@@ -324,44 +590,78 @@ const minDate = new Date().toISOString().split("T")[0];
                 <polyline points="12,6 12,12 16,14" />
               </svg>
             </span>
-            <select
+            <!-- Toggle button stands in for the old native <select> -->
+            <button
               id="time"
-              v-model="form.time"
-              class="w-full border border-gray-300 rounded-xl pl-12 pr-11 py-3.5 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1f9d63]/25 focus:border-[#1f9d63] transition-all appearance-none bg-white cursor-pointer"
+              type="button"
+              :disabled="!form.date"
+              @click="toggleTimeDropdown"
+              class="w-full flex items-center justify-between border border-gray-300 rounded-xl pl-12 pr-4 py-3.5 text-base text-left focus:outline-none focus:ring-2 focus:ring-[#1f9d63]/25 focus:border-[#1f9d63] transition-all bg-white disabled:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-70"
               :class="{ 'border-red-400 focus:ring-red-100 focus:border-red-400': errors.time }"
-              required
               :aria-invalid="!!errors.time"
               :aria-describedby="errors.time ? 'time-error' : undefined"
-              @change="errors.time = ''"
+              aria-haspopup="listbox"
+              :aria-expanded="showTimeDropdown"
             >
-              <option value="">Select Time</option>
-              <optgroup label="Morning">
-                <option value="08:00">8:00 AM</option>
-                <option value="08:30">8:30 AM</option>
-                <option value="09:00">9:00 AM</option>
-                <option value="09:30">9:30 AM</option>
-                <option value="10:00">10:00 AM</option>
-                <option value="10:30">10:30 AM</option>
-                <option value="11:00">11:00 AM</option>
-                <option value="11:30">11:30 AM</option>
-              </optgroup>
-              <optgroup label="Afternoon">
-                <option value="12:00">12:00 PM</option>
-                <option value="12:30">12:30 PM</option>
-                <option value="13:00">1:00 PM</option>
-                <option value="13:30">1:30 PM</option>
-                <option value="14:00">2:00 PM</option>
-                <option value="14:30">2:30 PM</option>
-                <option value="15:00">3:00 PM</option>
-                <option value="15:30">3:30 PM</option>
-                <option value="16:00">4:00 PM</option>
-                <option value="16:30">4:30 PM</option>
-              </optgroup>
-              <optgroup label="Evening">
-                <option value="17:00">5:00 PM</option>
-                <option value="17:30">5:30 PM</option>
-              </optgroup>
-            </select>
+              <span :class="form.time ? 'text-gray-900' : 'text-gray-400'">{{ selectedTimeLabel }}</span>
+              <svg
+                class="w-4 h-4 text-gray-400 flex-shrink-0 transition-transform"
+                :class="{ 'rotate-180': showTimeDropdown }"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"
+              >
+                <polyline points="6,9 12,15 18,9" />
+              </svg>
+            </button>
+
+            <!-- Dropdown panel: slots laid out as a grid instead of one long
+                 scrolling list, grouped under Morning / Afternoon headers -->
+            <div
+              v-if="showTimeDropdown"
+              role="listbox"
+              class="absolute z-20 mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-lg p-3 max-h-72 overflow-y-auto"
+            >
+              <template v-if="timeSlots.morning.length || timeSlots.afternoon.length">
+                <div v-if="timeSlots.morning.length" class="mb-3">
+                  <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2 px-1">Morning</p>
+                  <div class="grid grid-cols-3 gap-2">
+                    <button
+                      v-for="slot in timeSlots.morning"
+                      :key="slot.value"
+                      type="button"
+                      role="option"
+                      :aria-selected="form.time === slot.value"
+                      @click="selectTime(slot.value)"
+                      class="text-sm py-2 rounded-lg border transition-colors"
+                      :class="form.time === slot.value
+                        ? 'bg-[#1f9d63] text-white border-[#1f9d63]'
+                        : 'border-gray-200 text-gray-700 hover:border-[#1f9d63] hover:bg-[#e6faf6]'"
+                    >
+                      {{ slot.label }}
+                    </button>
+                  </div>
+                </div>
+                <div v-if="timeSlots.afternoon.length">
+                  <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2 px-1">Afternoon</p>
+                  <div class="grid grid-cols-3 gap-2">
+                    <button
+                      v-for="slot in timeSlots.afternoon"
+                      :key="slot.value"
+                      type="button"
+                      role="option"
+                      :aria-selected="form.time === slot.value"
+                      @click="selectTime(slot.value)"
+                      class="text-sm py-2 rounded-lg border transition-colors"
+                      :class="form.time === slot.value
+                        ? 'bg-[#1f9d63] text-white border-[#1f9d63]'
+                        : 'border-gray-200 text-gray-700 hover:border-[#1f9d63] hover:bg-[#e6faf6]'"
+                    >
+                      {{ slot.label }}
+                    </button>
+                  </div>
+                </div>
+              </template>
+              <p v-else class="text-sm text-gray-400 text-center py-4">No slots available</p>
+            </div>
           </div>
           <p v-if="errors.time" id="time-error" class="mt-1.5 flex items-center gap-1 text-sm text-red-500" role="alert">
             <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">

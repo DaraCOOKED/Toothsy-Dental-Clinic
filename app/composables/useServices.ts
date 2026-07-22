@@ -84,7 +84,7 @@ export const services = [
   {
     id: 'denture',
     title: 'Denture',
-    desc: 'Removable or fixed prosthetic devices designed to replace missing teeth and surrounding tissues.',
+    desc: 'Dentures are custom-made, removable prosthetic devices designed to replace missing teeth. They restore chewing function, support facial muscles, and improve speech and appearance.',
     link: '/book-appointment',
     image: '/Denture.jpg',
     category: 'Alignment',

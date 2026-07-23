@@ -84,11 +84,20 @@ export const services = [
   {
     id: 'denture',
     title: 'Denture',
-    desc: 'Removable or fixed prosthetic devices designed to replace missing teeth and surrounding tissues.',
+    desc: 'Dentures are custom-made, removable prosthetic devices designed to replace missing teeth. They restore chewing function, support facial muscles, and improve speech and appearance.',
     link: '/book-appointment',
     image: '/Denture.jpg',
     category: 'Alignment',
     includes: ['Consultation and Exam', 'Mouth Impressions', 'Bite Registration'],
+  },
+  {
+    id: 'teeth-whitening',
+    title: 'Teeth Whitening',
+    desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
+    link: '/book-appointment',
+    image: '/teeth-whitening.webp',
+    category: 'Cosmetic',
+    includes: ['Shade consultation', 'Single-visit whitening', 'Aftercare tips'],
   },
 ]
 

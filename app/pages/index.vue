@@ -23,12 +23,10 @@
           About Toothsy
         </span>
         <h1 class="font-display text-[2.1rem] md:text-5xl lg:text-[3.1rem] font-bold leading-[1.1] tracking-tight">
-          A dental clinic built around<br class="hidden md:block"> how it feels to sit in the chair
+          Honest, Gentle and Modern Dentistry<br class="hidden md:block"> at Toothsy Dental Clinic
         </h1>
         <p class="mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
-          Toothsy started with one idea: checkups shouldn't be something you put off.
-          Every room, every appointment, and every dentist here is built around
-          making that true.
+          At Toothsy Dental Clinic, we believe every patient deserves honest advice, gentle treatment, and modern dental care. We take time to explain every procedure so you can make informed decisions with confidence.
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-4">
@@ -36,7 +34,7 @@
          
           <NuxtLink
             to="/book-appointment"
-            target="_blank"
+        
             rel="noopener noreferrer"
             class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
           >Book a Visit</NuxtLink>
@@ -97,8 +95,9 @@
     <div
       v-for="svc in servicesPreview"
       :key="svc.title"
-      class="rounded-[24px] overflow-hidden transition-transform duration-200 hover:-translate-y-1"
+      class="rounded-[24px] overflow-hidden transition-transform duration-200 hover:-translate-y-1 cursor-pointer"
       :class="svc.bg"
+      @click="openServiceModal(svc)"
     >
       <div class="w-full h-[168px] overflow-hidden" :class="svc.thumbBg">
         <img
@@ -128,10 +127,15 @@
     </NuxtLink>
     <NuxtLink
       to="/book-appointment"
-      target="_blank" rel="noopener noreferrer"
+      rel="noopener noreferrer"
       class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
     >Book an appointment</NuxtLink>
   </div>
+
+  <ServiceDetailModal
+    v-model:open="isModalOpen"
+    :service="selectedService"
+  />
 </section>
 
 
@@ -155,9 +159,6 @@
     </p>
   </div>
 
-  <!-- Desktop/tablet: horizontal line, dot per item, labels alternating above/below.
-       storyVisualRef gets a mouse-driven perspective tilt on top of the per-item
-       scroll-parallax that each dot/label drives independently in tick(). -->
   <div
     ref="storyVisualRef"
     class="relative hidden md:block h-[300px] will-change-transform"
@@ -178,9 +179,7 @@
         class="relative transition-all duration-700 ease-out"
         :class="timelineVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
       >
-        <!-- DOT ANCHOR: this div owns ALL static centering (left-1/2, top-1/2, -translate-1/2)
-             and its classes are NEVER touched by the parallax loop. The loop only sets
-             `transform` on the inner span below, so it can't ever cancel out the centering. -->
+
         <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
           <span
             :ref="(el) => setStoryDotRef(el, i)"
@@ -189,11 +188,6 @@
             <span class="dot-pulse absolute inset-0 rounded-full bg-[#1f9d63] ring-4 ring-[#EFF8FC]"></span>
           </span>
         </div>
-
-        <!-- LABEL ANCHOR (odd items, above the line): same pattern — this div does the
-             static left-1/2 centering + width + text-align, untouched by JS. The parallax
-             transform lands on the inner div only.
-             Reading top-to-bottom: desc, title, year (year closest to the dot). -->
         <div
           v-if="i % 2 === 1"
           class="absolute left-1/2 -translate-x-1/2 bottom-[calc(50%+24px)] w-[230px] text-center"
@@ -220,8 +214,6 @@
     </div>
   </div>
 
-  <!-- Mobile: the horizontal layout doesn't have room to breathe on narrow screens,
-       so it falls back to the original simple vertical list (no parallax needed here) -->
   <div class="md:hidden space-y-7">
     <div
       v-for="item in storyItems"
@@ -286,21 +278,18 @@
       </p>
 
       <div class="relative max-w-3xl mx-auto rounded-[2.5rem] overflow-hidden h-[260px] md:h-[320px]">
-        <img
-          ref="ctaImgRef"
-          class="absolute inset-0 w-full h-[140%] -top-[20%] object-cover will-change-transform"
-          src="/frontmain.jpg"
-          alt="Inside the Toothsy clinic"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
-        <div ref="ctaIconRef" class="absolute top-6 right-6 md:top-8 md:right-10 will-change-transform">
-          
-        </div>
+        <Transition name="cta-fade">
+          <img
+            :key="ctaImages[currentCtaIndex].src"
+            :src="ctaImages[currentCtaIndex].src"
+            :alt="ctaImages[currentCtaIndex].alt"
+            class="absolute inset-0 w-full h-[140%] -top-[20%] object-fill"
+          />
+        </Transition>
       </div>
 
       <NuxtLink
         to="/book-appointment"
-        target="_blank"
         rel="noopener noreferrer"
         class="inline-block mt-8 bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
       >Book an Appointment</NuxtLink>
@@ -310,6 +299,24 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onBeforeUnmount } from "vue";
+const ctaImages = [
+  {
+    src: "frontmain.jpg",
+    alt: "CTA Image 1",
+  },
+  {
+    src: "imgsilde1.jpg",
+    alt: "CTA Image 2",
+  },
+  {
+    src: "imgsilde2.jpg",
+    alt: "CTA Image 3",
+  },
+];
+
+const currentCtaIndex = ref(0);
+
 /* ---------- content ---------- */
 const stats = [
   { value: 15, suffix: '+', label: 'Years in practice' },
@@ -374,11 +381,65 @@ const values = [
   }
 ]
 
+const servicesPreview = [
+  {
+    badge: 'General', 
+    bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
+    title: 'Tooth Cleaning',
+    desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
+    image: '/clean-teeth.jpeg',
+    includes: ['Full examination', 'Scale and polish', 'Oral health check'],
+    link: true
+  },
+  {
+    badge: 'Cosmetic',
+    bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
+    title: 'Teeth Whitening',
+    desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
+    image: '/teeth-whitening.webp',
+    includes: ['Shade consultation', 'Single-visit whitening', 'Aftercare tips'],
+    link: true
+  },
+  {
+    badge: 'Restorative', 
+    bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
+    title: 'Dental Filling',
+    desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
+    image: '/dental-filling.jpg',
+    includes: ['Decay removal', 'Tooth-coloured composite', 'Bite check'],
+    link: true
+  },
+]
+
 const team = [
   { name: 'Dr. Sornn Rithean', role: 'General Dentist', img: '/team/dr-1.png', alt: 'Dr. SOKThea Liyo, Orthodontics specialist' },
   { name: 'Dr. Chheng Mesa', role: 'Specialist Orthodontic', img: '/team/dr-2.png', alt: 'Dr. Channary Pich, Endodontics and Root Canal specialist' },
   { name: 'Dr. Sornn Rithornu', role: 'Prosthodontics', img: '/team/dr-3.png', alt: 'Dr. Vibol Heng, Family and Pediatric Dentistry specialist' },
 ]
+
+// Single source of truth for the CTA slideshow timer.
+let ctaSlideInterval = null
+
+function setupCtaSlideshow() {
+  ctaSlideInterval = setInterval(() => {
+    currentCtaIndex.value = (currentCtaIndex.value + 1) % ctaImages.length
+  }, 5000)
+}
+
+function stopCtaSlideshow() {
+  if (ctaSlideInterval) {
+    clearInterval(ctaSlideInterval)
+    ctaSlideInterval = null
+  }
+}
+
+// State for the click-to-open popup on the homepage cards above
+const isModalOpen = ref(false)
+const selectedService = ref(null)
+function openServiceModal(svc) {
+  selectedService.value = svc
+  isModalOpen.value = true
+}
 
 let prefersReducedMotion = false
 
@@ -638,6 +699,7 @@ onMounted(() => {
   nextTick(() => {
     setupReveal()
     setupParallax()
+    setupCtaSlideshow()
     if (!prefersReducedMotion) {
       rafId = requestAnimationFrame(tick)
     }
@@ -648,30 +710,8 @@ onBeforeUnmount(() => {
   if (rafId) cancelAnimationFrame(rafId)
   if (statsRafId) cancelAnimationFrame(statsRafId)
   if (observer) observer.disconnect()
+  stopCtaSlideshow()
 })
-const servicesPreview = [
-  {
-    badge: 'General', price: 'From $25',
-    bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
-    title: 'Checkup & clean',
-    desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
-    image: '/clean-teeth.jpeg'
-  },
-  {
-    badge: 'Cosmetic', price: 'From $80',
-    bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
-    title: 'Teeth whitening',
-    desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
-    image: '/teeth-whitening.webp'
-  },
-  {
-    badge: 'Restorative', price: 'From $60',
-    bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
-    title: 'Fillings',
-    desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
-    image: '/dental-filling.jpg'
-  },
-]
 </script>
 
 <style scoped>
@@ -715,8 +755,24 @@ const servicesPreview = [
   50% { box-shadow: 0 0 0 7px rgba(31, 157, 99, 0); }
 }
 
+/* CTA slideshow crossfade.
+   The <img> keeps `absolute inset-0` at all times (it's a static class on the element
+   itself, not something Vue toggles), so the outgoing and incoming <img> nodes stack
+   perfectly on top of one another inside the `overflow-hidden` wrapper. Vue's default
+   <Transition> mode runs enter and leave at the same time — exactly what a crossfade
+   needs — so we just animate opacity on both. */
+.cta-fade-enter-active,
+.cta-fade-leave-active {
+  transition: opacity 0.9s ease;
+}
+.cta-fade-enter-from,
+.cta-fade-leave-to {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-about-enter > * { animation: none; opacity: 1; transform: none; }
   .badge-float, .cta-icon-float, .dot-pulse { animation: none; }
+  .cta-fade-enter-active, .cta-fade-leave-active { transition: none; }
 }
 </style>

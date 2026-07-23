@@ -34,7 +34,7 @@
         ref="headingRef"
         class="text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight will-change-transform "
       >
-        {{ title }}<span v-if="highlight" class="text-[#8FE3B8]"> {{ highlight }}</span>
+        {{ title }} <span v-if="highlight" class="text-[#8FE3B8]"> {{ highlight }}</span>
       </h1>
       <p
         ref="subRef"
@@ -68,10 +68,8 @@ const props = defineProps({
   images: {
     type: Array,
     default: () => [
-      '/images/hero/hero-1.jpg',
-      '/images/hero/hero-2.jpg',
-      '/images/hero/hero-3.jpg',
-      '/images/hero/hero-4.jpg'
+      '/images/hero/here-1.png',
+    
     ]
   },
   // how long each slide stays fully visible before the next one crossfades in (ms)

@@ -36,7 +36,6 @@
         <div class="hidden md:block">
           <NuxtLink
             to="book-appointment"
-            target="_blank"
             rel="noopener noreferrer"
             class="relative z-10 ml-1 px-5 py-2 rounded-full bg-[#6BCE9F] text-white hover:bg-[#036533] transition-colors duration-300"
           >Book Now</NuxtLink>
@@ -112,9 +111,8 @@
               href="tel:+85512345678"
               class="text-[#354D24] hover:text-[#1f9d63] transition-colors font-medium text-sm md:text-base"
             >
-              +855 12 345 678
+              +855 858 899 56
             </a>
-            <p class="text-xs text-stone-500 mt-1">TODO: replace with real phone</p>
           </div>
 
           <!-- Address -->
@@ -123,10 +121,8 @@
               Visit Us
             </h4>
             <address class="not-italic text-[#354D24] text-sm md:text-base leading-relaxed">
-              123 Street 271, Sangkat Boeung Kak 2<br>
-              Khan Tuol Kork, Phnom Penh, Cambodia
+              No.F02, street GS, Sangkat Prek leap, khan Chroy chongva, Phnom Penh, Cambodia.
             </address>
-            <p class="text-xs text-stone-500 mt-1">TODO: replace with real address</p>
           </div>
 
           <!-- Opening Hours -->
@@ -137,14 +133,13 @@
             <dl class="text-[#354D24] text-sm md:text-base space-y-1">
               <div class="flex justify-center md:justify-end gap-4">
                 <dt class="font-medium">Mon – Sat</dt>
-                <dd>8:00 AM – 6:00 PM</dd>
+                <dd>9:00 Am – 7:00 PM</dd>
               </div>
               <div class="flex justify-center md:justify-end gap-4">
                 <dt class="font-medium">Sunday</dt>
-                <dd class="text-stone-500">Closed</dd>
+                <dd>9:00 Am – 4:00 PM</dd>
               </div>
             </dl>
-            <p class="text-xs text-stone-500 mt-1 text-center md:text-right">TODO: verify hours</p>
           </div>
         </div>
 
@@ -281,6 +276,16 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.body-font {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+}
+
 .slide-enter-active, .slide-leave-active { transition: transform 0.3s ease; }
 .slide-enter-from, .slide-leave-to { transform: translateX(-100%); }
 

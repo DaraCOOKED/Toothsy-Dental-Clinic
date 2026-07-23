@@ -23,10 +23,12 @@
           About Toothsy
         </span>
         <h1 class="font-display text-[2.1rem] md:text-5xl lg:text-[3.1rem] font-bold leading-[1.1] tracking-tight">
-          Honest, Gentle and Modern Dentistry<br class="hidden md:block"> at Toothsy Dental Clinic
+          A dental clinic built around<br class="hidden md:block"> how it feels to sit in the chair
         </h1>
         <p class="mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
-          At Toothsy Dental Clinic, we believe every patient deserves honest advice, gentle treatment, and modern dental care. We take time to explain every procedure so you can make informed decisions with confidence.
+          Toothsy started with one idea: checkups shouldn't be something you put off.
+          Every room, every appointment, and every dentist here is built around
+          making that true.
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-4">
@@ -34,9 +36,8 @@
          
           <NuxtLink
             to="/book-appointment"
-        
             rel="noopener noreferrer"
-            class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
+            class="btn-primary inline-block text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-all duration-300"
           >Book a Visit</NuxtLink>
         </div>
       </div>
@@ -55,6 +56,11 @@
             <circle cx="16" cy="40" r="4" fill="#9fe0d4" />
           </svg>
         </div>
+
+        <div
+          aria-hidden="true"
+          class="absolute inset-[10%_6%_8%_12%] md:inset-[8%_2%_6%_14%] bg-[#9fe0d4] rounded-[3rem] blur-2xl opacity-40 -z-10"
+        ></div>
 
         <div
           ref="heroBlobRef"
@@ -84,6 +90,19 @@
    
 
 <section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-14 ">
+  <div
+    ref="watermarkServicesRef"
+    aria-hidden="true"
+    class="pointer-events-none select-none absolute -right-10 -top-6 md:-right-4 md:-top-10 -z-10 w-[200px] md:w-[300px] opacity-[0.05] will-change-transform"
+  >
+    <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M100,20 C70,20 45,45 45,80 C45,110 55,135 50,165 C47,185 60,205 75,195 C85,188 88,170 100,170 C112,170 115,188 125,195 C140,205 153,185 150,165 C145,135 155,110 155,80 C155,45 130,20 100,20 Z"
+        stroke="#111827" stroke-width="3" stroke-linejoin="round"
+      />
+    </svg>
+  </div>
+
   <div class="text-center mb-10">
     <span class="inline-block text-[0.68rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">Our services</span>
     <h2 class="font-display text-2xl md:text-[1.9rem] font-bold tracking-tight max-w-md mx-auto leading-[1.2]">
@@ -93,17 +112,19 @@
 
   <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[860px] mx-auto">
     <div
-      v-for="svc in servicesPreview"
+      v-for="(svc, i) in servicesPreview"
       :key="svc.title"
-      class="rounded-[24px] overflow-hidden transition-transform duration-200 hover:-translate-y-1 cursor-pointer"
-      :class="svc.bg"
+      :ref="(el) => setServiceRef(el, i)"
+      class="group rounded-[24px] overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_18px_36px_rgba(3,101,51,0.18)]"
+      :class="[svc.bg, servicesVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6']"
+      :style="{ transitionDelay: servicesVisible[i] ? `${i * 100}ms` : '0ms' }"
       @click="openServiceModal(svc)"
     >
       <div class="w-full h-[168px] overflow-hidden" :class="svc.thumbBg">
         <img
           :src="svc.image"
           :alt="svc.title"
-          class="block w-full h-full object-cover object-center"
+          class="block w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
         />
       </div>
       <div class="px-[18px] pt-[18px] pb-[22px]">
@@ -120,7 +141,7 @@
   <div class="flex items-center justify-center gap-4 mt-8">
     <NuxtLink
       to="/service"
-      class="inline-flex items-center gap-1.5 border-2 border-[#6BCE9F] text-[#036533] font-semibold text-sm px-6 py-3 rounded-full transition-colors hover:bg-[#dff0e0] hover:border-[#036533]"
+      class="inline-flex items-center gap-1.5 border-2 border-[#6BCE9F] text-[#036533] font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#dff0e0] hover:border-[#036533] hover:shadow-[0_10px_24px_rgba(107,206,159,0.35)]"
     >
       See all services
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -128,7 +149,7 @@
     <NuxtLink
       to="/book-appointment"
       rel="noopener noreferrer"
-      class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
+      class="btn-primary inline-block text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-all duration-300"
     >Book an appointment</NuxtLink>
   </div>
 
@@ -171,6 +192,11 @@
       @mousemove="handleStoryMouseMove"
       @mouseleave="handleStoryMouseLeave"
     >
+      <div
+        aria-hidden="true"
+        class="absolute inset-[10%_8%_6%_14%] md:inset-[9%_4%_6%_12%] bg-[#9fe0d4] rounded-[3rem] blur-2xl opacity-30 -z-10"
+      ></div>
+
       <div class="absolute inset-[6%_4%_2%_10%] md:inset-[5%_0%_2%_8%] bg-[#d4f0ea] rounded-[2.5rem] will-change-transform z-0"></div>
 
       <img
@@ -197,7 +223,20 @@
 
 
     <!-- ═══════════════════ TEAM ═══════════════════ -->
-    <section class="relative z-10 bg-[#d4f0ea] py-16 md:py-20 flex justify-center">
+    <section class="relative z-10 bg-[#d4f0ea] py-16 md:py-20 flex justify-center overflow-hidden">
+      <div
+        ref="watermarkTeamRef"
+        aria-hidden="true"
+        class="pointer-events-none select-none absolute -left-14 -bottom-6 md:-left-6 md:-bottom-10 -z-10 w-[240px] md:w-[360px] opacity-[0.07] will-change-transform"
+      >
+        <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M100,20 C70,20 45,45 45,80 C45,110 55,135 50,165 C47,185 60,205 75,195 C85,188 88,170 100,170 C112,170 115,188 125,195 C140,205 153,185 150,165 C145,135 155,110 155,80 C155,45 130,20 100,20 Z"
+            stroke="#036533" stroke-width="3" stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
       <div class="max-w-6xl mx-auto px-6 md:px-10">
         <div class="text-center mb-12">
           <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#036533] mb-3">Meet the team</span>
@@ -209,11 +248,11 @@
             v-for="(m, i) in team"
             :key="m.name"
             :ref="(el) => setTeamRef(el, i)"
-            class="group transition-all duration-700 ease-out"
+            class="group transition-all duration-700 ease-out hover:-translate-y-1 hover:drop-shadow-[0_14px_24px_rgba(3,101,51,0.28)]"
             :class="teamVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
             :style="{ transitionDelay: teamVisible[i] ? `${i * 90}ms` : '0ms' }"
           >
-            <div class="overflow-hidden rounded-2xl mb-3">
+            <div class="overflow-hidden rounded-2xl mb-3 transition-shadow duration-500">
               <img
                 :src="m.img"
                 :alt="m.alt"
@@ -240,7 +279,16 @@
         A short visit, no obligation — meet the team and see the rooms for yourself.
       </p>
 
-      <div class="relative max-w-3xl mx-auto rounded-[2.5rem] overflow-hidden h-[260px] md:h-[320px]">
+      <div ref="ctaIconRef" aria-hidden="true" class="hidden md:flex absolute right-[10%] top-0 z-20 will-change-transform">
+        <div class="cta-icon-float w-11 h-11 rounded-full bg-white shadow-[0_10px_24px_rgba(3,101,51,0.2)] flex items-center justify-center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1f9d63"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/></svg>
+        </div>
+      </div>
+
+      <div
+        ref="ctaImgRef"
+        class="relative max-w-3xl mx-auto rounded-[2.5rem] overflow-hidden h-[260px] md:h-[320px] shadow-[0_24px_50px_rgba(3,101,51,0.2)] will-change-transform"
+      >
         <Transition name="cta-fade">
           <img
             :key="ctaImages[currentCtaIndex].src"
@@ -254,7 +302,7 @@
       <NuxtLink
         to="/book-appointment"
         rel="noopener noreferrer"
-        class="inline-block mt-8 bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
+        class="btn-primary inline-block mt-8 text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-all duration-300"
       >Book an Appointment</NuxtLink>
     </section>
 
@@ -332,6 +380,7 @@ const servicesPreview = [
     bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
     title: 'Tooth Cleaning',
     desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
+    price: 'From $25',
     image: '/clean-teeth.jpeg',
     includes: ['Full examination', 'Scale and polish', 'Oral health check'],
     link: true
@@ -341,6 +390,7 @@ const servicesPreview = [
     bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
     title: 'Teeth Whitening',
     desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
+    price: 'From $80',
     image: '/teeth-whitening.webp',
     includes: ['Shade consultation', 'Single-visit whitening', 'Aftercare tips'],
     link: true
@@ -350,6 +400,7 @@ const servicesPreview = [
     bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
     title: 'Dental Filling',
     desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
+    price: 'From $60',
     image: '/dental-filling.jpg',
     includes: ['Decay removal', 'Tooth-coloured composite', 'Bite check'],
     link: true
@@ -392,7 +443,11 @@ let prefersReducedMotion = false
 function clamp(n, min, max) { return Math.min(max, Math.max(min, n)) }
 function lerp(a, b, t) { return a + (b - a) * t }
 
-/* ---------- scroll reveal (bento / team / cta) + stats trigger ---------- */
+/* ---------- scroll reveal (services / bento / team / cta) + stats trigger ---------- */
+const servicesEls = ref([])
+const servicesVisible = reactive(servicesPreview.map(() => false))
+function setServiceRef(el, i) { servicesEls.value[i] = el }
+
 const bentoEls = ref([])
 const bentoVisible = reactive(values.map(() => false))
 function setBentoRef(el, i) { bentoEls.value[i] = el }
@@ -427,6 +482,7 @@ function animateStats() {
 
 function setupReveal() {
   const targets = [
+    ...servicesEls.value.map((el, i) => ({ el, set: (val) => (servicesVisible[i] = val) })),
     ...bentoEls.value.map((el, i) => ({ el, set: (val) => (bentoVisible[i] = val) })),
     ...teamEls.value.map((el, i) => ({ el, set: (val) => (teamVisible[i] = val) })),
     { el: ctaSectionRef.value, set: (val) => (ctaVisible.value = val) },
@@ -470,6 +526,11 @@ const ctaIconRef = ref(null)
 const storyVisualRef = ref(null)   // outer wrapper: gets the mouse-tilt
 const storyImgRef = ref(null)      // the clinic photo: gets the same depth-drift as the hero image
 
+// Secondary watermark motifs — same tooth silhouette as the page-top one, recurring
+// through the page at different scales/speeds so the parallax reads as one layered system.
+const watermarkServicesRef = ref(null)
+const watermarkTeamRef = ref(null)
+
 const w = { y: 0, ty: 0, rot: 0, trot: 0 }
 const heroImg = { y: 0, ty: 0 }
 const tilt = { rx: 0, ry: 0, trx: 0, tryY: 0 }
@@ -484,6 +545,8 @@ function setupParallax() {
     { el: heroBadgeRef.value, strength: 30, invert: true },
     { el: heroDotsRef.value, strength: 42 },
     { el: storyImgRef.value, strength: 16 },
+    { el: watermarkServicesRef.value, strength: 20, rotStrength: 14 },
+    { el: watermarkTeamRef.value, strength: 26, rotStrength: 18, invert: true },
     { el: ctaImgRef.value, strength: 30 },
     { el: ctaIconRef.value, strength: 46, invert: true }
   ].filter((item) => item.el)
@@ -545,7 +608,7 @@ function tick() {
       `translate3d(0, ${heroImg.y}px, 0) perspective(900px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`
   }
 
-  // generic depth-drift items (blob, badge, dots, story image, cta image, cta icon)
+  // generic depth-drift items (blob, badge, dots, watermarks, story image, cta image, cta icon)
   parallaxItems.forEach((item) => {
     const rect = item.el.getBoundingClientRect()
     const centerY = rect.top + rect.height / 2
@@ -553,7 +616,9 @@ function tick() {
     const dir = item.invert ? -1 : 1
     item.ty = (progress - 0.5) * item.strength * 2 * dir
     item.y = lerp(item.y ?? 0, item.ty, 0.1)
-    item.el.style.transform = `translate3d(0, ${item.y}px, 0) rotate(${item.baseRotate || 0}deg)`
+    const rotTarget = (item.baseRotate || 0) + (item.rotStrength ? (progress - 0.5) * item.rotStrength * 2 * dir : 0)
+    item.rot = lerp(item.rot ?? (item.baseRotate || 0), rotTarget, 0.1)
+    item.el.style.transform = `translate3d(0, ${item.y}px, 0) rotate(${item.rot}deg)`
   })
 
   // Our Story — the whole visual tilts toward the cursor
@@ -614,6 +679,20 @@ onBeforeUnmount(() => {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* shared "cool" gradient button — used for every primary booking CTA on the page */
+.btn-primary {
+  background: linear-gradient(135deg, #6BCE9F 0%, #1f9d63 55%, #036533 100%);
+  background-size: 180% 180%;
+  background-position: 0% 50%;
+  box-shadow: 0 10px 24px rgba(3, 101, 51, 0.22);
+  transition: background-position 0.5s ease, transform 0.25s ease, box-shadow 0.3s ease;
+}
+.btn-primary:hover {
+  background-position: 100% 50%;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(3, 101, 51, 0.32);
+}
+
 /* idle float / pulse, applied to inner elements only — never on a node the JS parallax loop also transforms */
 .badge-float { animation: floatY 3.2s ease-in-out infinite; }
 .cta-icon-float { animation: floatY 2.6s ease-in-out infinite; }
@@ -642,5 +721,7 @@ onBeforeUnmount(() => {
   .hero-about-enter > * { animation: none; opacity: 1; transform: none; }
   .badge-float, .cta-icon-float { animation: none; }
   .cta-fade-enter-active, .cta-fade-leave-active { transition: none; }
+  .btn-primary { transition: none; }
+  .btn-primary:hover { transform: none; }
 }
 </style>

@@ -88,7 +88,7 @@
             About Us
           </h2>
           <p class="mt-4 text-stone-500 text-[0.95rem] leading-relaxed max-w-md mx-auto">
-            Twenty years of whole body dental care, built on trust and getting to know every patient by name.
+            We believe visiting the dentist should feel comfortable, transparent, and stress-free. Every treatment is carefully planned to protect your oral health and create lasting results.
           </p>
         </div>
 
@@ -100,20 +100,23 @@
             :class="missionVisible ? 'is-visible' : ''">
             <h2 class="font-display text-2xl md:text-3xl font-bold text-[#111827] inline-block relative">Our Mission</h2>
             <p class="mt-4 text-stone-500 text-[0.95rem] leading-relaxed">
-              At Toothsy Dental Clinic, people come first. We help each of our patients
-              to achieve optimal wellness and health by using a whole body approach to oral
-              health. This means not just focusing on cavities, but focusing on:
-              cranio-facial development, bite and joint balance, oral flora, proper muscle
-              balance/function, and bio-compatibility of dental materials. Great care and
-              planning ensures that everything we do helps promote overall health and well being.
+              To make every dental visit comfortable, honest, and stress-free by providing modern, gentle care that puts people first.
             </p>
             <h3 class="font-display text-xl md:text-2xl mt-5 font-bold text-[#111827] inline-block relative">
-              More Than Anything Else We Love Creating Happy, Healthy Smiles.
+              Our core values 
             </h3>
             <p class="mt-4 text-stone-500 text-[0.95rem] leading-relaxed">
-              We work hard to stay up to date with the most advanced techniques and
-              technologies to ensure that our patients receive the best care possible.
-            </p>            
+              We treat every patient with kindness and respect.
+            </p>
+            <p class=" text-stone-500 text-[0.95rem] leading-relaxed">
+              We provide high-quality dentistry using modern techniques and materials.
+            </p>
+            <p class=" text-stone-500 text-[0.95rem] leading-relaxed">
+              We recommend only the treatments our patients truly need.
+            </p>   
+            <p class=" text-stone-500 text-[0.95rem] leading-relaxed">
+              We create a calm environment where patients feel safe and confident.
+            </p>    
           </div>
 
           <!-- Image: slides from right, continuous depth drift -->

@@ -23,12 +23,10 @@
           About Toothsy
         </span>
         <h1 class="font-display text-[2.1rem] md:text-5xl lg:text-[3.1rem] font-bold leading-[1.1] tracking-tight">
-          A dental clinic built around<br class="hidden md:block"> how it feels to sit in the chair
+          Honest, Gentle and Modern Dentistry<br class="hidden md:block"> at Toothsy Dental Clinic
         </h1>
         <p class="mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
-          Toothsy started with one idea: checkups shouldn't be something you put off.
-          Every room, every appointment, and every dentist here is built around
-          making that true.
+          At Toothsy Dental Clinic, we believe every patient deserves honest advice, gentle treatment, and modern dental care. We take time to explain every procedure so you can make informed decisions with confidence.
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-4">
@@ -389,7 +387,6 @@ const servicesPreview = [
     bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
     title: 'Tooth Cleaning',
     desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
-    price: 'From $25',
     image: '/clean-teeth.jpeg',
     includes: ['Full examination', 'Scale and polish', 'Oral health check'],
     link: true
@@ -399,7 +396,6 @@ const servicesPreview = [
     bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
     title: 'Teeth Whitening',
     desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
-    price: 'From $80',
     image: '/teeth-whitening.webp',
     includes: ['Shade consultation', 'Single-visit whitening', 'Aftercare tips'],
     link: true
@@ -409,7 +405,6 @@ const servicesPreview = [
     bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
     title: 'Dental Filling',
     desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
-    price: 'From $60',
     image: '/dental-filling.jpg',
     includes: ['Decay removal', 'Tooth-coloured composite', 'Bite check'],
     link: true

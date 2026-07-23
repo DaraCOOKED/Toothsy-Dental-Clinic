@@ -5,7 +5,7 @@
       eyebrow="Services"
       title="Dental services"
       highlight="for every smile"
-      description="Explore gentle, modern treatments from routine checkups to whitening and orthodontics."
+      description="Providing gentle, modern dental care for patients of all ages."
     />
 
     <section ref="sectionRef" class="py-20 px-6">

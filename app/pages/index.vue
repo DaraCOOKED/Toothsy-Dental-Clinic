@@ -142,90 +142,53 @@
 
 
   
-<!-- ═══════════════════ OUR STORY — horizontal timeline, heavy parallax ═══════════════════ -->
-<section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-20">
-  <div class="text-center mb-14 md:mb-16">
-    <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">
-      Our Story
-    </span>
+<!-- ═══════════════════ OUR STORY — founding narrative ═══════════════════ -->
+<section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-14 md:py-20">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
 
-    <h2 class="font-display text-2xl md:text-[2rem] font-bold tracking-tight max-w-lg mx-auto">
-      A new clinic dedicated to healthier, happier smiles
-    </h2>
+    <!-- Text side -->
+    <div>
+      <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">
+        Our Story
+      </span>
 
-    <p class="mt-4 text-stone-500 max-w-2xl mx-auto leading-relaxed">
-      Since opening in November 2025, Toothsy Clinic has focused on providing
-      gentle, modern, and patient-first dental care in a welcoming environment.
-    </p>
-  </div>
+      <h2 class="font-display text-2xl md:text-[2.1rem] font-bold tracking-tight leading-[1.15] mb-5 max-w-md">
+        Building healthy smiles,<br class="hidden md:block"> one patient at a time.
+      </h2>
 
-  <div
-    ref="storyVisualRef"
-    class="relative hidden md:block h-[300px] will-change-transform"
-    @mousemove="handleStoryMouseMove"
-    @mouseleave="handleStoryMouseLeave"
-  >
-    <!-- the connecting line — stretches horizontally as the section scrolls through view -->
-    <div
-      ref="storyLineRef"
-      class="absolute left-0 right-0 top-1/2 h-[2px] bg-[#1f9d63]/25 -translate-y-1/2 will-change-transform"
-    ></div>
-
-    <div class="absolute inset-0 grid grid-cols-3">
-      <div
-        v-for="(item, i) in storyItems"
-        :key="item.year"
-        :ref="(el) => setTimelineRef(el, i)"
-        class="relative transition-all duration-700 ease-out"
-        :class="timelineVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
-      >
-
-        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-          <span
-            :ref="(el) => setStoryDotRef(el, i)"
-            class="relative block w-3.5 h-3.5 will-change-transform"
-          >
-            <span class="dot-pulse absolute inset-0 rounded-full bg-[#1f9d63] ring-4 ring-[#EFF8FC]"></span>
-          </span>
-        </div>
-        <div
-          v-if="i % 2 === 1"
-          class="absolute left-1/2 -translate-x-1/2 bottom-[calc(50%+24px)] w-[230px] text-center"
-        >
-          <div :ref="(el) => setStoryLabelRef(el, i)" class="will-change-transform">
-            <p class="text-[0.78rem] text-stone-500 leading-relaxed mb-2">{{ item.desc }}</p>
-            <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] leading-tight mb-1">{{ item.title }}</h3>
-            <p class="text-[0.8rem] font-bold text-[#1f9d63]">{{ item.year }}</p>
-          </div>
-        </div>
-
-        <!-- LABEL ANCHOR (even items, below the line). Reading top-to-bottom: year, title, desc -->
-        <div
-          v-else
-          class="absolute left-1/2 -translate-x-1/2 top-[calc(50%+24px)] w-[230px] text-center"
-        >
-          <div :ref="(el) => setStoryLabelRef(el, i)" class="will-change-transform">
-            <p class="text-[0.8rem] font-bold text-[#1f9d63] mb-1">{{ item.year }}</p>
-            <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] leading-tight mb-2">{{ item.title }}</h3>
-            <p class="text-[0.78rem] text-stone-500 leading-relaxed">{{ item.desc }}</p>
-          </div>
-        </div>
-      </div>
+      <p class="text-stone-500 leading-relaxed max-w-md">
+        Toothsy Dental Clinic was founded in November 2025 with one simple belief:
+        visiting the dentist should be comfortable, transparent, and stress-free.
+        From routine check-ups to advanced treatments, we're committed to delivering
+        modern dentistry with compassion and precision.
+      </p>
     </div>
-  </div>
 
-  <div class="md:hidden space-y-7">
+    <!-- Visual side -->
     <div
-      v-for="item in storyItems"
-      :key="'m-' + item.year"
-      class="flex items-start gap-3"
+      ref="storyVisualRef"
+      class="relative h-[300px] md:h-[380px]"
+      @mousemove="handleStoryMouseMove"
+      @mouseleave="handleStoryMouseLeave"
     >
-      <span class="mt-2.5 w-2 h-2 rounded-full bg-[#1f9d63] flex-shrink-0"></span>
-      <div>
-        <h3 class="font-display text-lg font-bold text-[#111827] mb-1.5">
-          {{ item.year }} — {{ item.title }}
-        </h3>
-        <p class="text-[0.85rem] text-stone-500 leading-relaxed">{{ item.desc }}</p>
+      <div class="absolute inset-[6%_4%_2%_10%] md:inset-[5%_0%_2%_8%] bg-[#d4f0ea] rounded-[2.5rem] will-change-transform z-0"></div>
+
+      <img
+        ref="storyImgRef"
+        src="/frontmain.jpg"
+        alt="The Toothsy Dental Clinic entrance"
+        class="absolute inset-0 z-10 w-full h-[88%] mx-auto mt-[5%] object-cover rounded-[2rem] will-change-transform"
+      />
+
+      <div class="absolute left-2 md:-left-4 bottom-4 md:bottom-10 z-20 will-change-transform">
+        <div class="bg-[#036533] text-white rounded-2xl px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.18)] flex items-center gap-2.5">
+          <span class="flex-shrink-0 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2 6.5L4.5 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span class="text-[0.7rem] font-semibold leading-tight">Est. November 2025<br>Serving our community</span>
+        </div>
       </div>
     </div>
   </div>
@@ -323,24 +286,6 @@ const stats = [
   { value: 12000, suffix: '+', label: 'Smiles treated' },
   { value: 98, suffix: '%', label: 'Patient satisfaction' },
   { value: 6, suffix: '', label: 'Specialist dentists' }
-]
-
-const storyItems = [
-  {
-    year: '27 Nov 2025',
-    title: 'Our doors officially opened',
-    desc: 'Toothsy Clinic welcomed its very first patients with a commitment to gentle, modern, and personalized dental care.'
-  },
-  {
-    year: 'Early 2026',
-    title: 'Growing one smile at a time',
-    desc: 'We expanded our services and continued improving every patient experience through quality treatment and modern equipment.'
-  },
-  {
-    year: 'Today',
-    title: 'The journey has just begun',
-    desc: "We're proud to continue welcoming new patients every day and look forward to growing together with our community."
-  }
 ]
 
 const values = [
@@ -447,11 +392,7 @@ let prefersReducedMotion = false
 function clamp(n, min, max) { return Math.min(max, Math.max(min, n)) }
 function lerp(a, b, t) { return a + (b - a) * t }
 
-/* ---------- scroll reveal (timeline / bento / team / cta) + stats trigger ---------- */
-const timelineEls = ref([])
-const timelineVisible = reactive(storyItems.map(() => false))
-function setTimelineRef(el, i) { timelineEls.value[i] = el }
-
+/* ---------- scroll reveal (bento / team / cta) + stats trigger ---------- */
 const bentoEls = ref([])
 const bentoVisible = reactive(values.map(() => false))
 function setBentoRef(el, i) { bentoEls.value[i] = el }
@@ -486,7 +427,6 @@ function animateStats() {
 
 function setupReveal() {
   const targets = [
-    ...timelineEls.value.map((el, i) => ({ el, set: (val) => (timelineVisible[i] = val) })),
     ...bentoEls.value.map((el, i) => ({ el, set: (val) => (bentoVisible[i] = val) })),
     ...teamEls.value.map((el, i) => ({ el, set: (val) => (teamVisible[i] = val) })),
     { el: ctaSectionRef.value, set: (val) => (ctaVisible.value = val) },
@@ -526,26 +466,16 @@ const heroDotsRef = ref(null)
 const ctaImgRef = ref(null)
 const ctaIconRef = ref(null)
 
-// Our Story timeline — dedicated parallax refs.
-// Note: these refs point at the INNER moving elements only. The outer anchor divs
-// in the template (left-1/2, -translate-x-1/2, etc.) handle static centering and
-// are never referenced here, so JS can't ever knock the dot off-center from its label.
+// Our Story — dedicated parallax refs.
 const storyVisualRef = ref(null)   // outer wrapper: gets the mouse-tilt
-const storyLineRef = ref(null)     // the connecting line: gets a scroll-driven stretch
-const storyDotEls = ref([])        // per-item dot (inner span — the anchor div wrapping it is untouched)
-const storyLabelEls = ref([])      // per-item label block (inner div — its anchor wrapper is untouched)
-function setStoryDotRef(el, i) { storyDotEls.value[i] = el }
-function setStoryLabelRef(el, i) { storyLabelEls.value[i] = el }
+const storyImgRef = ref(null)      // the clinic photo: gets the same depth-drift as the hero image
 
 const w = { y: 0, ty: 0, rot: 0, trot: 0 }
 const heroImg = { y: 0, ty: 0 }
 const tilt = { rx: 0, ry: 0, trx: 0, tryY: 0 }
-const storyLine = { scale: 1 }
 const storyTilt = { rx: 0, ry: 0, trx: 0, tryY: 0 }
 
 let parallaxItems = []
-let storyDotItems = []
-let storyLabelItems = []
 let rafId = null
 
 function setupParallax() {
@@ -553,25 +483,10 @@ function setupParallax() {
     { el: heroBlobRef.value, strength: 14, baseRotate: 0 },
     { el: heroBadgeRef.value, strength: 30, invert: true },
     { el: heroDotsRef.value, strength: 42 },
+    { el: storyImgRef.value, strength: 16 },
     { el: ctaImgRef.value, strength: 30 },
     { el: ctaIconRef.value, strength: 46, invert: true }
   ].filter((item) => item.el)
-
-  // dots drift the same direction as their label, just with less travel
-  storyDotItems = storyDotEls.value
-    .map((el, i) => ({ el, dirY: i % 2 === 1 ? -1 : 1 }))
-    .filter((item) => item.el)
-
-  // labels fan outward from the line as the section scrolls through the viewport:
-  // above-the-line item rises, below-the-line items sink, and the two outer items
-  // also drift sideways in opposite directions for the "fan" effect
-  storyLabelItems = storyLabelEls.value
-    .map((el, i) => ({
-      el,
-      dirY: i % 2 === 1 ? -1 : 1,
-      dirX: i === 0 ? -1 : i === 2 ? 1 : 0
-    }))
-    .filter((item) => item.el)
 }
 
 function handleHeroMouseMove(e) {
@@ -630,7 +545,7 @@ function tick() {
       `translate3d(0, ${heroImg.y}px, 0) perspective(900px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`
   }
 
-  // generic depth-drift items (blob, badge, dots, cta image, cta icon)
+  // generic depth-drift items (blob, badge, dots, story image, cta image, cta icon)
   parallaxItems.forEach((item) => {
     const rect = item.el.getBoundingClientRect()
     const centerY = rect.top + rect.height / 2
@@ -641,48 +556,7 @@ function tick() {
     item.el.style.transform = `translate3d(0, ${item.y}px, 0) rotate(${item.baseRotate || 0}deg)`
   })
 
-  // Our Story — connecting line stretches as the section scrolls through view
-  if (storyLineRef.value) {
-    const rect = storyLineRef.value.getBoundingClientRect()
-    const centerY = rect.top + rect.height / 2
-    const progress = clamp(1 - centerY / vh, 0, 1)
-    const scaleTarget = 0.86 + progress * 0.26
-    storyLine.scale = lerp(storyLine.scale, scaleTarget, 0.08)
-    storyLineRef.value.style.transform = `scaleX(${storyLine.scale})`
-  }
-
-  // Our Story — dots bounce off the line and swell slightly at the extremes.
-  // No -50%/centering here anymore — the wrapping anchor div in the template already
-  // centers this span, so this transform is a pure delta on top of that fixed position.
-  storyDotItems.forEach((item) => {
-    const rect = item.el.getBoundingClientRect()
-    const centerY = rect.top + rect.height / 2
-    const progress = clamp(1 - centerY / vh, 0, 1)
-    const depth = (progress - 0.5) * 2
-    item.ty = depth * 16 * item.dirY
-    item.ts = 1 + Math.abs(depth) * 0.3
-    item.y = lerp(item.y ?? 0, item.ty, 0.12)
-    item.sc = lerp(item.sc ?? 1, item.ts, 0.12)
-    item.el.style.transform = `translate3d(0, ${item.y}px, 0) scale(${item.sc})`
-  })
-
-  // Our Story — labels fan out from the line: the strongest movement in the section.
-  // Same deal — the anchor div already centers this, so this is a pure delta.
-  storyLabelItems.forEach((item) => {
-    const rect = item.el.getBoundingClientRect()
-    const centerY = rect.top + rect.height / 2
-    const progress = clamp(1 - centerY / vh, 0, 1)
-    const depth = (progress - 0.5) * 2
-    item.ty = depth * 60 * item.dirY
-    item.tx = depth * 26 * item.dirX
-    item.trot = depth * 5 * item.dirX
-    item.y = lerp(item.y ?? 0, item.ty, 0.1)
-    item.x = lerp(item.x ?? 0, item.tx, 0.1)
-    item.rot = lerp(item.rot ?? 0, item.trot, 0.1)
-    item.el.style.transform = `translate3d(${item.x}px, ${item.y}px, 0) rotate(${item.rot}deg)`
-  })
-
-  // Our Story — the whole timeline tilts toward the cursor, layered on top of the scroll drift above
+  // Our Story — the whole visual tilts toward the cursor
   if (storyVisualRef.value) {
     storyTilt.rx = lerp(storyTilt.rx, storyTilt.trx, 0.08)
     storyTilt.ry = lerp(storyTilt.ry, storyTilt.tryY, 0.08)
@@ -743,16 +617,10 @@ onBeforeUnmount(() => {
 /* idle float / pulse, applied to inner elements only — never on a node the JS parallax loop also transforms */
 .badge-float { animation: floatY 3.2s ease-in-out infinite; }
 .cta-icon-float { animation: floatY 2.6s ease-in-out infinite; }
-.dot-pulse { animation: dotPulse 2.4s ease-in-out infinite; }
 
 @keyframes floatY {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
-}
-
-@keyframes dotPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(31, 157, 99, 0.35); }
-  50% { box-shadow: 0 0 0 7px rgba(31, 157, 99, 0); }
 }
 
 /* CTA slideshow crossfade.
@@ -772,7 +640,7 @@ onBeforeUnmount(() => {
 
 @media (prefers-reduced-motion: reduce) {
   .hero-about-enter > * { animation: none; opacity: 1; transform: none; }
-  .badge-float, .cta-icon-float, .dot-pulse { animation: none; }
+  .badge-float, .cta-icon-float { animation: none; }
   .cta-fade-enter-active, .cta-fade-leave-active { transition: none; }
 }
 </style>

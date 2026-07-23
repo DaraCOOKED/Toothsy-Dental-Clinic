@@ -1,5 +1,5 @@
 <template>
-  <div class="relative isolate body-font bg-[#EFF8FC] text-[#111827]">
+  <div class="relative isolate overflow-x-hidden body-font bg-[#EFF8FC] text-[#111827]">
 
     <!-- Signature ambient watermark (same motif as Home, mirrored to the left this time) -->
     <div
@@ -90,6 +90,15 @@
    
 
 <section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-14 ">
+  <div ref="servicesDoodleRef" aria-hidden="true" class="absolute -left-2 top-0 scale-[0.65] origin-top-left opacity-60 md:opacity-100 md:scale-100 md:-left-4 md:top-2 z-20 will-change-transform">
+    <svg width="70" height="56" viewBox="0 0 70 56" fill="none">
+      <circle cx="8" cy="10" r="4" fill="#f4b8b8" />
+      <circle cx="30" cy="4" r="3" fill="#9fe0d4" />
+      <circle cx="52" cy="20" r="5.5" fill="#6BCE9F" opacity="0.6" />
+      <path d="M4 40 Q 18 28 34 40 T 66 40" stroke="#1f9d63" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+    </svg>
+  </div>
+
   <div
     ref="watermarkServicesRef"
     aria-hidden="true"
@@ -165,6 +174,14 @@
   
 <!-- ═══════════════════ OUR STORY — founding narrative ═══════════════════ -->
 <section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-14 md:py-20">
+  <div ref="storyDoodleRef" aria-hidden="true" class="absolute left-0 top-0 scale-[0.6] origin-top-left opacity-60 md:opacity-100 md:scale-100 md:left-2 md:top-4 z-20 will-change-transform">
+    <svg width="64" height="50" viewBox="0 0 64 50" fill="none">
+      <path d="M2 30 Q 16 10 30 30 T 58 24" stroke="#6BCE9F" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>
+      <circle cx="6" cy="8" r="3.5" fill="#f4b8b8" />
+      <circle cx="54" cy="42" r="4.5" fill="#9fe0d4" opacity="0.7" />
+    </svg>
+  </div>
+
   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
 
     <!-- Text side -->
@@ -224,6 +241,14 @@
 
     <!-- ═══════════════════ TEAM ═══════════════════ -->
     <section class="relative z-10 bg-[#d4f0ea] py-16 md:py-20 flex justify-center overflow-hidden">
+      <div ref="teamDoodleRef" aria-hidden="true" class="absolute right-2 top-2 scale-[0.6] origin-top-right opacity-60 md:opacity-100 md:scale-100 md:right-8 md:top-6 z-20 will-change-transform">
+        <svg width="60" height="46" viewBox="0 0 60 46" fill="none">
+          <circle cx="10" cy="8" r="4" fill="#f4b8b8" />
+          <circle cx="34" cy="4" r="3" fill="#fff" opacity="0.8" />
+          <circle cx="50" cy="22" r="5" fill="#036533" opacity="0.35" />
+        </svg>
+      </div>
+
       <div
         ref="watermarkTeamRef"
         aria-hidden="true"
@@ -264,6 +289,16 @@
           </div>
         </div>
       </div>
+
+      <svg
+        class="absolute bottom-0 left-0 w-full h-8 md:h-14 pointer-events-none"
+        viewBox="0 0 1440 60"
+        preserveAspectRatio="none"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path d="M0,30 C240,60 480,0 720,20 C960,40 1200,10 1440,30 L1440,60 L0,60 Z" fill="#EFF8FC" />
+      </svg>
     </section>
 
     <!-- ═══════════════════ CTA BANNER ═══════════════════ -->
@@ -279,12 +314,6 @@
         A short visit, no obligation — meet the team and see the rooms for yourself.
       </p>
 
-      <div ref="ctaIconRef" aria-hidden="true" class="hidden md:flex absolute right-[10%] top-0 z-20 will-change-transform">
-        <div class="cta-icon-float w-11 h-11 rounded-full bg-white shadow-[0_10px_24px_rgba(3,101,51,0.2)] flex items-center justify-center">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#1f9d63"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/></svg>
-        </div>
-      </div>
-
       <div
         ref="ctaImgRef"
         class="relative max-w-3xl mx-auto rounded-[2.5rem] overflow-hidden h-[260px] md:h-[320px] shadow-[0_24px_50px_rgba(3,101,51,0.2)] will-change-transform"
@@ -297,6 +326,19 @@
             class="absolute inset-0 w-full h-[140%] -top-[20%] object-fill"
           />
         </Transition>
+
+        <div ref="ctaIconRef" aria-hidden="true" class="absolute right-4 top-4 md:right-5 md:top-5 z-20 will-change-transform">
+          <div class="cta-icon-float w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/90 backdrop-blur-sm shadow-[0_10px_24px_rgba(3,101,51,0.25)] flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#1f9d63"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/></svg>
+          </div>
+        </div>
+
+        <div ref="ctaDoodleRef" aria-hidden="true" class="absolute left-4 bottom-4 md:left-5 md:bottom-5 z-20 will-change-transform">
+          <svg width="26" height="26" viewBox="0 0 34 34" fill="none" class="md:w-[34px] md:h-[34px]">
+            <circle cx="8" cy="10" r="4" fill="#9fe0d4" opacity="0.85" />
+            <circle cx="22" cy="22" r="3" fill="#f4b8b8" opacity="0.85" />
+          </svg>
+        </div>
       </div>
 
       <NuxtLink
@@ -380,7 +422,6 @@ const servicesPreview = [
     bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
     title: 'Tooth Cleaning',
     desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
-    price: 'From $25',
     image: '/clean-teeth.jpeg',
     includes: ['Full examination', 'Scale and polish', 'Oral health check'],
     link: true
@@ -390,7 +431,6 @@ const servicesPreview = [
     bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
     title: 'Teeth Whitening',
     desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
-    price: 'From $80',
     image: '/teeth-whitening.webp',
     includes: ['Shade consultation', 'Single-visit whitening', 'Aftercare tips'],
     link: true
@@ -400,7 +440,6 @@ const servicesPreview = [
     bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
     title: 'Dental Filling',
     desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
-    price: 'From $60',
     image: '/dental-filling.jpg',
     includes: ['Decay removal', 'Tooth-coloured composite', 'Bite check'],
     link: true
@@ -531,6 +570,13 @@ const storyImgRef = ref(null)      // the clinic photo: gets the same depth-drif
 const watermarkServicesRef = ref(null)
 const watermarkTeamRef = ref(null)
 
+// Small floating dot/squiggle doodles — purely decorative, each drifts and spins
+// at its own speed on the shared parallax loop.
+const servicesDoodleRef = ref(null)
+const storyDoodleRef = ref(null)
+const teamDoodleRef = ref(null)
+const ctaDoodleRef = ref(null)
+
 const w = { y: 0, ty: 0, rot: 0, trot: 0 }
 const heroImg = { y: 0, ty: 0 }
 const tilt = { rx: 0, ry: 0, trx: 0, tryY: 0 }
@@ -543,12 +589,16 @@ function setupParallax() {
   parallaxItems = [
     { el: heroBlobRef.value, strength: 14, baseRotate: 0 },
     { el: heroBadgeRef.value, strength: 30, invert: true },
-    { el: heroDotsRef.value, strength: 42 },
+    { el: heroDotsRef.value, strength: 42, rotStrength: 22 },
     { el: storyImgRef.value, strength: 16 },
     { el: watermarkServicesRef.value, strength: 20, rotStrength: 14 },
     { el: watermarkTeamRef.value, strength: 26, rotStrength: 18, invert: true },
+    { el: servicesDoodleRef.value, strength: 30, rotStrength: 26 },
+    { el: storyDoodleRef.value, strength: 22, rotStrength: 18, invert: true },
+    { el: teamDoodleRef.value, strength: 34, rotStrength: 24 },
+    { el: ctaDoodleRef.value, strength: 8, rotStrength: 12, invert: true },
     { el: ctaImgRef.value, strength: 30 },
-    { el: ctaIconRef.value, strength: 46, invert: true }
+    { el: ctaIconRef.value, strength: 10, invert: true }
   ].filter((item) => item.el)
 }
 

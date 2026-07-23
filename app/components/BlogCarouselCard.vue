@@ -13,8 +13,8 @@
           <span class="bg-[#111827] text-white text-[11px] font-semibold px-3 py-1.5 rounded-full whitespace-nowrap">{{ category }}</span>
           <span class="text-[11px] text-stone-400 whitespace-nowrap">~{{ author }}</span>
         </div>
-      <h3 class="font-sans font-semibold text-xl text-[#111827] mb-2">{{ title }}</h3>
-        <p class="text-[0.8rem] text-stone-500 leading-relaxed">{{ excerpt }}</p>
+      <h2 class="font-display font-bold text-[#064e35] uppercase tracking-[0.03em] leading-tight mb-1.5">{{ title }}</h2>
+        <p class="text-[0.83rem] text-stone-500 leading-relaxed mb-5">{{ excerpt }}</p>
       </div>
     </div>
   </div>
@@ -29,3 +29,17 @@ defineProps({
   excerpt: { type: String, default: '' }
 })
 </script>
+<style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.body-font {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+}
+
+
+</style>

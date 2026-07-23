@@ -32,9 +32,9 @@
       
       <h1
         ref="headingRef"
-        class="text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight will-change-transform hero-text-shadow"
+        class="text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight will-change-transform "
       >
-        {{ title }}<span v-if="highlight" class="text-[#8FE3B8]"> {{ highlight }}</span>
+        {{ title }} <span v-if="highlight" class="text-[#8FE3B8]"> {{ highlight }}</span>
       </h1>
       <p
         ref="subRef"
@@ -68,10 +68,8 @@ const props = defineProps({
   images: {
     type: Array,
     default: () => [
-      '/images/hero/hero-1.jpg',
-      '/images/hero/hero-2.jpg',
-      '/images/hero/hero-3.jpg',
-      '/images/hero/hero-4.jpg'
+      '/images/hero/here-1.png',
+    
     ]
   },
   // how long each slide stays fully visible before the next one crossfades in (ms)
@@ -180,11 +178,7 @@ onBeforeUnmount(() => {
 
 /* Crisp edge on the text itself so it stays legible even over the
    brighter parts of a photo, without needing a heavier overlay. */
-.hero-text-shadow {
-  text-shadow:
-    0 2px 12px rgba(0, 0, 0, 0.65),
-    0 1px 3px rgba(0, 0, 0, 0.75);
-}
+
 
 .scroll-bounce {
   animation: bounce 1.8s ease-in-out infinite;

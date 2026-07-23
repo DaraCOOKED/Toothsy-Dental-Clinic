@@ -17,7 +17,7 @@
     </div>
 
     <div class="p-7">
-      <h3 class="font-sans font-semibold text-xl text-[#111827] mb-2">{{ title }}</h3>
+      <h3 class="font-display text-base font-bold text-[#064e35] uppercase tracking-[0.03em] leading-tight mb-1.5">{{ title }}</h3>
       <p class="text-[0.83rem] text-stone-500 leading-relaxed mb-5">{{ desc }}</p>
 
       <button
@@ -111,5 +111,9 @@ onBeforeUnmount(() => observer?.disconnect())
     filter: none;
     transition: box-shadow 0.3s ease, translate 0.3s ease;
   }
+}
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
 }
 </style>

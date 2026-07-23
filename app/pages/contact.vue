@@ -10,10 +10,10 @@
     <section class="pt-24 pb-20 px-6 md:px-10">
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-12">
-          <h1 class=" text-3xl md:text-4xl font-bold text-[#111827] inline-block relative">
-            Get In Touch
-          </h1>
-          <p class="mt-6 text-stone-500 text-sm md:text-base">
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-[#111827] inline-block relative">
+            Get in touch
+          </h2>
+          <p class="mt-4 text-stone-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed mt-5 text-stone-500 text-[0.95rem] leading-relaxed max-w-md">
             Book an appointment to treat your teeth right now.
           </p>
         </div>
@@ -51,8 +51,16 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.body-font {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
 .font-display {
-  font-family: Bebas Neue, sans-serif;
+  font-family: 'Fraunces', serif;
   font-optical-sizing: auto;
 }
+
+
 </style>

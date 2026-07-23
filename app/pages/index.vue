@@ -35,8 +35,8 @@
          
          
           <NuxtLink
-            to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
-            target="_blank"
+            to="/book-appointment"
+        
             rel="noopener noreferrer"
             class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
           >Book a Visit</NuxtLink>
@@ -60,13 +60,13 @@
 
         <div
           ref="heroBlobRef"
-          class="absolute inset-[6%_2%_4%_8%] md:inset-[8%_4%_4%_10%] bg-[#d4f0ea] rounded-[2.5rem] will-change-transform z-0"
+          class="absolute inset-[6%_2%_4%_8%] md:inset-[5%_-3%_4%_10%] bg-[#d4f0ea] rounded-[2.5rem] will-change-transform z-0"
         ></div>
 
         <img
           ref="heroImgRef"
-          class="absolute inset-0 z-10 w-[85%] h-[86%] mx-auto mt-[6%] object-cover object-top rounded-[2rem] will-change-transform"
-          src="/owndoctor.png"
+          class="absolute inset-0 z-10 w-[100%] h-[86%] mx-auto mt-[6%] object-cover object-top rounded-[2rem] will-change-transform"
+          src="/homepage-viproom.png"
           alt="Toothsy dental team in the clinic"
         />
 
@@ -97,8 +97,9 @@
     <div
       v-for="svc in servicesPreview"
       :key="svc.title"
-      class="rounded-[24px] overflow-hidden transition-transform duration-200 hover:-translate-y-1"
+      class="rounded-[24px] overflow-hidden transition-transform duration-200 hover:-translate-y-1 cursor-pointer"
       :class="svc.bg"
+      @click="openServiceModal(svc)"
     >
       <div class="w-full h-[168px] overflow-hidden" :class="svc.thumbBg">
         <img
@@ -127,20 +128,25 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
     </NuxtLink>
     <NuxtLink
-      to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
-      target="_blank" rel="noopener noreferrer"
+      to="/book-appointment"
+      rel="noopener noreferrer"
       class="inline-block bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
     >Book an appointment</NuxtLink>
   </div>
+
+  <ServiceDetailModal
+    v-model:open="isModalOpen"
+    :service="selectedService"
+  />
 </section>
 
 
 
 
   
-<!-- time story -->
+<!-- ═══════════════════ OUR STORY — horizontal timeline, heavy parallax ═══════════════════ -->
 <section class="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-10 md:py-20">
-  <div class="text-center mb-12">
+  <div class="text-center mb-14 md:mb-16">
     <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#1f9d63] mb-3">
       Our Story
     </span>
@@ -150,83 +156,94 @@
     </h2>
 
     <p class="mt-4 text-stone-500 max-w-2xl mx-auto leading-relaxed">
-      Since opening in September 2025, Toothsy Clinic has focused on providing
+      Since opening in November 2025, Toothsy Clinic has focused on providing
       gentle, modern, and patient-first dental care in a welcoming environment.
     </p>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+  <div
+    ref="storyVisualRef"
+    class="relative hidden md:block h-[300px] will-change-transform"
+    @mousemove="handleStoryMouseMove"
+    @mouseleave="handleStoryMouseLeave"
+  >
+    <!-- the connecting line — stretches horizontally as the section scrolls through view -->
+    <div
+      ref="storyLineRef"
+      class="absolute left-0 right-0 top-1/2 h-[2px] bg-[#1f9d63]/25 -translate-y-1/2 will-change-transform"
+    ></div>
 
-    <!-- Text column -->
-    <div class="space-y-7 order-2 md:order-1">
+    <div class="absolute inset-0 grid grid-cols-3">
       <div
         v-for="(item, i) in storyItems"
         :key="item.year"
         :ref="(el) => setTimelineRef(el, i)"
-        class="flex items-start gap-3 transition-all duration-700 ease-out"
-        :class="timelineVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'"
+        class="relative transition-all duration-700 ease-out"
+        :class="timelineVisible[i] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
       >
-        <span class="mt-2.5 w-2 h-2 rounded-full bg-[#1f9d63] flex-shrink-0"></span>
 
-        <div>
-          <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] mb-1.5">
-            {{ item.year }} — {{ item.title }}
-          </h3>
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+          <span
+            :ref="(el) => setStoryDotRef(el, i)"
+            class="relative block w-3.5 h-3.5 will-change-transform"
+          >
+            <span class="dot-pulse absolute inset-0 rounded-full bg-[#1f9d63] ring-4 ring-[#EFF8FC]"></span>
+          </span>
+        </div>
+        <div
+          v-if="i % 2 === 1"
+          class="absolute left-1/2 -translate-x-1/2 bottom-[calc(50%+24px)] w-[230px] text-center"
+        >
+          <div :ref="(el) => setStoryLabelRef(el, i)" class="will-change-transform">
+            <p class="text-[0.78rem] text-stone-500 leading-relaxed mb-2">{{ item.desc }}</p>
+            <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] leading-tight mb-1">{{ item.title }}</h3>
+            <p class="text-[0.8rem] font-bold text-[#1f9d63]">{{ item.year }}</p>
+          </div>
+        </div>
 
-          <p class="text-[0.85rem] text-stone-500 leading-relaxed">
-            {{ item.desc }}
-          </p>
+        <!-- LABEL ANCHOR (even items, below the line). Reading top-to-bottom: year, title, desc -->
+        <div
+          v-else
+          class="absolute left-1/2 -translate-x-1/2 top-[calc(50%+24px)] w-[230px] text-center"
+        >
+          <div :ref="(el) => setStoryLabelRef(el, i)" class="will-change-transform">
+            <p class="text-[0.8rem] font-bold text-[#1f9d63] mb-1">{{ item.year }}</p>
+            <h3 class="font-display text-lg md:text-xl font-bold text-[#111827] leading-tight mb-2">{{ item.title }}</h3>
+            <p class="text-[0.78rem] text-stone-500 leading-relaxed">{{ item.desc }}</p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Image column -->
-    <div class="relative order-1 md:order-2 h-[280px] md:h-[420px]">
-      <div class="absolute inset-[4%_0%_0%_8%] bg-[#d4f0ea] rounded-[2rem]"></div>
-
-      <img
-        src="/frontmain.jpg"
-        alt="Inside Toothsy Clinic"
-        class="absolute inset-0 w-[92%] h-[92%] ml-auto object-cover rounded-[2rem]"
-      />
-
-      <!-- Floating Badge -->
-      <div class="absolute -left-3 bottom-6 md:bottom-10 z-20">
-        <div class="badge-float bg-[#6BCE9F] text-white rounded-2xl px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.18)] flex items-center gap-2.5">
-
-          <span class="flex-shrink-0 w-6 h-6 rounded-full bg-white/25 flex items-center justify-center">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path
-                d="M6 1v10M1 6h10"
-                stroke="#fff"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
-          </span>
-
-          <span class="text-[0.7rem] font-semibold leading-tight">
-            Since<br>Sep 2025
-          </span>
-
-        </div>
+  <div class="md:hidden space-y-7">
+    <div
+      v-for="item in storyItems"
+      :key="'m-' + item.year"
+      class="flex items-start gap-3"
+    >
+      <span class="mt-2.5 w-2 h-2 rounded-full bg-[#1f9d63] flex-shrink-0"></span>
+      <div>
+        <h3 class="font-display text-lg font-bold text-[#111827] mb-1.5">
+          {{ item.year }} — {{ item.title }}
+        </h3>
+        <p class="text-[0.85rem] text-stone-500 leading-relaxed">{{ item.desc }}</p>
       </div>
     </div>
-
   </div>
 </section>
 
 
 
     <!-- ═══════════════════ TEAM ═══════════════════ -->
-    <section class="relative z-10 bg-[#d4f0ea] py-16 md:py-20">
+    <section class="relative z-10 bg-[#d4f0ea] py-16 md:py-20 flex justify-center">
       <div class="max-w-6xl mx-auto px-6 md:px-10">
         <div class="text-center mb-12">
           <span class="inline-block text-[0.7rem] font-bold tracking-[0.18em] uppercase text-[#036533] mb-3">Meet the team</span>
           <h2 class="font-display text-2xl md:text-[2rem] font-bold tracking-tight">The dentists you'll actually see</h2>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
           <div
             v-for="(m, i) in team"
             :key="m.name"
@@ -238,7 +255,7 @@
             <div class="overflow-hidden rounded-2xl mb-3">
               <img
                 :src="m.img"
-                :alt="m.name"
+                :alt="m.alt"
                 class="w-full h-[170px] md:h-[210px] object-cover object-top transition-transform duration-500 group-hover:scale-105"
               />
             </div>
@@ -263,21 +280,18 @@
       </p>
 
       <div class="relative max-w-3xl mx-auto rounded-[2.5rem] overflow-hidden h-[260px] md:h-[320px]">
-        <img
-          ref="ctaImgRef"
-          class="absolute inset-0 w-full h-[140%] -top-[20%] object-cover will-change-transform"
-          src="/frontmain.jpg"
-          alt="Inside the Toothsy clinic"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
-        <div ref="ctaIconRef" class="absolute top-6 right-6 md:top-8 md:right-10 will-change-transform">
-          
-        </div>
+        <Transition name="cta-fade">
+          <img
+            :key="ctaImages[currentCtaIndex].src"
+            :src="ctaImages[currentCtaIndex].src"
+            :alt="ctaImages[currentCtaIndex].alt"
+            class="absolute inset-0 w-full h-[140%] -top-[20%] object-fill"
+          />
+        </Transition>
       </div>
 
       <NuxtLink
-        to="https://docs.google.com/forms/d/e/1FAIpQLSdqhTMChYM1xTzOyuM-oESSiuGBy84d88DVS7E-RfLvCeUyaQ/viewform?usp=publish-editor"
-        target="_blank"
+        to="/book-appointment"
         rel="noopener noreferrer"
         class="inline-block mt-8 bg-[#6BCE9F] hover:bg-[#036533] text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors duration-200"
       >Book an Appointment</NuxtLink>
@@ -287,6 +301,24 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onBeforeUnmount } from "vue";
+const ctaImages = [
+  {
+    src: "frontmain.jpg",
+    alt: "CTA Image 1",
+  },
+  {
+    src: "imgsilde1.jpg",
+    alt: "CTA Image 2",
+  },
+  {
+    src: "imgsilde2.jpg",
+    alt: "CTA Image 3",
+  },
+];
+
+const currentCtaIndex = ref(0);
+
 /* ---------- content ---------- */
 const stats = [
   { value: 15, suffix: '+', label: 'Years in practice' },
@@ -297,14 +329,9 @@ const stats = [
 
 const storyItems = [
   {
-    year: '15 Sep 2025',
+    year: '27 Nov 2025',
     title: 'Our doors officially opened',
     desc: 'Toothsy Clinic welcomed its very first patients with a commitment to gentle, modern, and personalized dental care.'
-  },
-  {
-    year: 'Oct 2025',
-    title: 'Building trust in our community',
-    desc: 'As more patients visited, we focused on creating a friendly environment where everyone feels comfortable and cared for.'
   },
   {
     year: 'Early 2026',
@@ -356,12 +383,68 @@ const values = [
   }
 ]
 
-const team = [
-  { name: 'Dr. SOKThea Liyo', role: 'Orthodontics', img: '/team-member.png' },
-  { name: 'Dr. Channary Pich', role: 'Endodontics · Root Canal', img: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&q=80&fit=crop&crop=faces' },
-  { name: 'Dr. Vibol Heng', role: 'Family & Pediatric Dentistry', img: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&q=80&fit=crop&crop=faces' },
-  { name: 'Dr. Sreymom Keo', role: 'Orthodontics', img: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&q=80&fit=crop&crop=faces' }
+const servicesPreview = [
+  {
+    badge: 'General', 
+    bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
+    title: 'Tooth Cleaning',
+    desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
+    price: 'From $25',
+    image: '/clean-teeth.jpeg',
+    includes: ['Full examination', 'Scale and polish', 'Oral health check'],
+    link: true
+  },
+  {
+    badge: 'Cosmetic',
+    bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
+    title: 'Teeth Whitening',
+    desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
+    price: 'From $80',
+    image: '/teeth-whitening.webp',
+    includes: ['Shade consultation', 'Single-visit whitening', 'Aftercare tips'],
+    link: true
+  },
+  {
+    badge: 'Restorative', 
+    bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
+    title: 'Dental Filling',
+    desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
+    price: 'From $60',
+    image: '/dental-filling.jpg',
+    includes: ['Decay removal', 'Tooth-coloured composite', 'Bite check'],
+    link: true
+  },
 ]
+
+const team = [
+  { name: 'Dr. Sornn Rithean', role: 'General Dentist', img: '/team/dr-1.png', alt: 'Dr. SOKThea Liyo, Orthodontics specialist' },
+  { name: 'Dr. Chheng Mesa', role: 'Specialist Orthodontic', img: '/team/dr-2.png', alt: 'Dr. Channary Pich, Endodontics and Root Canal specialist' },
+  { name: 'Dr. Sornn Rithornu', role: 'Prosthodontics', img: '/team/dr-3.png', alt: 'Dr. Vibol Heng, Family and Pediatric Dentistry specialist' },
+]
+
+// Single source of truth for the CTA slideshow timer.
+let ctaSlideInterval = null
+
+function setupCtaSlideshow() {
+  ctaSlideInterval = setInterval(() => {
+    currentCtaIndex.value = (currentCtaIndex.value + 1) % ctaImages.length
+  }, 5000)
+}
+
+function stopCtaSlideshow() {
+  if (ctaSlideInterval) {
+    clearInterval(ctaSlideInterval)
+    ctaSlideInterval = null
+  }
+}
+
+// State for the click-to-open popup on the homepage cards above
+const isModalOpen = ref(false)
+const selectedService = ref(null)
+function openServiceModal(svc) {
+  selectedService.value = svc
+  isModalOpen.value = true
+}
 
 let prefersReducedMotion = false
 
@@ -448,11 +531,26 @@ const heroDotsRef = ref(null)
 const ctaImgRef = ref(null)
 const ctaIconRef = ref(null)
 
+// Our Story timeline — dedicated parallax refs.
+// Note: these refs point at the INNER moving elements only. The outer anchor divs
+// in the template (left-1/2, -translate-x-1/2, etc.) handle static centering and
+// are never referenced here, so JS can't ever knock the dot off-center from its label.
+const storyVisualRef = ref(null)   // outer wrapper: gets the mouse-tilt
+const storyLineRef = ref(null)     // the connecting line: gets a scroll-driven stretch
+const storyDotEls = ref([])        // per-item dot (inner span — the anchor div wrapping it is untouched)
+const storyLabelEls = ref([])      // per-item label block (inner div — its anchor wrapper is untouched)
+function setStoryDotRef(el, i) { storyDotEls.value[i] = el }
+function setStoryLabelRef(el, i) { storyLabelEls.value[i] = el }
+
 const w = { y: 0, ty: 0, rot: 0, trot: 0 }
 const heroImg = { y: 0, ty: 0 }
 const tilt = { rx: 0, ry: 0, trx: 0, tryY: 0 }
+const storyLine = { scale: 1 }
+const storyTilt = { rx: 0, ry: 0, trx: 0, tryY: 0 }
 
 let parallaxItems = []
+let storyDotItems = []
+let storyLabelItems = []
 let rafId = null
 
 function setupParallax() {
@@ -463,6 +561,22 @@ function setupParallax() {
     { el: ctaImgRef.value, strength: 30 },
     { el: ctaIconRef.value, strength: 46, invert: true }
   ].filter((item) => item.el)
+
+  // dots drift the same direction as their label, just with less travel
+  storyDotItems = storyDotEls.value
+    .map((el, i) => ({ el, dirY: i % 2 === 1 ? -1 : 1 }))
+    .filter((item) => item.el)
+
+  // labels fan outward from the line as the section scrolls through the viewport:
+  // above-the-line item rises, below-the-line items sink, and the two outer items
+  // also drift sideways in opposite directions for the "fan" effect
+  storyLabelItems = storyLabelEls.value
+    .map((el, i) => ({
+      el,
+      dirY: i % 2 === 1 ? -1 : 1,
+      dirX: i === 0 ? -1 : i === 2 ? 1 : 0
+    }))
+    .filter((item) => item.el)
 }
 
 function handleHeroMouseMove(e) {
@@ -477,6 +591,20 @@ function handleHeroMouseMove(e) {
 function handleHeroMouseLeave() {
   tilt.trx = 0
   tilt.tryY = 0
+}
+
+function handleStoryMouseMove(e) {
+  if (prefersReducedMotion || !storyVisualRef.value) return
+  const rect = storyVisualRef.value.getBoundingClientRect()
+  const relX = (e.clientX - rect.left) / rect.width - 0.5
+  const relY = (e.clientY - rect.top) / rect.height - 0.5
+  storyTilt.trx = relY * -6
+  storyTilt.tryY = relX * 8
+}
+
+function handleStoryMouseLeave() {
+  storyTilt.trx = 0
+  storyTilt.tryY = 0
 }
 
 function tick() {
@@ -518,6 +646,55 @@ function tick() {
     item.el.style.transform = `translate3d(0, ${item.y}px, 0) rotate(${item.baseRotate || 0}deg)`
   })
 
+  // Our Story — connecting line stretches as the section scrolls through view
+  if (storyLineRef.value) {
+    const rect = storyLineRef.value.getBoundingClientRect()
+    const centerY = rect.top + rect.height / 2
+    const progress = clamp(1 - centerY / vh, 0, 1)
+    const scaleTarget = 0.86 + progress * 0.26
+    storyLine.scale = lerp(storyLine.scale, scaleTarget, 0.08)
+    storyLineRef.value.style.transform = `scaleX(${storyLine.scale})`
+  }
+
+  // Our Story — dots bounce off the line and swell slightly at the extremes.
+  // No -50%/centering here anymore — the wrapping anchor div in the template already
+  // centers this span, so this transform is a pure delta on top of that fixed position.
+  storyDotItems.forEach((item) => {
+    const rect = item.el.getBoundingClientRect()
+    const centerY = rect.top + rect.height / 2
+    const progress = clamp(1 - centerY / vh, 0, 1)
+    const depth = (progress - 0.5) * 2
+    item.ty = depth * 16 * item.dirY
+    item.ts = 1 + Math.abs(depth) * 0.3
+    item.y = lerp(item.y ?? 0, item.ty, 0.12)
+    item.sc = lerp(item.sc ?? 1, item.ts, 0.12)
+    item.el.style.transform = `translate3d(0, ${item.y}px, 0) scale(${item.sc})`
+  })
+
+  // Our Story — labels fan out from the line: the strongest movement in the section.
+  // Same deal — the anchor div already centers this, so this is a pure delta.
+  storyLabelItems.forEach((item) => {
+    const rect = item.el.getBoundingClientRect()
+    const centerY = rect.top + rect.height / 2
+    const progress = clamp(1 - centerY / vh, 0, 1)
+    const depth = (progress - 0.5) * 2
+    item.ty = depth * 60 * item.dirY
+    item.tx = depth * 26 * item.dirX
+    item.trot = depth * 5 * item.dirX
+    item.y = lerp(item.y ?? 0, item.ty, 0.1)
+    item.x = lerp(item.x ?? 0, item.tx, 0.1)
+    item.rot = lerp(item.rot ?? 0, item.trot, 0.1)
+    item.el.style.transform = `translate3d(${item.x}px, ${item.y}px, 0) rotate(${item.rot}deg)`
+  })
+
+  // Our Story — the whole timeline tilts toward the cursor, layered on top of the scroll drift above
+  if (storyVisualRef.value) {
+    storyTilt.rx = lerp(storyTilt.rx, storyTilt.trx, 0.08)
+    storyTilt.ry = lerp(storyTilt.ry, storyTilt.tryY, 0.08)
+    storyVisualRef.value.style.transform =
+      `perspective(1400px) rotateX(${storyTilt.rx}deg) rotateY(${storyTilt.ry}deg)`
+  }
+
   rafId = requestAnimationFrame(tick)
 }
 
@@ -527,6 +704,7 @@ onMounted(() => {
   nextTick(() => {
     setupReveal()
     setupParallax()
+    setupCtaSlideshow()
     if (!prefersReducedMotion) {
       rafId = requestAnimationFrame(tick)
     }
@@ -537,30 +715,8 @@ onBeforeUnmount(() => {
   if (rafId) cancelAnimationFrame(rafId)
   if (statsRafId) cancelAnimationFrame(statsRafId)
   if (observer) observer.disconnect()
+  stopCtaSlideshow()
 })
-const servicesPreview = [
-  {
-    badge: 'General', price: 'From $25',
-    bg: 'bg-[#d4f0ea]', thumbBg: 'bg-[#c0e8de]',
-    title: 'Checkup & clean',
-    desc: 'A full examination, scale, and polish — the foundation of every healthy smile.',
-    image: '/service1.png'
-  },
-  {
-    badge: 'Cosmetic', price: 'From $80',
-    bg: 'bg-[#c5eae1]', thumbBg: 'bg-[#b0e0d5]',
-    title: 'Teeth whitening',
-    desc: 'Professional-grade whitening that works in a single visit — safe, even, and lasting.',
-    image: '/service1.png'
-  },
-  {
-    badge: 'Restorative', price: 'From $60',
-    bg: 'bg-[#dff0e0]', thumbBg: 'bg-[#cde8ce]',
-    title: 'Fillings',
-    desc: 'Tooth-coloured composite fillings that blend in and hold up — no silver in sight.',
-    image: '/service1.png'
-  },
-]
 </script>
 
 <style scoped>
@@ -589,17 +745,39 @@ const servicesPreview = [
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* idle float, applied to inner elements only — never on a node the JS parallax loop also transforms */
+/* idle float / pulse, applied to inner elements only — never on a node the JS parallax loop also transforms */
 .badge-float { animation: floatY 3.2s ease-in-out infinite; }
 .cta-icon-float { animation: floatY 2.6s ease-in-out infinite; }
+.dot-pulse { animation: dotPulse 2.4s ease-in-out infinite; }
 
 @keyframes floatY {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
 
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(31, 157, 99, 0.35); }
+  50% { box-shadow: 0 0 0 7px rgba(31, 157, 99, 0); }
+}
+
+/* CTA slideshow crossfade.
+   The <img> keeps `absolute inset-0` at all times (it's a static class on the element
+   itself, not something Vue toggles), so the outgoing and incoming <img> nodes stack
+   perfectly on top of one another inside the `overflow-hidden` wrapper. Vue's default
+   <Transition> mode runs enter and leave at the same time — exactly what a crossfade
+   needs — so we just animate opacity on both. */
+.cta-fade-enter-active,
+.cta-fade-leave-active {
+  transition: opacity 0.9s ease;
+}
+.cta-fade-enter-from,
+.cta-fade-leave-to {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-about-enter > * { animation: none; opacity: 1; transform: none; }
-  .badge-float, .cta-icon-float { animation: none; }
+  .badge-float, .cta-icon-float, .dot-pulse { animation: none; }
+  .cta-fade-enter-active, .cta-fade-leave-active { transition: none; }
 }
 </style>

@@ -65,17 +65,15 @@
 
           <div class="max-w-6xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             <article v-for="(doctor, i) in doctors" :key="doctor.name" :ref="(el) => setDoctorRef(el, i)"
-              class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl
-                     transition-shadow duration-300 doctor-reveal"
+              class="bg-white rounded-2xl overflow-hidden card-reveal hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(0,0,0,0.09)]"
               :class="doctorVisible[i] ? 'is-visible' : ''"
               :style="{ transitionDelay: doctorVisible[i] ? `${i * 100}ms` : '0ms' }">
-              <div class="relative h-60 overflow-hidden group">
+              <div class="w-full overflow-hidden" :style="{ height: '168px' }">
                 <img :src="doctor.photo" :alt="doctor.name"
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div class="absolute inset-0 bg-[#5bbfa0]/0 group-hover:bg-[#5bbfa0]/25 transition-all duration-500" />
+                  class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
               </div>
               <div class="p-6">
-                <h3 class="font-display text-lg font-bold text-[#111827]">{{ doctor.name }}</h3>
+                <h3 class="font-display text-base font-bold text-[#064e35] uppercase tracking-[0.03em] leading-tight mb-1.5">{{ doctor.name }}</h3>
                 <span class="inline-block text-xs font-medium text-[#3d8f74] bg-[#5bbfa0]/10 px-2.5 py-1 rounded-full mt-1.5 mb-2">
                   {{ doctor.specialty }}
                 </span>
@@ -271,21 +269,24 @@ onBeforeUnmount(() => {
   filter: blur(0);
 }
 
-/* ── Doctor cards: staggered slide-up + scale ─────────────── */
-.doctor-reveal {
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateY(40px) scale(0.98);
-  transition: opacity .85s cubic-bezier(.22, 1, .36, 1),
-    transform .85s cubic-bezier(.22, 1, .36, 1),
-    filter .7s cubic-bezier(.22, 1, .36, 1);
-}
+/* ── Doctor cards: staggered slide-up + shadow hover ───────── */
+  .card-reveal {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+    filter: blur(6px);
+    transition:
+      opacity   0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      filter    0.65s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.3s ease,
+      translate  0.3s ease;
+  }
 
-.doctor-reveal.is-visible {
-  opacity: 1;
-  transform: none;
-  filter: blur(0);
-}
+  .card-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
 
 /* ── CTA: most dramatic scale + fade ─────────────────────── */
 .cta-reveal {

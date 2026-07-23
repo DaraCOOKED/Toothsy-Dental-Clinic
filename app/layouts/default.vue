@@ -7,12 +7,12 @@
       <div class="relative z-10 flex items-center justify-between px-4 py-1 md:px-8">
 
         <!-- Logo -->
-        <NuxtLink to="/" class="order-2 md:order-1 flex items-center gap-2 rounded-xl px-1 py-1.5">
+        <NuxtLink to="/" class="md:order-1 flex items-center gap-2 rounded-xl px-1 py-1.5">
           <img ref="logoRef" src="/companylogo.png" class="h-17 w-20" alt="Toothsy Dental Clinic logo">
         </NuxtLink>
 
         <!-- Mobile menu button -->
-        <button @click="menuOpen = true" class="order-1 md:hidden flex flex-col gap-1" aria-label="Open menu">
+        <button @click="menuOpen = true" class="md:hidden flex flex-col gap-1" aria-label="Open menu">
         <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
         <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>
         <span class="block w-6 h-1 transition-colors duration-300" :class="barColor"></span>

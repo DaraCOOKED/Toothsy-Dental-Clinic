@@ -1,8 +1,8 @@
 <template>
   <div class="relative isolate overflow-x-hidden bg-[#EFF8FC]">
 
-    <HeroSection eyebrow="About Toothsy" title="Gentle care" highlight="people first"
-      description="Learn about our mission, specialists, and practical approach to calm, modern dental care." />
+    <HeroSection eyebrow="About Toothsy" title="Healthy Smiles" highlight="Begin Here"
+      description="Comfortable, high-quality dental care delivered with precision and compassion." />
 
     <!-- ════════════════════════════════════════════════════
       ABOUT CONTENT
